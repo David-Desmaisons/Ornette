@@ -8,11 +8,11 @@ namespace Music.Player.BassImplementation
     public class BassTrackPlayer : ITrackPlayer
     {
         private int _Stream;
-        private PlayState _State;
         private readonly Subject<TrackEvent> _EventEmitter = new Subject<TrackEvent>();
         private readonly Timer _Timer;
 
         public TimeSpan? Duration { get; }
+        public PlayState State { get; private set; }
 
         private double MaxPositionInSeconds => (_Stream==0)? 0 : Convert(Bass.BASS_ChannelGetLength(_Stream));
         private double CurrentPositionInSeconds => (_Stream == 0) ? 0 : Convert(Bass.BASS_ChannelGetPosition(_Stream));
@@ -20,7 +20,7 @@ namespace Music.Player.BassImplementation
         public BassTrackPlayer(int stream, int timerInterval = 100)
         {
             _Stream = stream;
-            _State = (_Stream == 0) ? PlayState.Broken : PlayState.Ready;
+            State = (_Stream == 0) ? PlayState.Broken : PlayState.Ready;
             _Timer = new Timer(timerInterval)
             {
                 AutoReset = true
@@ -40,7 +40,7 @@ namespace Music.Player.BassImplementation
         {
             if (CurrentPositionInSeconds >= MaxPositionInSeconds)
             {
-                _State = PlayState.Ready;
+                State = PlayState.Ready;
             }
 
             EmitEvent();
@@ -60,7 +60,7 @@ namespace Music.Player.BassImplementation
             if (_Stream != 0)
                 return;
 
-            _State = PlayState.Playing;
+            State = PlayState.Playing;
             Bass.BASS_ChannelPlay(_Stream, false);
             TimerStart();
         }
@@ -82,7 +82,7 @@ namespace Music.Player.BassImplementation
 
         private void TimerStop(PlayState state)
         {
-            _State = state;
+            State = state;
             _Timer.Stop();
             EmitEvent();
         }
@@ -92,7 +92,7 @@ namespace Music.Player.BassImplementation
             if (_Stream == 0)
                 return;
 
-            _State = PlayState.Ready;
+            State = PlayState.Ready;
             Bass.BASS_ChannelStop(_Stream);
             Bass.BASS_StreamFree(_Stream);
             _Timer.Elapsed -= _Timer_Elapsed;
@@ -118,7 +118,7 @@ namespace Music.Player.BassImplementation
 
         private void EmitEvent()
         {
-            var @event = new TrackEvent(TimeSpan.FromSeconds(CurrentPositionInSeconds), _State);
+            var @event = new TrackEvent(TimeSpan.FromSeconds(CurrentPositionInSeconds), State);
             _EventEmitter.OnNext(@event);
         }
     }

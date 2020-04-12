@@ -6,6 +6,8 @@ namespace Music.Player
     {
         TimeSpan? Duration { get; }
 
+        PlayState State { get;  }
+
         void Play();
 
         void Stop();

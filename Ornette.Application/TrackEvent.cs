@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Music.Player
+namespace Ornette.Application
 {
     public class TrackEvent
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reactive.Subjects;
 using System.Timers;
-using Un4seen.Bass;
+using Ornette.Application;
 
-namespace Music.Player.BassImplementation
+namespace Music.Adapter.Bass
 {
     public class BassTrackPlayer : ITrackPlayer
     {
@@ -14,8 +14,8 @@ namespace Music.Player.BassImplementation
         public TimeSpan? Duration { get; }
         public PlayState State { get; private set; }
 
-        private double MaxPositionInSeconds => (_Stream==0)? 0 : Convert(Bass.BASS_ChannelGetLength(_Stream));
-        private double CurrentPositionInSeconds => (_Stream == 0) ? 0 : Convert(Bass.BASS_ChannelGetPosition(_Stream));
+        private double MaxPositionInSeconds => (_Stream==0)? 0 : Convert(Un4seen.Bass.Bass.BASS_ChannelGetLength(_Stream));
+        private double CurrentPositionInSeconds => (_Stream == 0) ? 0 : Convert(Un4seen.Bass.Bass.BASS_ChannelGetPosition(_Stream));
 
         public BassTrackPlayer(int stream, int timerInterval = 100)
         {
@@ -34,7 +34,7 @@ namespace Music.Player.BassImplementation
             OnTimer();
         }
 
-        private double Convert(long position) => Bass.BASS_ChannelBytes2Seconds(_Stream, position);
+        private double Convert(long position) => Un4seen.Bass.Bass.BASS_ChannelBytes2Seconds(_Stream, position);
 
         protected void OnTimer()
         {
@@ -51,7 +51,7 @@ namespace Music.Player.BassImplementation
             if (_Stream != 0)
                 return;
 
-            Bass.BASS_ChannelPause(_Stream);
+            Un4seen.Bass.Bass.BASS_ChannelPause(_Stream);
             TimerStop(PlayState.Paused);
         }
 
@@ -61,7 +61,7 @@ namespace Music.Player.BassImplementation
                 return;
 
             State = PlayState.Playing;
-            Bass.BASS_ChannelPlay(_Stream, false);
+            Un4seen.Bass.Bass.BASS_ChannelPlay(_Stream, false);
             TimerStart();
         }
 
@@ -70,7 +70,7 @@ namespace Music.Player.BassImplementation
             if (_Stream != 0)
                 return;
 
-            Bass.BASS_ChannelStop(_Stream);
+            Un4seen.Bass.Bass.BASS_ChannelStop(_Stream);
             TimerStop(PlayState.Ready);
         }
 
@@ -93,8 +93,8 @@ namespace Music.Player.BassImplementation
                 return;
 
             State = PlayState.Ready;
-            Bass.BASS_ChannelStop(_Stream);
-            Bass.BASS_StreamFree(_Stream);
+            Un4seen.Bass.Bass.BASS_ChannelStop(_Stream);
+            Un4seen.Bass.Bass.BASS_StreamFree(_Stream);
             _Timer.Elapsed -= _Timer_Elapsed;
             _Timer.Stop();
             _Timer.Dispose();
@@ -106,8 +106,8 @@ namespace Music.Player.BassImplementation
             if (_Stream == 0)
                 return;
 
-            var position = Bass.BASS_ChannelSeconds2Bytes(_Stream, value.TotalSeconds);
-            Bass.BASS_ChannelSetPosition(_Stream, position);
+            var position = Un4seen.Bass.Bass.BASS_ChannelSeconds2Bytes(_Stream, value.TotalSeconds);
+            Un4seen.Bass.Bass.BASS_ChannelSetPosition(_Stream, position);
             EmitEvent();
         }
 

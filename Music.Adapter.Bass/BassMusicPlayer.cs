@@ -1,7 +1,8 @@
 ﻿using System;
+using Ornette.Application;
 using Un4seen.Bass;
 
-namespace Music.Player.BassImplementation
+namespace Music.Adapter.Bass
 {
     public class BassMusicPlayer : IMusicPlayer
     {
@@ -12,8 +13,8 @@ namespace Music.Player.BassImplementation
 
         public double Volume
         {
-            get => (Bass.BASS_GetConfig(BASSConfig.BASS_CONFIG_GVOL_STREAM) / 10000d);
-            set => Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_GVOL_STREAM, (int)(Math.Truncate(value * 10000)));
+            get => Un4seen.Bass.Bass.BASS_GetConfig(BASSConfig.BASS_CONFIG_GVOL_STREAM) / 10000d;
+            set => Un4seen.Bass.Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_GVOL_STREAM, (int)(Math.Truncate(value * 10000)));
         }
 
         private BassMusicPlayer() {}
@@ -24,9 +25,9 @@ namespace Music.Player.BassImplementation
                 return _BassMusicPlayer;
 
             Un4seen.Bass.BassNet.Registration(email, password);
-            Bass.LoadMe(Path);
+            Un4seen.Bass.Bass.LoadMe(Path);
 
-            if (!Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero))
+            if (!Un4seen.Bass.Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero))
                 throw new Exception("Not possible create ");
 
             return _BassMusicPlayer = new BassMusicPlayer(); ;
@@ -34,13 +35,13 @@ namespace Music.Player.BassImplementation
 
         public void Dispose()
         {
-            Bass.BASS_Free();
+            Un4seen.Bass.Bass.BASS_Free();
             _BassMusicPlayer = null;
         }
 
         public ITrackPlayer CreateTrackPlayer(string path)
         {
-            var stream = Bass.BASS_StreamCreateFile(path, 0, 0, BASSFlag.BASS_DEFAULT);
+            var stream = Un4seen.Bass.Bass.BASS_StreamCreateFile(path, 0, 0, BASSFlag.BASS_DEFAULT);
             return new BassTrackPlayer(stream);
         }
     }

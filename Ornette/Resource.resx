@@ -117,15 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About1" xml:space="preserve">
-    <value>Complete Neutronium Vue Demo</value>
-  </data>
-  <data name="About2" xml:space="preserve">
-    <value>Including Ioc, navigation (vue-router) internalization (vue-i18n) and chromeless window</value>
-  </data>
-  <data name="About3" xml:space="preserve">
-    <value>Made with vuetify framework</value>
-  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -155,9 +146,6 @@
   </data>
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
-  </data>
-  <data name="ProjectDescription" xml:space="preserve">
-    <value>Neutronium Vue SPA Template including IoC, routing and internalization</value>
   </data>
   <data name="Restart" xml:space="preserve">
     <value>Restart</value>

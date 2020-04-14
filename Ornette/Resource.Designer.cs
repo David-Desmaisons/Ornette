@@ -61,33 +61,6 @@ namespace Ornette {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Complete Neutronium Vue Demo.
-        /// </summary>
-        internal static string About1 {
-            get {
-                return ResourceManager.GetString("About1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Including Ioc, navigation (vue-router) internalization (vue-i18n) and chromeless window.
-        /// </summary>
-        internal static string About2 {
-            get {
-                return ResourceManager.GetString("About2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Made with vuetify framework.
-        /// </summary>
-        internal static string About3 {
-            get {
-                return ResourceManager.GetString("About3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Cancel {
@@ -174,15 +147,6 @@ namespace Ornette {
         internal static string Ok {
             get {
                 return ResourceManager.GetString("Ok", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Neutronium Vue SPA Template including IoC, routing and internalization.
-        /// </summary>
-        internal static string ProjectDescription {
-            get {
-                return ResourceManager.GetString("ProjectDescription", resourceCulture);
             }
         }
         

@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace Ornette.Application
+namespace Ornette.Application.Player
 {
-    public class TrackEvent
+    public class PlayEvent
     {
         public TimeSpan? Position { get; }
         public PlayState State { get; }
 
-        public TrackEvent(TimeSpan? position, PlayState state)
+        public PlayEvent(TimeSpan? position, PlayState state)
         {
             Position = position;
             State = state;

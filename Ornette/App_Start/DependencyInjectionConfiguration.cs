@@ -7,7 +7,7 @@ using Neutronium.BuildingBlocks.Wpf.Application;
 using Neutronium.Core.WebBrowserEngine.Window;
 using Neutronium.WPF.Internal;
 using Ninject;
-using Ornette.Application;
+using Ornette.Application.Player;
 using Ornette.ServiceLocator;
 using Ornette.ViewModel;
 

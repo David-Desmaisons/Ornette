@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Ornette.Application
+namespace Ornette.Application.Player
 {
-    public interface ITrackPlayer : IDisposable, IObservable<TrackEvent>
+    public interface ITrackPlayer : IDisposable, IObservable<PlayEvent>
     {
         TimeSpan? Duration { get; }
 

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Reactive.Subjects;
 using System.Timers;
-using Ornette.Application;
+using Ornette.Application.Player;
 
 namespace Music.Adapter.Bass
 {
     public class BassTrackPlayer : ITrackPlayer
     {
         private int _Stream;
-        private readonly Subject<TrackEvent> _EventEmitter = new Subject<TrackEvent>();
+        private readonly Subject<PlayEvent> _EventEmitter = new Subject<PlayEvent>();
         private readonly Timer _Timer;
 
         public TimeSpan? Duration { get; }
@@ -111,14 +111,14 @@ namespace Music.Adapter.Bass
             EmitEvent();
         }
 
-        public IDisposable Subscribe(IObserver<TrackEvent> observer)
+        public IDisposable Subscribe(IObserver<PlayEvent> observer)
         {
             return _EventEmitter.Subscribe(observer);
         }
 
         private void EmitEvent()
         {
-            var @event = new TrackEvent(TimeSpan.FromSeconds(CurrentPositionInSeconds), State);
+            var @event = new PlayEvent(TimeSpan.FromSeconds(CurrentPositionInSeconds), State);
             _EventEmitter.OnNext(@event);
         }
     }

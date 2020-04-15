@@ -62,10 +62,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMusicPlayer.cs" />
-    <Compile Include="ITrackPlayer.cs" />
-    <Compile Include="PlayState.cs" />
-    <Compile Include="TrackEvent.cs" />
+    <Compile Include="Player\IMusicPlayer.cs" />
+    <Compile Include="Player\ITrackPlayer.cs" />
+    <Compile Include="Player\PlayState.cs" />
+    <Compile Include="Model\Track.cs" />
+    <Compile Include="Player\PlayEvent.cs" />
+    <Compile Include="Model\TrackMetaData.cs" />
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

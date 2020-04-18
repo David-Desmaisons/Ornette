@@ -8,7 +8,7 @@ using System.Reactive.Subjects;
 
 namespace Ornette.Application.Model
 {
-    public class Player
+    public class Player: IPlayer
     {
         private readonly IMusicPlayer _MusicPlayer;
         private ITrackPlayer _TrackPlayer;

@@ -71,6 +71,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\IPlayer.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Player\IMusicPlayer.cs" />
     <Compile Include="Player\ITrackPlayer.cs" />

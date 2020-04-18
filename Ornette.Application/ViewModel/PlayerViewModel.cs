@@ -2,37 +2,32 @@
 using Neutronium.MVVMComponents;
 using Neutronium.MVVMComponents.Relay;
 using Ornette.Application.Model;
+using ReactiveUI;
 
 namespace Ornette.Application.ViewModel
 {
-    public class PlayerViewModel : Neutronium.BuildingBlocks.ViewModel
+    public class PlayerViewModel : ReactiveObject
     {
-        private readonly Model.Player _Player;
+        private readonly IPlayer _Player;
+        private readonly ObservableAsPropertyHelper<TrackMetaData> _CurrentTrackMapper;
 
         public ObservableCollection<TrackMetaData> Tracks => _Player.Tracks;
         public double Volume => _Player.Volume;
 
-
-        private TrackMetaData _CurrentTrack;
         public TrackMetaData CurrentTrack
         {
-            get => _CurrentTrack;
-            private set
-            {
-                if (!Set(ref _CurrentTrack, value))
-                    return;
-
-                UpdatePlayer(value);
-            }
+            get => _CurrentTrackMapper.Value;
+            set => _Player.SetCurrentTrack(value);
         }
 
         public ICommandWithoutParameter Play { get; }
         public ICommandWithoutParameter Pause { get; }
         public ICommandWithoutParameter Stop { get; }
 
-        public PlayerViewModel(Model.Player player)
+        public PlayerViewModel(IPlayer player)
         {
             _Player = player;
+            _CurrentTrackMapper = _Player.CurrentTrack.ToProperty(this, nameof(CurrentTrack));
 
             Play  = new RelayToogleCommand(player.Play);
             Pause = new RelayToogleCommand(player.Pause);

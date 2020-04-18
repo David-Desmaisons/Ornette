@@ -240,6 +240,7 @@
     </ApplicationDefinition>
     <Compile Include="App_Start\ApplicationLifeCycle.cs" />
     <Compile Include="App_Start\ApplicationViewModelBuilder.cs" />
+    <Compile Include="App_Start\BassConfiguration.cs" />
     <Compile Include="App_Start\ServiceLocator\NinjectServiceLocator.cs" />
     <Compile Include="App_Start\IDependencyInjectionConfiguration.cs" />
     <Compile Include="Resource.Designer.cs">

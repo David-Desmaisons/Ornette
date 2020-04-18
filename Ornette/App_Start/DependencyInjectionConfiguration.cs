@@ -57,7 +57,7 @@ namespace Ornette
             kernel.Bind<IDispatcher>().ToConstant(new WPFUIDispatcher(window.Dispatcher));
             kernel.Bind<IApplicationLifeCycle>().To<ApplicationLifeCycle>();
             kernel.Bind<MainViewModel>().ToSelf().InSingletonScope();
-            kernel.Bind<IMusicPlayer>().ToMethod(_ => BassMusicPlayer.Init("", "")).InSingletonScope();
+            kernel.Bind<IMusicPlayer>().ToMethod(_ => BassMusicPlayer.Init(BassConfiguration.Email, BassConfiguration.Password)).InSingletonScope();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Ornette.Application.Model
         private readonly Track[] _Tracks;
         private readonly Subject<TrackMetaData> _CurrentTrackSubject = new Subject<TrackMetaData>();
 
-        private TrackMetaData _CurrentTrack;
+        private Track _CurrentTrack;
 
         public ObservableCollection<TrackMetaData> Tracks { get; }
 
@@ -66,8 +66,8 @@ namespace Ornette.Application.Model
         {
             _Listener?.Dispose();
 
-            var track = _Tracks.First(t => t.MetaData == value);
-            _TrackPlayer = _MusicPlayer.CreateTrackPlayer(track.Path);
+            _CurrentTrack = _Tracks.First(t => t.MetaData == value);
+            _TrackPlayer = _MusicPlayer.CreateTrackPlayer(_CurrentTrack.Path);
             _Listener = _TrackPlayer.Subscribe(OnNext);
         }
 

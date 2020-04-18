@@ -12,7 +12,12 @@ namespace Ornette.Application.ViewModel
         private readonly ObservableAsPropertyHelper<TrackMetaData> _CurrentTrackMapper;
 
         public ObservableCollection<TrackMetaData> Tracks => _Player.Tracks;
-        public double Volume => _Player.Volume;
+
+        public double Volume
+        {
+            get => _Player.Volume;
+            set => _Player.Volume = value;
+        }
 
         public TrackMetaData CurrentTrack
         {

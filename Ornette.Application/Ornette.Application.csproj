@@ -31,11 +31,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DynamicData, Version=6.14.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicData.6.14.8\lib\net461\DynamicData.dll</HintPath>
+    </Reference>
     <Reference Include="Neutronium.BuildingBlocks.ApplicationTools, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Neutronium.BuildingBlocks.ApplicationTools.1.2.0\lib\net472\Neutronium.BuildingBlocks.ApplicationTools.dll</HintPath>
     </Reference>
     <Reference Include="Neutronium.MVVMComponents, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Neutronium.MVVMComponents.1.5.0\lib\net472\Neutronium.MVVMComponents.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveUI, Version=11.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveUI.11.3.1\lib\net461\ReactiveUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Splat, Version=9.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Splat.9.4.1\lib\net461\Splat.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -62,6 +71,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Player.cs" />
     <Compile Include="Player\IMusicPlayer.cs" />
     <Compile Include="Player\ITrackPlayer.cs" />
     <Compile Include="Player\PlayState.cs" />

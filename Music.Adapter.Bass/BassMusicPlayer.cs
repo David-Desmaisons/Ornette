@@ -1,5 +1,5 @@
-﻿using System;
-using Ornette.Application.Player;
+﻿using Ornette.Application.MusicPlayer;
+using System;
 using Un4seen.Bass;
 
 namespace Music.Adapter.Bass
@@ -17,11 +17,11 @@ namespace Music.Adapter.Bass
             set => Un4seen.Bass.Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_GVOL_STREAM, (int)(Math.Truncate(value * 10000)));
         }
 
-        private BassMusicPlayer() {}
+        private BassMusicPlayer() { }
 
         public static IMusicPlayer Init(string email, string password)
         {
-            if (_BassMusicPlayer!= null)
+            if (_BassMusicPlayer != null)
                 return _BassMusicPlayer;
 
             Un4seen.Bass.BassNet.Registration(email, password);
@@ -42,7 +42,7 @@ namespace Music.Adapter.Bass
         public ITrackPlayer CreateTrackPlayer(string path)
         {
             var stream = Un4seen.Bass.Bass.BASS_StreamCreateFile(path, 0, 0, BASSFlag.BASS_DEFAULT);
-            return new BassTrackPlayer(stream);
+            return (stream == 0) ? BrokenTrackPlayer .Instance : new BassTrackPlayer(stream);
         }
     }
 }

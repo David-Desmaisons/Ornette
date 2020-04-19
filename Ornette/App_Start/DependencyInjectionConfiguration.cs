@@ -7,7 +7,8 @@ using Neutronium.BuildingBlocks.Wpf.Application;
 using Neutronium.Core.WebBrowserEngine.Window;
 using Neutronium.WPF.Internal;
 using Ninject;
-using Ornette.Application.Player;
+using Ornette.Application.Model;
+using Ornette.Application.MusicPlayer;
 using Ornette.ServiceLocator;
 using Ornette.ViewModel;
 
@@ -57,6 +58,7 @@ namespace Ornette
             kernel.Bind<IDispatcher>().ToConstant(new WPFUIDispatcher(window.Dispatcher));
             kernel.Bind<IApplicationLifeCycle>().To<ApplicationLifeCycle>();
             kernel.Bind<MainViewModel>().ToSelf().InSingletonScope();
+            kernel.Bind<IPlayer>().To<Player>().InSingletonScope();
             kernel.Bind<IMusicPlayer>().ToMethod(_ => BassMusicPlayer.Init(BassConfiguration.Email, BassConfiguration.Password)).InSingletonScope();
         }
     }

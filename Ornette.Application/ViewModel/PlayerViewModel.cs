@@ -9,9 +9,9 @@ namespace Ornette.Application.ViewModel
     public class PlayerViewModel : ReactiveObject
     {
         private readonly IPlayer _Player;
-        private readonly ObservableAsPropertyHelper<TrackMetaData> _CurrentTrackMapper;
+        private readonly ObservableAsPropertyHelper<Track> _CurrentTrackMapper;
 
-        public ObservableCollection<TrackMetaData> Tracks => _Player.Tracks;
+        public ObservableCollection<Track> Tracks => _Player.Tracks;
 
         public double Volume
         {
@@ -19,7 +19,7 @@ namespace Ornette.Application.ViewModel
             set => _Player.Volume = value;
         }
 
-        public TrackMetaData CurrentTrack
+        public Track CurrentTrack
         {
             get => _CurrentTrackMapper.Value;
             set => _Player.SetCurrentTrack(value);

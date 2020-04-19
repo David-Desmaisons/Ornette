@@ -1,4 +1,4 @@
-﻿namespace Ornette.Application.Player
+﻿namespace Ornette.Application.MusicPlayer
 {
     public enum PlayState
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ornette.Application.Player
+namespace Ornette.Application.MusicPlayer
 {
     public interface ITrackPlayer : IDisposable, IObservable<PlayEvent>
     {

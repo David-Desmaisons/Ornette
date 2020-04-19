@@ -5,11 +5,11 @@ namespace Ornette.Application.Model
 {
     public interface IPlayer
     {
-        IObservable<TrackMetaData> CurrentTrack { get; }
-        ObservableCollection<TrackMetaData> Tracks { get; }
+        IObservable<Track> CurrentTrack { get; }
+        ObservableCollection<Track> Tracks { get; }
         double Volume { get; set; }
 
-        void SetCurrentTrack(TrackMetaData track);
+        void SetCurrentTrack(Track track);
         void Play();
         void Pause();
         void Stop();

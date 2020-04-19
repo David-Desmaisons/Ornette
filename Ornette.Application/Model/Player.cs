@@ -1,26 +1,25 @@
-﻿using Ornette.Application.Player;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.Collections.Specialized;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using DynamicData.Binding;
+using Ornette.Application.MusicPlayer;
 
 namespace Ornette.Application.Model
 {
-    public class Player: IPlayer
+    public class Player : IPlayer
     {
         private readonly IMusicPlayer _MusicPlayer;
         private ITrackPlayer _TrackPlayer;
         private IDisposable _Listener;
-        private readonly Track[] _Tracks;
-        private readonly Subject<TrackMetaData> _CurrentTrackSubject = new Subject<TrackMetaData>();
-
+        private readonly Subject<Track> _CurrentTrackSubject = new Subject<Track>();
         private Track _CurrentTrack;
 
-        public ObservableCollection<TrackMetaData> Tracks { get; }
+        public ObservableCollection<Track> Tracks { get; } = new ObservableCollection<Track>();
 
-        public IObservable<TrackMetaData> CurrentTrack => _CurrentTrackSubject.Distinct();
+        public IObservable<Track> CurrentTrack => _CurrentTrackSubject.Distinct();
 
         public double Volume
         {
@@ -28,47 +27,59 @@ namespace Ornette.Application.Model
             set => _MusicPlayer.Volume = value;
         }
 
-        public Player(IMusicPlayer musicPlayer, IEnumerable<Track> tracks)
+        public Player(IMusicPlayer musicPlayer)
         {
             _MusicPlayer = musicPlayer;
 
-            tracks = tracks ?? Enumerable.Empty<Track>();
-            Tracks = new ObservableCollection<TrackMetaData>(tracks.Select(t => t.MetaData));
-            _Tracks = tracks.ToArray();
-
+            Tracks.ObserveCollectionChanges().Subscribe(OnNext);
             CurrentTrack.Subscribe(UpdatePlayer);
-
-            SetCurrentTrack(_Tracks[0].MetaData);
         }
 
-        public void SetCurrentTrack(TrackMetaData value)
+        public void SetCurrentTrack(Track value)
         {
             _CurrentTrackSubject.OnNext(value);
-            UpdatePlayer(value);
         }
 
         public void Play()
         {
-            _TrackPlayer.Play();
+            _TrackPlayer?.Play();
         }
 
         public void Pause()
         {
-            _TrackPlayer.Pause();
+            _TrackPlayer?.Pause();
         }
 
         public void Stop()
         {
-            _TrackPlayer.Stop();
+            _TrackPlayer?.Stop();
         }
 
-        private void UpdatePlayer(TrackMetaData value)
+        private void UpdatePlayer(Track value)
         {
             _Listener?.Dispose();
 
-            _CurrentTrack = _Tracks.First(t => t.MetaData == value);
+            _CurrentTrack = value;
             _TrackPlayer = _MusicPlayer.CreateTrackPlayer(_CurrentTrack.Path);
             _Listener = _TrackPlayer.Subscribe(OnNext);
+        }
+
+        public void OnNext(EventPattern<NotifyCollectionChangedEventArgs> collectionChanged)
+        {
+            var @event = collectionChanged.EventArgs;
+            if ((@event.Action != NotifyCollectionChangedAction.Add) || (Tracks.Count != @event.NewItems.Count))
+            {
+                return;
+            }
+            LoadFirstTrack();
+        }
+
+        private void LoadFirstTrack()
+        {
+            if (Tracks.Count == 0)
+                return;
+
+            SetCurrentTrack(Tracks[0]);
         }
 
         public void OnNext(PlayEvent value)

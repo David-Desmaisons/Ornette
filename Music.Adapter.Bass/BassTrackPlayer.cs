@@ -10,6 +10,7 @@ namespace Music.Adapter.Bass
         private readonly int _Stream;
         private readonly Subject<PlayEvent> _EventEmitter = new Subject<PlayEvent>();
         private readonly Timer _Timer;
+        private bool _Restart = false;
 
         public TimeSpan? Duration { get; }
         public PlayState State { get; private set; }
@@ -47,6 +48,7 @@ namespace Music.Adapter.Bass
 
         public void Pause()
         {
+            _Restart = false;
             Un4seen.Bass.Bass.BASS_ChannelPause(_Stream);
             TimerStop(PlayState.Paused);
         }
@@ -54,12 +56,14 @@ namespace Music.Adapter.Bass
         public void Play()
         {
             State = PlayState.Playing;
-            Un4seen.Bass.Bass.BASS_ChannelPlay(_Stream, false);
+            Un4seen.Bass.Bass.BASS_ChannelPlay(_Stream, _Restart);
+            _Restart = true;
             TimerStart();
         }
 
         public void Stop()
         {
+            _Restart = true;
             Un4seen.Bass.Bass.BASS_ChannelStop(_Stream);
             TimerStop(PlayState.Ready);
         }

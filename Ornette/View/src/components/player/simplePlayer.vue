@@ -1,9 +1,23 @@
 <template>
-  <div>
+  <div class="simple-player">
 
-    <icon-button icon="mdi-play"  :command="player.Play"></icon-button>
-    <icon-button icon="mdi-pause" :command="player.Pause"></icon-button>
-    <icon-button icon="mdi-stop"  :command="player.Stop"></icon-button>
+    <icon-button
+      icon="mdi-play"
+      :command="player.Play"
+    />
+
+    <icon-button
+      icon="mdi-pause"
+      :command="player.Pause"
+    />
+
+    <icon-button
+      icon="mdi-stop"
+      :command="player.Stop"
+    />
+
+    <p class="description">{{displayName}}</p>
+
   </div>
 </template>
 
@@ -17,11 +31,40 @@ export default {
       type: Object
     }
   },
+  computed: {
+    displayName() {
+      const { CurrentTrack } = this.player;
+      if (CurrentTrack === null) {
+        return "";
+      }
+      const { MetaData } = CurrentTrack;
+      return `${MetaData.TrackNumber}-${MetaData.Name}`;
+    }
+  },
   components: {
     iconButton
   }
 };
 </script>
 
-<style>
+<style scoped=true>
+.simple-player {
+  width: 100px;
+  height: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.simple-player div {
+  align-self: center;
+  place-self: center;
+}
+
+.simple-player .description {
+  grid-column: 1 / span 3;
+  font-size: 10px;
+  align-self: center;
+  place-self: center;
+}
 </style>

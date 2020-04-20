@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Reactive;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using DynamicData.Binding;
@@ -15,11 +16,12 @@ namespace Ornette.Application.Model
         private ITrackPlayer _TrackPlayer;
         private IDisposable _Listener;
         private readonly Subject<Track> _CurrentTrackSubject = new Subject<Track>();
+        private readonly Subject<PlayEvent> _EventsSubject = new Subject<PlayEvent>();
         private Track _CurrentTrack;
 
         public ObservableCollection<Track> Tracks { get; } = new ObservableCollection<Track>();
-
-        public IObservable<Track> CurrentTrack => _CurrentTrackSubject.Distinct();
+        public IObservable<Track> CurrentTrack { get; }
+        public IObservable<PlayEvent> Events { get; }
 
         public double Volume
         {
@@ -31,6 +33,9 @@ namespace Ornette.Application.Model
         {
             _MusicPlayer = musicPlayer;
 
+            CurrentTrack = _CurrentTrackSubject.Distinct().ObserveOn(DispatcherScheduler.Current);
+            Events = _EventsSubject.ObserveOn(DispatcherScheduler.Current);
+
             Tracks.ObserveCollectionChanges().Subscribe(OnNext);
             CurrentTrack.Subscribe(UpdatePlayer);
         }
@@ -38,6 +43,14 @@ namespace Ornette.Application.Model
         public void SetCurrentTrack(Track value)
         {
             _CurrentTrackSubject.OnNext(value);
+        }
+
+        public void SetPosition(TimeSpan? value)
+        {
+            if (!value.HasValue)
+                return;
+
+            _TrackPlayer?.SetPosition(value.Value);
         }
 
         public void Play()
@@ -84,6 +97,7 @@ namespace Ornette.Application.Model
 
         public void OnNext(PlayEvent value)
         {
+            _EventsSubject.OnNext(value);
         }
     }
 }

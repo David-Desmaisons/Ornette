@@ -13,8 +13,8 @@ namespace Music.Adapter.Bass
 
         public double Volume
         {
-            get => Un4seen.Bass.Bass.BASS_GetConfig(BASSConfig.BASS_CONFIG_GVOL_STREAM) / 10000d;
-            set => Un4seen.Bass.Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_GVOL_STREAM, (int)(Math.Truncate(value * 10000)));
+            get => Un4seen.Bass.Bass.BASS_GetConfig(BASSConfig.BASS_CONFIG_GVOL_STREAM) / 100d;
+            set => Un4seen.Bass.Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_GVOL_STREAM, (int)(Math.Truncate(value * 100)));
         }
 
         private BassMusicPlayer() { }

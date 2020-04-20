@@ -1,8 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using Neutronium.MVVMComponents;
+﻿using Neutronium.MVVMComponents;
 using Neutronium.MVVMComponents.Relay;
 using Ornette.Application.Model;
+using Ornette.Application.MusicPlayer;
 using ReactiveUI;
+using System;
+using System.Collections.ObjectModel;
+using System.Reactive.Linq;
 
 namespace Ornette.Application.ViewModel
 {
@@ -10,6 +13,8 @@ namespace Ornette.Application.ViewModel
     {
         private readonly IPlayer _Player;
         private readonly ObservableAsPropertyHelper<Track> _CurrentTrackMapper;
+        private readonly ObservableAsPropertyHelper<TimeSpan?> _PositionMapper;
+        private readonly ObservableAsPropertyHelper<PlayState> _StateMapper;
 
         public ObservableCollection<Track> Tracks => _Player.Tracks;
 
@@ -25,6 +30,14 @@ namespace Ornette.Application.ViewModel
             set => _Player.SetCurrentTrack(value);
         }
 
+        public TimeSpan? Position
+        {
+            get => _PositionMapper.Value;
+            set => _Player.SetPosition(value);
+        }
+
+        public PlayState State => _StateMapper.Value;
+
         public ICommandWithoutParameter Play { get; }
         public ICommandWithoutParameter Pause { get; }
         public ICommandWithoutParameter Stop { get; }
@@ -32,11 +45,14 @@ namespace Ornette.Application.ViewModel
         public PlayerViewModel(IPlayer player)
         {
             _Player = player;
+
+            _PositionMapper = _Player.Events.Select(evt => evt.Position).ToProperty(this, nameof(Position));
+            _StateMapper = _Player.Events.Select(evt => evt.State).ToProperty(this, nameof(State));
             _CurrentTrackMapper = _Player.CurrentTrack.ToProperty(this, nameof(CurrentTrack));
 
-            Play  = new RelayToogleCommand(player.Play);
+            Play = new RelayToogleCommand(player.Play);
             Pause = new RelayToogleCommand(player.Pause);
-            Stop  = new RelayToogleCommand(player.Stop);
+            Stop = new RelayToogleCommand(player.Stop);
         }
     }
 }

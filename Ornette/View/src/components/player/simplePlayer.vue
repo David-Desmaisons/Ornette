@@ -17,6 +17,7 @@
     />
 
     <p class="description">{{displayName}}</p>
+    <p>{{player.Position |timeSpan('M')}}</p>
 
   </div>
 </template>
@@ -63,8 +64,11 @@ export default {
 
 .simple-player .description {
   grid-column: 1 / span 3;
-  font-size: 10px;
   align-self: center;
   place-self: center;
+}
+
+.simple-player p {
+  font-size: 10px;
 }
 </style>

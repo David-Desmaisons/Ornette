@@ -2,7 +2,7 @@ function format(value, decimal = 2) {
   return String(value).padStart(decimal, '0');
 }
 
-function timeSpan(value, type) {
+function timeSpan(value, type = "M") {
   if (value === null) {
     return null;
   }

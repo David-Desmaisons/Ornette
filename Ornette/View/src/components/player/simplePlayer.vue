@@ -17,12 +17,13 @@
     />
 
     <p class="description">{{displayName}}</p>
-    <p>{{player.Position |timeSpan('M')}}</p>
+    <p>{{player.Position |timeSpan }}</p>
 
   </div>
 </template>
 
 <script>
+import Vue from "vue";
 import iconButton from "../iconButton";
 
 export default {
@@ -38,8 +39,11 @@ export default {
       if (CurrentTrack === null) {
         return "";
       }
-      const { MetaData } = CurrentTrack;
-      return `${MetaData.TrackNumber}-${MetaData.Name}`;
+      const {
+        MetaData: { Duration, Name, TrackNumber }
+      } = CurrentTrack;
+      const filter = Vue.filter("timeSpan");
+      return `${TrackNumber}-${Name}-${filter(Duration)}`;
     }
   },
   components: {

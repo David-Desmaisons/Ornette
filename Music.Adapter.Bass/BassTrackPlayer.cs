@@ -40,11 +40,10 @@ namespace Music.Adapter.Bass
         protected void OnTimer()
         {
             EmitEvent();
-            if (CurrentPositionInSeconds < MaxPositionInSeconds)
+            if (CurrentPositionInSeconds >= MaxPositionInSeconds)
             {
-                return;
+                TimerStop(PlayState.Ended);
             }
-            Stop();
         }
 
         public void Pause()

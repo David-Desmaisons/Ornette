@@ -4,6 +4,7 @@
     {
         Loading,
         Broken,
+        Ended,
         Ready,
         Playing,
         Paused

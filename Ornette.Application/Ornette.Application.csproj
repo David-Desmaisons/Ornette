@@ -75,6 +75,7 @@
     <Compile Include="Model\Player.cs" />
     <Compile Include="MusicPlayer\IMusicPlayer.cs" />
     <Compile Include="MusicPlayer\ITrackPlayer.cs" />
+    <Compile Include="Model\NexTrack.cs" />
     <Compile Include="MusicPlayer\PlayState.cs" />
     <Compile Include="Model\Track.cs" />
     <Compile Include="MusicPlayer\PlayEvent.cs" />

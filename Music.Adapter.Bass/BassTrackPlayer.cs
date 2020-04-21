@@ -39,11 +39,12 @@ namespace Music.Adapter.Bass
 
         protected void OnTimer()
         {
-            if (CurrentPositionInSeconds >= MaxPositionInSeconds)
-            {
-                State = PlayState.Ready;
-            }
             EmitEvent();
+            if (CurrentPositionInSeconds < MaxPositionInSeconds)
+            {
+                return;
+            }
+            Stop();
         }
 
         public void Pause()

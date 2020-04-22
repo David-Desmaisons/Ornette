@@ -12,6 +12,16 @@ function timeSpan(value, type = "M") {
   return (type === 'M') ? formattedMinute : `${formattedMinute}:${format(Milliseconds, 3)}`;
 }
 
+function formatTime(value) {
+  if (value === null) {
+    return null;
+  }
+  const minutes = Math.trunc(value / 60);
+  const seconds = value % 60;
+  return `${format(minutes)}:${format(seconds)}`;
+}
+
 export {
-  timeSpan
+  timeSpan,
+  formatTime
 }

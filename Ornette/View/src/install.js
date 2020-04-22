@@ -7,7 +7,7 @@ import { router } from "@/neutronium/route";
 import VueI18n from "vue-i18n";
 import messages from "./message";
 import Notifications from "vue-notification";
-import { timeSpan } from "./filter/timeSpan";
+import { formatTime, timeSpan } from "./filter/timeSpan";
 
 import Vuetify, {
   VApp,
@@ -78,6 +78,7 @@ function install(Vue) {
   Vue.use(VueI18n);
   Vue.use(Notifications);
   Vue.filter("timeSpan", timeSpan);
+  Vue.filter("formatTime",formatTime);
 }
 
 /*eslint no-unused-vars: ["error", { "args": "none" }]*/

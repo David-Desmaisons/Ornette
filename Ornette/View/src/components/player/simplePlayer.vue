@@ -17,7 +17,7 @@
     />
 
     <p class="description">{{displayName}}</p>
-    <p>{{player.Position |timeSpan }}</p>
+    <p>{{player.PositionInSeconds | formatTime}}</p>
 
   </div>
 </template>

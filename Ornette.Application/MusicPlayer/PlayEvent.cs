@@ -1,15 +1,13 @@
-﻿using System;
-
-namespace Ornette.Application.MusicPlayer
+﻿namespace Ornette.Application.MusicPlayer
 {
     public class PlayEvent
     {
-        public TimeSpan? Position { get; }
+        public int? PositionInSeconds { get; }
         public PlayState State { get; }
 
-        public PlayEvent(TimeSpan? position, PlayState state)
+        public PlayEvent(int? positionInSeconds, PlayState state)
         {
-            Position = position;
+            PositionInSeconds = positionInSeconds;
             State = state;
         }
     }

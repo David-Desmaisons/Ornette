@@ -54,12 +54,9 @@ namespace Ornette.Application.Model
             _CurrentTrackSubject.OnNext(nextTrack);
         }
 
-        public void SetPosition(TimeSpan? value)
+        public void SetPositionInSeconds(int value)
         {
-            if (!value.HasValue)
-                return;
-
-            _TrackPlayer?.SetPosition(value.Value);
+            _TrackPlayer?.SetPositionInSeconds(value);
         }
 
         public void Play()

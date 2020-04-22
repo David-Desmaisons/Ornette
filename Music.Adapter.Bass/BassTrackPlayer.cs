@@ -65,7 +65,7 @@ namespace Music.Adapter.Bass
         {
             _Restart = true;
             Un4seen.Bass.Bass.BASS_ChannelStop(_Stream);
-            TimerStop(PlayState.Ready, TimeSpan.FromSeconds(0));
+            TimerStop(PlayState.Ready, 0);
         }
 
         private void TimerStart()
@@ -74,7 +74,7 @@ namespace Music.Adapter.Bass
             EmitEvent();
         }
 
-        private void TimerStop(PlayState state, TimeSpan? position = null)
+        private void TimerStop(PlayState state, int? position = null)
         {
             State = state;
             _Timer.Stop();
@@ -91,9 +91,9 @@ namespace Music.Adapter.Bass
             _Timer.Dispose();
         }
 
-        public void SetPosition(TimeSpan value)
+        public void SetPositionInSeconds(int value)
         {
-            var position = Un4seen.Bass.Bass.BASS_ChannelSeconds2Bytes(_Stream, value.TotalSeconds);
+            var position = Un4seen.Bass.Bass.BASS_ChannelSeconds2Bytes(_Stream, value);
             Un4seen.Bass.Bass.BASS_ChannelSetPosition(_Stream, position);
             EmitEvent();
         }
@@ -103,9 +103,9 @@ namespace Music.Adapter.Bass
             return _EventEmitter.Subscribe(observer);
         }
 
-        private void EmitEvent(TimeSpan? position = null)
+        private void EmitEvent(int? position = null)
         {
-            position = position ?? TimeSpan.FromSeconds(CurrentPositionInSeconds);
+            position = position ?? (int)CurrentPositionInSeconds;
             var @event = new PlayEvent(position, State);
             _EventEmitter.OnNext(@event);
         }

@@ -7,7 +7,7 @@ import { router } from "@/neutronium/route";
 import VueI18n from "vue-i18n";
 import messages from "./message";
 import Notifications from "vue-notification";
-import { formatTime, timeSpan } from "./filter/timeSpan";
+import { formatTime, timeSpan } from "./filter/time";
 
 import Vuetify, {
   VApp,

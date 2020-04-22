@@ -335,6 +335,7 @@
     <Content Include="View\build-scripts\create-hash.js" />
     <Content Include="View\build-scripts\hash-builder.js" />
     <Content Include="View\build-scripts\message-updater.js" />
+    <Content Include="View\src\filter\time.js" />
     <Content Include="View\src\neutronium\entry.js" />
     <Content Include="View\src\neutronium\main.js" />
     <Content Include="View\src\neutronium\route.js" />

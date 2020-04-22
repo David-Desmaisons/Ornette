@@ -1,24 +1,13 @@
 <template>
   <div class="simple-player">
+    <icon-button icon="mdi-play" :command="player.Play" />
 
-    <icon-button
-      icon="mdi-play"
-      :command="player.Play"
-    />
+    <icon-button icon="mdi-pause" :command="player.Pause" />
 
-    <icon-button
-      icon="mdi-pause"
-      :command="player.Pause"
-    />
+    <icon-button icon="mdi-stop" :command="player.Stop" />
 
-    <icon-button
-      icon="mdi-stop"
-      :command="player.Stop"
-    />
-
-    <p class="description">{{player.CurrentTrack | track}}</p>
-    <p>{{player.PositionInSeconds | formatTime}}</p>
-
+    <p class="description">{{ player.CurrentTrack | track }}</p>
+    <p>{{ player.PositionInSeconds | formatTime }}</p>
   </div>
 </template>
 
@@ -38,7 +27,7 @@ export default {
 };
 </script>
 
-<style scoped=true>
+<style scoped="true">
 .simple-player {
   width: 100px;
   height: 50px;

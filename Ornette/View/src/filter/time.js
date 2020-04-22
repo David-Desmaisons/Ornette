@@ -1,5 +1,5 @@
 function format(value, decimal = 2) {
-  return String(value).padStart(decimal, '0');
+  return String(value).padStart(decimal, "0");
 }
 
 function timeSpan(value, type = "M") {
@@ -9,7 +9,9 @@ function timeSpan(value, type = "M") {
   const { Minutes, Hours, Seconds, Milliseconds } = value;
   const addMinutes = Hours * 60;
   const formattedMinute = `${format(addMinutes + Minutes)}:${format(Seconds)}`;
-  return (type === 'M') ? formattedMinute : `${formattedMinute}:${format(Milliseconds, 3)}`;
+  return type === "M"
+    ? formattedMinute
+    : `${formattedMinute}:${format(Milliseconds, 3)}`;
 }
 
 function formatTime(value) {
@@ -21,7 +23,4 @@ function formatTime(value) {
   return `${format(minutes)}:${format(seconds)}`;
 }
 
-export {
-  timeSpan,
-  formatTime
-}
+export { timeSpan, formatTime };

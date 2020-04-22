@@ -1,4 +1,4 @@
-import { timeSpan } from "./time"
+import { timeSpan } from "./time";
 
 function track(value) {
   if (value === null) {
@@ -10,6 +10,4 @@ function track(value) {
   return `${TrackNumber}-${Name}-${timeSpan(Duration)}`;
 }
 
-export {
-  track
-}
+export { track };

@@ -79,8 +79,8 @@ function install(Vue) {
   Vue.use(VueI18n);
   Vue.use(Notifications);
   Vue.filter("timeSpan", timeSpan);
-  Vue.filter("formatTime",formatTime);
-  Vue.filter("track",track);
+  Vue.filter("formatTime", formatTime);
+  Vue.filter("track", track);
 }
 
 /*eslint no-unused-vars: ["error", { "args": "none" }]*/

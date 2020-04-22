@@ -16,14 +16,13 @@
       :command="player.Stop"
     />
 
-    <p class="description">{{displayName}}</p>
+    <p class="description">{{player.CurrentTrack | track}}</p>
     <p>{{player.PositionInSeconds | formatTime}}</p>
 
   </div>
 </template>
 
 <script>
-import Vue from "vue";
 import iconButton from "../iconButton";
 
 export default {
@@ -31,19 +30,6 @@ export default {
     player: {
       required: true,
       type: Object
-    }
-  },
-  computed: {
-    displayName() {
-      const { CurrentTrack } = this.player;
-      if (CurrentTrack === null) {
-        return "";
-      }
-      const {
-        MetaData: { Duration, Name, TrackNumber }
-      } = CurrentTrack;
-      const filter = Vue.filter("timeSpan");
-      return `${TrackNumber}-${Name}-${filter(Duration)}`;
     }
   },
   components: {

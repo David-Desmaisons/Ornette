@@ -8,6 +8,7 @@ import VueI18n from "vue-i18n";
 import messages from "./message";
 import Notifications from "vue-notification";
 import { formatTime, timeSpan } from "./filter/time";
+import { track } from "./filter/track";
 
 import Vuetify, {
   VApp,
@@ -79,6 +80,7 @@ function install(Vue) {
   Vue.use(Notifications);
   Vue.filter("timeSpan", timeSpan);
   Vue.filter("formatTime",formatTime);
+  Vue.filter("track",track);
 }
 
 /*eslint no-unused-vars: ["error", { "args": "none" }]*/

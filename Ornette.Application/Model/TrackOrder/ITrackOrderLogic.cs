@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace Ornette.Application.Model
+namespace Ornette.Application.Model.TrackOrder
 {
     internal interface ITrackOrderLogic
     {

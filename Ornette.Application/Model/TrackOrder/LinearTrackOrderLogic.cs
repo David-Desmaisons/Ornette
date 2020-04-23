@@ -1,10 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace Ornette.Application.Model
+namespace Ornette.Application.Model.TrackOrder
 {
     internal class LinearTrackOrderLogic : ITrackOrderLogic
     {
-        private Track _CurrentTrack;
         public ObservableCollection<Track> Tracks { get; set; }
 
         public Track GetFirst()
@@ -14,7 +13,6 @@ namespace Ornette.Application.Model
 
         public void SetCurrentTrack(Track track)
         {
-            _CurrentTrack = track;
         }
 
         public NextTrack GetNextTrack(Track track, bool autoPlay)

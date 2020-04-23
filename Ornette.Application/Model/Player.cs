@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using Ornette.Application.Model.TrackOrder;
 
 namespace Ornette.Application.Model
 {
@@ -28,6 +29,17 @@ namespace Ornette.Application.Model
         }
 
         public bool AutoReplay { get; set; } = false;
+
+        private bool _RandomPlay;
+        public bool RandomPlay
+        {
+            get => _RandomPlay;
+            set
+            {
+                _RandomPlay = value;
+                _TrackOrderLogic = TrackOrderLogic.GetLogic(value);
+            }
+        }
 
         public Player(IMusicPlayer musicPlayer)
         {

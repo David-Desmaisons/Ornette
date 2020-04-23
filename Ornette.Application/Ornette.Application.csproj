@@ -72,9 +72,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\IPlayer.cs" />
-    <Compile Include="Model\ITrackOrderLogic.cs" />
-    <Compile Include="Model\LinearTrackOrderLogic.cs" />
+    <Compile Include="Model\TrackOrder\ITrackOrderLogic.cs" />
+    <Compile Include="Model\TrackOrder\LinearTrackOrderLogic.cs" />
     <Compile Include="Model\Player.cs" />
+    <Compile Include="Model\TrackOrder\TrackOrderLogic.cs" />
     <Compile Include="MusicPlayer\IMusicPlayer.cs" />
     <Compile Include="MusicPlayer\ITrackPlayer.cs" />
     <Compile Include="Model\NextTrack.cs" />

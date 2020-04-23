@@ -23,6 +23,12 @@ namespace Ornette.Application.ViewModel
             set => _Player.Volume = value;
         }
 
+        public bool RandomPlay
+        {
+            get => _Player.RandomPlay;
+            set => _Player.RandomPlay = value;
+        }
+
         public bool AutoReplay
         {
             get => _Player.AutoReplay;

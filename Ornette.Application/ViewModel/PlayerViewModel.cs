@@ -23,6 +23,12 @@ namespace Ornette.Application.ViewModel
             set => _Player.Volume = value;
         }
 
+        public bool AutoReplay
+        {
+            get => _Player.AutoReplay;
+            set => _Player.AutoReplay = value;
+        }
+
         public Track CurrentTrack
         {
             get => _CurrentTrackMapper.Value;

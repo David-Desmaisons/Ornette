@@ -9,6 +9,7 @@ namespace Ornette.Application.Model
         IObservable<Track> CurrentTrack { get; }
         IObservable<PlayEvent> Events { get; }
 
+        bool AutoReplay { get; set; }
         double Volume { get; set; }
         ObservableCollection<Track> Tracks { get; }
 

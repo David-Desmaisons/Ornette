@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Ornette.Application.MusicPlayer;
+using System;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using DynamicData.Binding;
-using Ornette.Application.MusicPlayer;
 
 namespace Ornette.Application.Model
 {
@@ -15,9 +12,10 @@ namespace Ornette.Application.Model
         private readonly IMusicPlayer _MusicPlayer;
         private ITrackPlayer _TrackPlayer;
         private IDisposable _Listener;
-        private readonly Subject<NexTrack> _CurrentTrackSubject = new Subject<NexTrack>();
+        private readonly Subject<NextTrack> _CurrentTrackSubject = new Subject<NextTrack>();
         private readonly Subject<PlayEvent> _EventsSubject = new Subject<PlayEvent>();
         private Track _CurrentTrack;
+        private ITrackOrderLogic _TrackOrderLogic;
 
         public ObservableCollection<Track> Tracks { get; } = new ObservableCollection<Track>();
         public IObservable<Track> CurrentTrack { get; }
@@ -34,23 +32,24 @@ namespace Ornette.Application.Model
         public Player(IMusicPlayer musicPlayer)
         {
             _MusicPlayer = musicPlayer;
+            _TrackOrderLogic = new LinearTrackOrderLogic { Tracks = Tracks };
 
             var trackFlow = _CurrentTrackSubject.Distinct();
             CurrentTrack = trackFlow.Select(tr => tr.Track).ObserveOn(DispatcherScheduler.Current);
             Events = _EventsSubject.ObserveOn(DispatcherScheduler.Current);
 
-            Tracks.ObserveCollectionChanges().Subscribe(OnNext);
             trackFlow.Subscribe(UpdatePlayer);
         }
 
         public void SetCurrentTrack(Track value)
         {
+            _TrackOrderLogic.SetCurrentTrack(value);
             ChangeTrack(value, true);
         }
 
         private void ChangeTrack(Track track, bool play)
         {
-            var nextTrack = new NexTrack(track, play);
+            var nextTrack = new NextTrack(track, play);
             _CurrentTrackSubject.OnNext(nextTrack);
         }
 
@@ -61,6 +60,11 @@ namespace Ornette.Application.Model
 
         public void Play()
         {
+            if (_CurrentTrack == null)
+            {
+                ChangeTrack(_TrackOrderLogic.GetFirst(), true);
+                return;
+            }
             _TrackPlayer?.Play();
         }
 
@@ -74,32 +78,25 @@ namespace Ornette.Application.Model
             _TrackPlayer?.Stop();
         }
 
-        private void UpdatePlayer(NexTrack value)
+        private void UpdatePlayer(NextTrack value)
         {
+            Stop();
             _Listener?.Dispose();
 
             _CurrentTrack = value.Track;
+            if (_CurrentTrack == null)
+            {
+                OnNext(PlayEvent.Ready);
+                return;
+            }
+
             _TrackPlayer = _MusicPlayer.CreateTrackPlayer(_CurrentTrack.Path);
             _Listener = _TrackPlayer.Subscribe(OnNext);
             if (value.Play)
-            {
                 Play();
-                return;
-            }
-            Stop();
         }
 
-        public void OnNext(EventPattern<NotifyCollectionChangedEventArgs> collectionChanged)
-        {
-            var @event = collectionChanged.EventArgs;
-            if ((@event.Action != NotifyCollectionChangedAction.Add) || (Tracks.Count != @event.NewItems.Count))
-            {
-                return;
-            }
-            ChangeTrack(Tracks[0], false);
-        }
-
-        public void OnNext(PlayEvent value)
+        private void OnNext(PlayEvent value)
         {
             if (value.State == PlayState.Ended)
             {
@@ -111,33 +108,8 @@ namespace Ornette.Application.Model
 
         private void OnEnded()
         {
-            var next = GetNexTrack();
-            _Listener?.Dispose();
-            Stop();
-            if (next == null)
-                return;
-
+            var next = _TrackOrderLogic.GetNextTrack(_CurrentTrack, AutoReplay);
             _CurrentTrackSubject.OnNext(next);
-        }
-
-        private NexTrack GetNexTrack()
-        {
-            var nextIndex = GetNextIndex();
-            if (nextIndex == -1)
-                return null;
-
-            var play = (nextIndex > 0) || AutoReplay;
-            return new NexTrack(Tracks[nextIndex], play);
-        }
-
-        private int GetNextIndex()
-        {
-            var currentCount = Tracks.Count;
-            if (currentCount == 0)
-                return -1;
-
-            var nextIndex = Tracks.IndexOf(_CurrentTrack) + 1;
-            return (nextIndex > currentCount - 1) ? 0 : nextIndex;
         }
     }
 }

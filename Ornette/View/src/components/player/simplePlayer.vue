@@ -6,8 +6,14 @@
 
     <icon-button icon="mdi-stop" :command="player.Stop" />
 
-    <p class="description">{{ player.CurrentTrack | track }}</p>
+    <p class="full">{{ player.CurrentTrack | track }}</p>
     <p>{{ player.PositionInSeconds | formatTime }}</p>
+    <v-slider
+      v-model="player.PositionInSeconds"
+      :max="player.CurrentTrack | totalSeconds"
+      class="full slider"
+      :dense="true"
+    />
   </div>
 </template>
 
@@ -41,7 +47,7 @@ export default {
   place-self: center;
 }
 
-.simple-player .description {
+.simple-player .full {
   grid-column: 1 / span 3;
   align-self: center;
   place-self: center;
@@ -49,5 +55,9 @@ export default {
 
 .simple-player p {
   font-size: 10px;
+}
+
+.simple-player .slider {
+  width: 100%;
 }
 </style>

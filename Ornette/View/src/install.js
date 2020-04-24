@@ -7,7 +7,7 @@ import { router } from "@/neutronium/route";
 import VueI18n from "vue-i18n";
 import messages from "./message";
 import Notifications from "vue-notification";
-import { formatTime, timeSpan } from "./filter/time";
+import { formatTime, timeSpan, totalSeconds } from "./filter/time";
 import { track } from "./filter/track";
 
 import Vuetify, {
@@ -38,7 +38,8 @@ import Vuetify, {
   VTextField,
   VAppBarNavIcon,
   VToolbarTitle,
-  VSpacer
+  VSpacer,
+  VSlider
 } from "vuetify/lib";
 
 function install(Vue) {
@@ -71,7 +72,8 @@ function install(Vue) {
       VTextField,
       VAppBarNavIcon,
       VToolbarTitle,
-      VSpacer
+      VSpacer,
+      VSlider
     }
   });
 
@@ -81,6 +83,7 @@ function install(Vue) {
   Vue.filter("timeSpan", timeSpan);
   Vue.filter("formatTime", formatTime);
   Vue.filter("track", track);
+  Vue.filter("totalSeconds", totalSeconds);
 }
 
 /*eslint no-unused-vars: ["error", { "args": "none" }]*/

@@ -14,6 +14,16 @@ function timeSpan(value, type = "M") {
     : `${formattedMinute}:${format(Milliseconds, 3)}`;
 }
 
+function totalSeconds(value) {
+  if (value === null) {
+    return null;
+  }
+  const {
+    MetaData: { Duration }
+  } = value;
+  return Duration.TotalSeconds;
+}
+
 function formatTime(value) {
   if (value === null) {
     return null;
@@ -23,4 +33,4 @@ function formatTime(value) {
   return `${format(minutes)}:${format(seconds)}`;
 }
 
-export { timeSpan, formatTime };
+export { timeSpan, formatTime, totalSeconds };

@@ -12,5 +12,7 @@
             Track = track;
             Play = play;
         }
+
+        internal static NextTrack PlayTrack(Track track) => new NextTrack(track, true);
     }
 }

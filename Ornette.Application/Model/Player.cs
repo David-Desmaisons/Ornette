@@ -47,7 +47,7 @@ namespace Ornette.Application.Model
             _MusicPlayer = musicPlayer;
             _TrackOrderLogicFactory = trackOrderLogicFactory;
 
-            RandomPlay = true;
+            RandomPlay = false;
             var trackFlow = _CurrentTrackSubject.Distinct();
             CurrentTrack = trackFlow.Select(tr => tr.Track).ObserveOn(DispatcherScheduler.Current);
             Events = _EventsSubject.ObserveOn(DispatcherScheduler.Current);

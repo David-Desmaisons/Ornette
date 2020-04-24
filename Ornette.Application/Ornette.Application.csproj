@@ -71,9 +71,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infra\IRandomProvider.cs" />
+    <Compile Include="Infra\RandomProvider.cs" />
     <Compile Include="Model\IPlayer.cs" />
     <Compile Include="Model\TrackOrder\ITrackOrderLogicFactory.cs" />
     <Compile Include="Model\TrackOrder\ITrackOrderLogic.cs" />
+    <Compile Include="Model\TrackOrder\RandomTrackOrderLogic.cs" />
     <Compile Include="Model\TrackOrder\LinearTrackOrderLogic.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\TrackOrder\TrackOrderLogic.cs" />

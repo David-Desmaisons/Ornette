@@ -26,7 +26,7 @@ namespace Ornette.Application.Model.TrackOrder
             if ((nextIndex == -1) || ((nextIndex == 0) && !autoPlay))
                 return NextTrack.None;
 
-            return new NextTrack(_Tracks[nextIndex], true);
+            return NextTrack.PlayTrack(_Tracks[nextIndex]);
         }
 
         private int GetNextIndex(Track track)

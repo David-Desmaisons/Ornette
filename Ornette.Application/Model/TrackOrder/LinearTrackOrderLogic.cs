@@ -4,11 +4,16 @@ namespace Ornette.Application.Model.TrackOrder
 {
     internal class LinearTrackOrderLogic : ITrackOrderLogic
     {
-        public ObservableCollection<Track> Tracks { get; set; }
+        private readonly ObservableCollection<Track> _Tracks;
+
+        public LinearTrackOrderLogic(ObservableCollection<Track> tracks)
+        {
+            _Tracks = tracks;
+        }
 
         public Track GetFirst()
         {
-            return Tracks.Count > 0 ? Tracks[0] : null;
+            return _Tracks.Count > 0 ? _Tracks[0] : null;
         }
 
         public void SetCurrentTrack(Track track)
@@ -21,16 +26,16 @@ namespace Ornette.Application.Model.TrackOrder
             if ((nextIndex == -1) || ((nextIndex == 0) && !autoPlay))
                 return NextTrack.None;
 
-            return new NextTrack(Tracks[nextIndex], true);
+            return new NextTrack(_Tracks[nextIndex], true);
         }
 
         private int GetNextIndex(Track track)
         {
-            var currentCount = Tracks.Count;
+            var currentCount = _Tracks.Count;
             if (currentCount == 0)
                 return -1;
 
-            var nextIndex = Tracks.IndexOf(track) + 1;
+            var nextIndex = _Tracks.IndexOf(track) + 1;
             return (nextIndex > currentCount - 1) ? 0 : nextIndex;
         }
     }

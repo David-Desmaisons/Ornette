@@ -1,10 +1,12 @@
-﻿namespace Ornette.Application.Model.TrackOrder
+﻿using System.Collections.ObjectModel;
+
+namespace Ornette.Application.Model.TrackOrder
 {
-    internal static class TrackOrderLogic
+    public class TrackOrderLogicFactory : ITrackOrderLogicFactory
     {
-        internal static ITrackOrderLogic GetLogic(bool random)
+        public ITrackOrderLogic GetLogic(ObservableCollection<Track> tracks, bool random)
         {
-            return new LinearTrackOrderLogic();
+            return new LinearTrackOrderLogic(tracks);
         }
     }
 }

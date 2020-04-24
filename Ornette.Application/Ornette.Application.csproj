@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\IPlayer.cs" />
+    <Compile Include="Model\TrackOrder\ITrackOrderLogicFactory.cs" />
     <Compile Include="Model\TrackOrder\ITrackOrderLogic.cs" />
     <Compile Include="Model\TrackOrder\LinearTrackOrderLogic.cs" />
     <Compile Include="Model\Player.cs" />

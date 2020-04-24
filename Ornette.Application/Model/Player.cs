@@ -11,6 +11,7 @@ namespace Ornette.Application.Model
     public class Player : IPlayer
     {
         private readonly IMusicPlayer _MusicPlayer;
+        private readonly ITrackOrderLogicFactory _TrackOrderLogicFactory;
         private ITrackPlayer _TrackPlayer;
         private IDisposable _Listener;
         private readonly Subject<NextTrack> _CurrentTrackSubject = new Subject<NextTrack>();
@@ -37,19 +38,19 @@ namespace Ornette.Application.Model
             set
             {
                 _RandomPlay = value;
-                _TrackOrderLogic = TrackOrderLogic.GetLogic(value);
+                _TrackOrderLogic = _TrackOrderLogicFactory.GetLogic(Tracks, value);
             }
         }
 
-        public Player(IMusicPlayer musicPlayer)
+        public Player(IMusicPlayer musicPlayer, ITrackOrderLogicFactory trackOrderLogicFactory)
         {
             _MusicPlayer = musicPlayer;
-            _TrackOrderLogic = new LinearTrackOrderLogic { Tracks = Tracks };
+            _TrackOrderLogicFactory = trackOrderLogicFactory;
 
+            RandomPlay = true;
             var trackFlow = _CurrentTrackSubject.Distinct();
             CurrentTrack = trackFlow.Select(tr => tr.Track).ObserveOn(DispatcherScheduler.Current);
             Events = _EventsSubject.ObserveOn(DispatcherScheduler.Current);
-
             trackFlow.Subscribe(UpdatePlayer);
         }
 

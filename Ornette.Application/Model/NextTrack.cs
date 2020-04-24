@@ -1,6 +1,6 @@
 ﻿namespace Ornette.Application.Model
 {
-    internal class NextTrack
+    public class NextTrack
     {
         public Track Track { get; }
         public bool Play { get; }

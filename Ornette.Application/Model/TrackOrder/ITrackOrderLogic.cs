@@ -1,11 +1,7 @@
-﻿using System.Collections.ObjectModel;
-
-namespace Ornette.Application.Model.TrackOrder
+﻿namespace Ornette.Application.Model.TrackOrder
 {
-    internal interface ITrackOrderLogic
+    public interface ITrackOrderLogic
     {
-        ObservableCollection<Track> Tracks { get; set; }
-
         Track GetFirst();
 
         void SetCurrentTrack(Track track);

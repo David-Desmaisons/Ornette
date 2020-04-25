@@ -93,6 +93,7 @@ namespace Music.Adapter.Bass
 
         public void SetPositionInSeconds(int value)
         {
+            _Restart = false;
             var position = Un4seen.Bass.Bass.BASS_ChannelSeconds2Bytes(_Stream, value);
             Un4seen.Bass.Bass.BASS_ChannelSetPosition(_Stream, position);
             EmitEvent();

@@ -1,26 +1,28 @@
 <template>
   <div class="simple-player">
+
+    <p class="time">{{ player.PositionInSeconds | formatTime }}</p>
+
+    <marquee class="track-name">{{ player.CurrentTrack | track }}</marquee>
+
     <icon-button icon="mdi-skip-backward" :command="player.Back" />
 
-    <icon-button icon="mdi-pause" :command="player.Pause" />
-    
     <icon-button icon="mdi-play" :command="player.Play" />
+
+    <icon-button icon="mdi-pause" :command="player.Pause" />  
 
     <icon-button icon="mdi-stop" :command="player.Stop" />
 
     <icon-button icon="mdi-skip-forward" :command="player.Next" />
 
-    <p class="full">{{ player.CurrentTrack | track }}</p>
-    
     <v-slider
       v-if="player.CurrentTrack"
       v-model="player.PositionInSeconds"
       :max="player.CurrentTrack | totalSeconds"
-      class="full slider"
+      class="full"
       :dense="true"
     />
     
-    <p>{{ player.PositionInSeconds | formatTime }}</p>
   </div>
 </template>
 
@@ -46,7 +48,7 @@ export default {
   height: 50px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 20px 1fr auto;
 }
 
 .simple-player div {
@@ -58,13 +60,26 @@ export default {
   grid-column: 1 / span 5;
   align-self: center;
   place-self: center;
+  width: 100%;
 }
 
-.simple-player p {
+.simple-player .time {
+  grid-column: 1 / span 2;
+  margin-bottom: 0;
+  font-size: 18px;
+  text-align: center;
+  align-self: center;
+  place-self: center;
+}
+
+.simple-player {
   font-size: 10px;
 }
 
-.simple-player .slider {
+.simple-player .track-name {
   width: 100%;
+  grid-column: 3 / span 3;
+  align-self: center;
+  place-self: center;
 }
 </style>

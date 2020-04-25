@@ -7,7 +7,7 @@ function track(value) {
   const {
     MetaData: { Duration, Name, TrackNumber }
   } = value;
-  return `${TrackNumber}-${Name}-${timeSpan(Duration)}`;
+  return `${TrackNumber}-${Name} (${timeSpan(Duration)})`;
 }
 
 export { track };

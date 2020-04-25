@@ -16,7 +16,7 @@ function timeSpan(value, type = "M") {
 
 function totalSeconds(value) {
   if (value === null) {
-    return null;
+    return 0;
   }
   const {
     MetaData: { Duration }
@@ -25,6 +25,7 @@ function totalSeconds(value) {
 }
 
 function formatTime(value) {
+  window.console.log(value);
   if (value === null) {
     return null;
   }

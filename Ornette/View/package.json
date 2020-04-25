@@ -5,13 +5,13 @@
   "scripts": {
     "serve": "npm run build:resource && vue-cli-service serve ./src/neutronium/main.js --open --port 9000",
     "build": "vue-cli-service build --entry ./src/neutronium/entry.js --modern && npm run create-hash",
-    "build:cached": "npm run build:resource && npm run check-hash || npm run build",
-    "build:resource": "node ./build-scripts/message-updater.js",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "live": "vue-cli-service serve ./src/neutronium/entry.js --port 8080 --mode integrated",
+    "build:cached": "npm run build:resource && npm run check-hash || npm run build",
+    "build:resource": "node ./build-scripts/message-updater.js",
+    "check-hash": "node ./build-scripts/check-hash.js",
     "create-hash": "node ./build-scripts/create-hash.js || exit 0",
-    "check-hash": "node ./build-scripts/check-hash.js"
+    "live": "vue-cli-service serve ./src/neutronium/entry.js --port 8080 --mode integrated"
   },
   "dependencies": {
     "@mdi/font": "^3.2.89",
@@ -45,9 +45,12 @@
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "neutronium-vm-loader": "^1.3.0",
+    "sass": "^1.19.0",
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-neutronium": "~0.4.0",
+    "vue-cli-plugin-vuetify": "~2.0.5",
     "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.3.0",
     "xml2js": "^0.4.23"
   }
 }

@@ -9,6 +9,7 @@
     <p class="full">{{ player.CurrentTrack | track }}</p>
     <p>{{ player.PositionInSeconds | formatTime }}</p>
     <v-slider
+      v-if="player.CurrentTrack"
       v-model="player.PositionInSeconds"
       :max="player.CurrentTrack | totalSeconds"
       class="full slider"

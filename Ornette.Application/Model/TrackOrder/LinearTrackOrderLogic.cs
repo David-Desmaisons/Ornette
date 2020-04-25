@@ -20,13 +20,27 @@ namespace Ornette.Application.Model.TrackOrder
         {
         }
 
-        public NextTrack GetNextTrack(Track track, bool autoPlay)
+        public NextTrack GetNext(Track track, bool autoPlay)
         {
             var nextIndex = GetNextIndex(track);
             if ((nextIndex == -1) || ((nextIndex == 0) && !autoPlay))
                 return NextTrack.None;
 
             return NextTrack.PlayTrack(_Tracks[nextIndex]);
+        }
+
+        public Track GetBack(Track track)
+        {
+            var currentCount = _Tracks.Count;
+            if (currentCount == 0)
+                return null;
+
+            if (track == null)
+                return GetFirst();
+
+            var nextIndex = _Tracks.IndexOf(track);
+            var index = (nextIndex > 0) ? nextIndex -1 : 0;
+            return _Tracks[index];
         }
 
         private int GetNextIndex(Track track)

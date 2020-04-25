@@ -19,5 +19,7 @@ namespace Ornette.Application.Model
         void Play();
         void Pause();
         void Stop();
+        void Next();
+        void Back();
     }
 }

@@ -91,6 +91,18 @@ namespace Ornette.Application.Model
             _TrackPlayer?.Stop();
         }
 
+        public void Next()
+        {
+            var next = _TrackOrderLogic.GetNext(_CurrentTrack, AutoReplay);
+            _CurrentTrackSubject.OnNext(next);
+        }
+
+        public void Back()
+        {
+            var next = _TrackOrderLogic.GetBack(_CurrentTrack);
+            _CurrentTrackSubject.OnNext(NextTrack.PlayTrack(next));
+        }
+
         private void UpdatePlayer(NextTrack value)
         {
             Stop();
@@ -121,7 +133,7 @@ namespace Ornette.Application.Model
 
         private void OnEnded()
         {
-            var next = _TrackOrderLogic.GetNextTrack(_CurrentTrack, AutoReplay);
+            var next = _TrackOrderLogic.GetNext(_CurrentTrack, AutoReplay);
             _CurrentTrackSubject.OnNext(next);
         }
     }

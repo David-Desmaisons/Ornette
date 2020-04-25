@@ -25,7 +25,6 @@ function totalSeconds(value) {
 }
 
 function formatTime(value) {
-  window.console.log(value);
   if (value === null) {
     return null;
   }

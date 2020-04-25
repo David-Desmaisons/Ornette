@@ -6,6 +6,8 @@
 
         void SetCurrentTrack(Track track);
 
-        NextTrack GetNextTrack(Track track, bool autoPlay);
+        NextTrack GetNext(Track track, bool autoPlay);
+
+        Track GetBack(Track track);
     }
 }

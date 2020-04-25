@@ -56,6 +56,9 @@ namespace Ornette.Application.ViewModel
         public ICommandWithoutParameter Play { get; }
         public ICommandWithoutParameter Pause { get; }
         public ICommandWithoutParameter Stop { get; }
+        public ICommandWithoutParameter Next { get; }
+        public ICommandWithoutParameter Back { get; }
+
 
         public PlayerViewModel(IPlayer player)
         {
@@ -68,6 +71,8 @@ namespace Ornette.Application.ViewModel
             Play = new RelayToogleCommand(player.Play);
             Pause = new RelayToogleCommand(player.Pause);
             Stop = new RelayToogleCommand(player.Stop);
+            Next = new RelayToogleCommand(player.Next);
+            Back = new RelayToogleCommand(player.Back);
         }
     }
 }

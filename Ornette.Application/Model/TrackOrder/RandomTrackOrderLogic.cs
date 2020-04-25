@@ -9,7 +9,7 @@ namespace Ornette.Application.Model.TrackOrder
     {
         private readonly IRandomProvider _RandomProvider;
         private readonly ObservableCollection<Track> _Tracks;
-        private readonly ISet<Track> _PlayedTracks = new HashSet<Track>();
+        private readonly IList<Track> _PlayedTracks = new List<Track>();
 
         public RandomTrackOrderLogic(IRandomProvider randomProvider, ObservableCollection<Track> tracks)
         {
@@ -29,7 +29,7 @@ namespace Ornette.Application.Model.TrackOrder
             _PlayedTracks.Add(track);
         }
 
-        public NextTrack GetNextTrack(Track track, bool autoPlay)
+        public NextTrack GetNext(Track track, bool autoPlay)
         {
             if (_Tracks.Count == 0)
                 return NextTrack.None;
@@ -41,6 +41,18 @@ namespace Ornette.Application.Model.TrackOrder
 
             _PlayedTracks.Clear();
             return autoPlay ? NextTrack.PlayTrack(GetFirst()) : NextTrack.None;
+        }
+
+        public Track GetBack(Track track)
+        {
+            var currentCount = _PlayedTracks.Count;
+            if (currentCount == 0)
+                return null;
+
+            var index = currentCount - 1;
+            var result = _PlayedTracks[index];
+            _PlayedTracks.RemoveAt(index);
+            return result;
         }
 
         private Track GetNext(IList<Track> tracks)

@@ -48,7 +48,7 @@ namespace Ornette.Application.Model
             _TrackOrderLogicFactory = trackOrderLogicFactory;
 
             RandomPlay = false;
-            var trackFlow = _CurrentTrackSubject.Distinct();
+            var trackFlow = _CurrentTrackSubject.DistinctUntilChanged();
             CurrentTrack = trackFlow.Select(tr => tr.Track).ObserveOn(DispatcherScheduler.Current);
             Events = _EventsSubject.ObserveOn(DispatcherScheduler.Current);
             trackFlow.Subscribe(UpdatePlayer);

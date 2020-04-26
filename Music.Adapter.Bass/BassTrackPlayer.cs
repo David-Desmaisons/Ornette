@@ -55,10 +55,12 @@ namespace Music.Adapter.Bass
 
         public void Play()
         {
+            var alreadyPlaying = (State == PlayState.Playing);
             State = PlayState.Playing;
             Un4seen.Bass.Bass.BASS_ChannelPlay(_Stream, _Restart);
             _Restart = true;
-            TimerStart();
+            if (!alreadyPlaying)
+                TimerStart();
         }
 
         public void Stop()
@@ -93,7 +95,10 @@ namespace Music.Adapter.Bass
 
         public void SetPositionInSeconds(int value)
         {
-            _Restart = false;
+            if (State == PlayState.Ready)
+            {
+                _Restart = false;
+            }
             var position = Un4seen.Bass.Bass.BASS_ChannelSeconds2Bytes(_Stream, value);
             Un4seen.Bass.Bass.BASS_ChannelSetPosition(_Stream, position);
             EmitEvent();

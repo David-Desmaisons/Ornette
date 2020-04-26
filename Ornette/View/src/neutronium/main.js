@@ -2,7 +2,8 @@ import Vue from "vue";
 import App from "@/App.vue";
 import rawVm from "../../data/vm";
 import { install, vueInstanceOption } from "@/install";
-import { createVM } from "neutronium-vm-loader";
+import { createVM, Command } from "neutronium-vm-loader";
+import { onCommand } from "./commandEmulator";
 
 const vm = updateVM(rawVm);
 
@@ -11,6 +12,13 @@ function updateVM(raw) {
   vm.ViewModel.Router = { BeforeResolveCommand: null };
   return vm;
 }
+
+Command.listen((id, ...args) =>
+  onCommand({
+    id,
+    args
+  })
+);
 
 install(Vue);
 
@@ -22,6 +30,10 @@ router.beforeEach((to, _, next) => {
   import(`../../data/${name}/vm.cjson`)
     .then(module => {
       const newVm = updateVM(module.default);
+      onCommand.context = {
+        route: name,
+        vm: newVm.ViewModel
+      };
       router.app.ViewModel.CurrentViewModel = newVm.ViewModel.CurrentViewModel;
       next();
     })

@@ -8,7 +8,7 @@
       v-if="player.CurrentTrack"
       v-model="player.PositionInSeconds"
       :max="player.CurrentTrack | totalSeconds"
-      class="full slider"
+      class="slider player"
       :dense="true"
     />
 
@@ -25,7 +25,7 @@
     </v-btn-toggle>
 
     <v-btn-toggle
-      class="full-rigth"
+      class="control-minor"
       multiple
       :value="toogleValue"
       @change="changeToogle"
@@ -77,8 +77,8 @@ export default {
   height: 50px;
   display: grid;
   grid-template-columns: 2fr 3fr 2fr;
-  grid-template-rows: 25px 30px 1fr;
-  grid-column-gap: 20px;
+  grid-template-rows: 25px 20px 1fr;
+  grid-column-gap: 5px;
 }
 
 .simple-player div {
@@ -86,14 +86,9 @@ export default {
   place-self: center;
 }
 
-.simple-player .control {
-  grid-column: 1 / span 2;
-  align-self: center;
-  place-self: center;
-}
-
 .simple-player .time {
   grid-column: 1 / span 1;
+  grid-row-start: 1;
   margin-bottom: 0;
   font-size: 20px;
   text-align: center;
@@ -105,18 +100,30 @@ export default {
   font-size: 10px;
 }
 
-.simple-player .full.slider {
-  height: 25px;
+.simple-player .slider {
+  height: 30px;
   width: 100%;
   grid-column: 1 / span 3;
-  align-self: center;
-  place-self: center;
+  grid-row-start: 2;
 }
 
 .simple-player .track-name {
   width: 100%;
   grid-column: 2 / span 2;
+  grid-row-start: 1;
   align-self: center;
   place-self: center;
+}
+
+.simple-player .control {
+  grid-column: 2 / span 2;
+  grid-row-start: 3;
+  align-self: center;
+  place-self: flex-end;
+}
+
+.simple-player .control-minor {
+  grid-row-start: 3;
+  grid-column: 1 / span 1;
 }
 </style>

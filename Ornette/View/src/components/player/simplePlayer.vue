@@ -74,7 +74,7 @@ export default {
 <style scoped="true">
 .simple-player {
   width: 200px;
-  height: 50px;
+  height: 100px;
   display: grid;
   grid-template-columns: 2fr 3fr 2fr;
   grid-template-rows: 25px 20px 1fr;
@@ -111,15 +111,12 @@ export default {
   width: 100%;
   grid-column: 2 / span 2;
   grid-row-start: 1;
-  align-self: center;
   place-self: center;
 }
 
 .simple-player .control {
   grid-column: 2 / span 2;
   grid-row-start: 3;
-  align-self: center;
-  place-self: flex-end;
 }
 
 .simple-player .control-minor {

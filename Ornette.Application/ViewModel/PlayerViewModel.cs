@@ -59,7 +59,6 @@ namespace Ornette.Application.ViewModel
         public ICommandWithoutParameter Next { get; }
         public ICommandWithoutParameter Back { get; }
 
-
         public PlayerViewModel(IPlayer player)
         {
             _Player = player;

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import simplePlayer from "../components/player/simplePlayer";
+import simplePlayer from "../components/player/simple/player";
 
 const props = {
   viewModel: Object

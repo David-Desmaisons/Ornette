@@ -47,11 +47,6 @@ export default {
   }
 };
 </script>
-<style scoped>
-.volume {
-  display: flex;
-}
-</style>
 <style>
 .volume-slider .v-icon.v-icon {
   font-size: 16px;

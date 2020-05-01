@@ -12,40 +12,19 @@
       :dense="true"
     />
 
-    <v-btn-toggle class="control">
-      <icon-button icon="mdi-skip-backward" :command="player.Back" />
+    <play-control :player="player" class="control"/>
 
-      <icon-button icon="mdi-play" :command="player.Play" />
-
-      <icon-button icon="mdi-pause" :command="player.Pause" />
-
-      <icon-button icon="mdi-stop" :command="player.Stop" />
-
-      <icon-button icon="mdi-skip-forward" :command="player.Next" />
-    </v-btn-toggle>
-
-    <v-btn-toggle
-      class="control-minor"
-      multiple
-      :value="toogleValue"
-      @change="changeToogle"
-    >
-      <v-btn small icon>
-        <v-icon>mdi-shuffle-variant</v-icon>
-      </v-btn>
-
-      <v-btn small icon>
-        <v-icon>mdi-repeat</v-icon>
-      </v-btn>
-    </v-btn-toggle>
+    <play-mode :player="player" class="control-minor" />
 
     <volume class="slider volume" v-model="player.Volume" />
+
   </div>
 </template>
 
 <script>
-import iconButton from "../iconButton";
 import volume from "./volume";
+import playMode from "./playMode";
+import playControl from "./playControl";
 
 export default {
   props: {
@@ -55,7 +34,8 @@ export default {
     }
   },
   components: {
-    iconButton,
+    playMode,
+    playControl,
     volume
   },
   computed: {

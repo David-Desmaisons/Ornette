@@ -38,11 +38,14 @@
         <v-icon>mdi-repeat</v-icon>
       </v-btn>
     </v-btn-toggle>
+
+    <volume class="slider volume" v-model="player.Volume" />
   </div>
 </template>
 
 <script>
 import iconButton from "../iconButton";
+import volume from "./volume";
 
 export default {
   props: {
@@ -52,7 +55,8 @@ export default {
     }
   },
   components: {
-    iconButton
+    iconButton,
+    volume
   },
   computed: {
     toogleValue() {
@@ -73,12 +77,12 @@ export default {
 
 <style scoped="true">
 .simple-player {
-  width: 200px;
-  height: 100px;
+  width: 210px;
+  height: 120px;
   display: grid;
   grid-template-columns: 2fr 3fr 2fr;
-  grid-template-rows: 25px 20px 1fr;
-  grid-column-gap: 5px;
+  grid-template-rows: 25px 18px 40px 30px;
+  grid-column-gap: 2px;
 }
 
 .simple-player div {
@@ -100,11 +104,17 @@ export default {
   font-size: 10px;
 }
 
-.simple-player .slider {
+.simple-player .slider.player {
   height: 30px;
   width: 100%;
   grid-column: 1 / span 3;
   grid-row-start: 2;
+}
+
+.simple-player .slider.volume {
+  width: 100%;
+  grid-column: 1 / span 4;
+  grid-row-start: 4;
 }
 
 .simple-player .track-name {
@@ -117,6 +127,7 @@ export default {
 .simple-player .control {
   grid-column: 2 / span 2;
   grid-row-start: 3;
+  justify-self: end;
 }
 
 .simple-player .control-minor {

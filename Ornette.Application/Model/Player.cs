@@ -1,10 +1,10 @@
-﻿using Ornette.Application.MusicPlayer;
+﻿using Ornette.Application.Model.TrackOrder;
+using Ornette.Application.MusicPlayer;
 using System;
 using System.Collections.ObjectModel;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using Ornette.Application.Model.TrackOrder;
 
 namespace Ornette.Application.Model
 {
@@ -39,6 +39,8 @@ namespace Ornette.Application.Model
             {
                 _RandomPlay = value;
                 _TrackOrderLogic = _TrackOrderLogicFactory.GetLogic(Tracks, value);
+                if (_CurrentTrack != null)
+                    _TrackOrderLogic.SetCurrentTrack(_CurrentTrack);
             }
         }
 

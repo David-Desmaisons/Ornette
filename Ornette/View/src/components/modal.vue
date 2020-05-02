@@ -30,8 +30,6 @@
 </template>
 
 <script>
-import textButton from "../components/textButton";
-
 const props = {
   value: {
     type: Boolean,
@@ -43,9 +41,6 @@ const props = {
 };
 
 export default {
-  components: {
-    textButton
-  },
   props,
   methods: {
     close() {

@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     icon() {
-      return this.muted
+      return this.value === 0
         ? "volume_off"
         : this.value >= 50
         ? "volume_up"

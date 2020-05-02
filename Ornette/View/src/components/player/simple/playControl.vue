@@ -13,17 +13,12 @@
 </template>
 
 <script>
-import iconButton from "@/components/iconButton";
-
 export default {
   props: {
     player: {
       required: true,
       type: Object
     }
-  },
-  components: {
-    iconButton
   }
 };
 </script>

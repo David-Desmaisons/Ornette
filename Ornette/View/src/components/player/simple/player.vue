@@ -12,12 +12,11 @@
       :dense="true"
     />
 
-    <play-control :player="player" class="control"/>
+    <play-control :player="player" class="control" />
 
     <play-mode :player="player" class="control-minor" />
 
     <volume class="slider volume" v-model="player.Volume" />
-
   </div>
 </template>
 

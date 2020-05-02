@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import iconButton from "./iconButton";
-
 const props = {
   value: {
     type: Boolean,
@@ -34,10 +32,6 @@ const props = {
 
 export default {
   props,
-
-  components: {
-    iconButton
-  },
 
   computed: {
     middleIcon() {

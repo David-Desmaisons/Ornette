@@ -9,6 +9,8 @@ import messages from "./message";
 import Notifications from "vue-notification";
 import { formatTime, timeSpan, totalSeconds } from "./filter/time";
 import { track } from "./filter/track";
+import iconButton from "./components/button/iconButton";
+import textButton from "./components/button/iconButton";
 
 import Vuetify, {
   VApp,
@@ -80,6 +82,8 @@ function install(Vue) {
   Vue.use(Vue_Router);
   Vue.use(VueI18n);
   Vue.use(Notifications);
+  Vue.component("iconButton", iconButton);
+  Vue.component("textButton", textButton);
   Vue.filter("timeSpan", timeSpan);
   Vue.filter("formatTime", formatTime);
   Vue.filter("track", track);

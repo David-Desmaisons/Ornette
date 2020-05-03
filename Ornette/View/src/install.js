@@ -10,7 +10,7 @@ import Notifications from "vue-notification";
 import { formatTime, timeSpan, totalSeconds } from "./filter/time";
 import { track } from "./filter/track";
 import iconButton from "./components/button/iconButton";
-import textButton from "./components/button/iconButton";
+import textButton from "./components/button/textButton";
 
 import Vuetify, {
   VApp,

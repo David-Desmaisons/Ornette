@@ -6,11 +6,11 @@
     @change="changeToogle"
   >
     <v-btn small icon>
-      <v-icon>mdi-shuffle-variant</v-icon>
+      <v-icon x-small>mdi-shuffle-variant</v-icon>
     </v-btn>
 
     <v-btn small icon>
-      <v-icon>mdi-repeat</v-icon>
+      <v-icon x-small>mdi-repeat</v-icon>
     </v-btn>
   </v-btn-toggle>
 </template>

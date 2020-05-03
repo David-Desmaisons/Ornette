@@ -6,7 +6,8 @@
 
     <v-spacer></v-spacer>
 
-    <icon-button :command="window.Minimize" icon="remove"> </icon-button>
+    <icon-button :x-small="true" :command="window.Minimize" icon="remove">
+    </icon-button>
 
     <icon-button :command="window.Normalize" :icon="middleIcon"> </icon-button>
 

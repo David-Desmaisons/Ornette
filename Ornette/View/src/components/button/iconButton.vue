@@ -1,12 +1,6 @@
 <template>
-  <v-btn
-    small
-    icon
-    :disabled="!canExecute"
-    @click.stop="execute"
-    v-bind="attrs"
-  >
-    <v-icon>{{ icon }}</v-icon>
+  <v-btn icon :disabled="!canExecute" @click.stop="execute" v-bind="attrs">
+    <v-icon v-bind="attrs">{{ icon }}</v-icon>
   </v-btn>
 </template>
 

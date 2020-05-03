@@ -1,7 +1,7 @@
 <template>
   <v-slider
     class="volume-slider"
-    :value="value"
+    :value="volumeValue"
     @change="change"
     :max="100"
     :height="30"
@@ -31,6 +31,9 @@ export default {
         : this.value >= 50
         ? "volume_up"
         : "volume_down";
+    },
+    volumeValue() {
+      return this.muted ? this.lastVolume : this.value;
     }
   },
   methods: {

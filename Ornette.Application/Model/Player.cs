@@ -95,7 +95,7 @@ namespace Ornette.Application.Model
 
         public void Next()
         {
-            var next = _TrackOrderLogic.GetNext(_CurrentTrack, AutoReplay);
+            var next = _TrackOrderLogic.GetNext(_CurrentTrack, true);
             _CurrentTrackSubject.OnNext(next);
         }
 

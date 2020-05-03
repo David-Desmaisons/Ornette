@@ -1,12 +1,15 @@
 <template>
   <v-slider
     class="volume-slider"
+    :class="{ muted }"
     :value="volumeValue"
-    @change="change"
+    :color="color"
     :max="100"
     :height="30"
     :prepend-icon="icon"
     @click:prepend="mute"
+    @change="change"
+    @wheel.prevent.native="wheel"
   >
   </v-slider>
 </template>
@@ -34,6 +37,9 @@ export default {
     },
     volumeValue() {
       return this.muted ? this.lastVolume : this.value;
+    },
+    color() {
+      return this.muted ? "grey" : undefined;
     }
   },
   methods: {
@@ -44,14 +50,28 @@ export default {
       this.$emit("input", newValue);
     },
     change(evt) {
+      this.updateValue(evt);
+    },
+    wheel(evt) {
+      const change = evt.deltaY < 0 ? 10 : -10;
+      const value = this.muted ? this.lastVolume : this.value;
+      this.updateValue(value + change);
+    },
+    updateValue(value) {
+      const normaLizedValue = Math.max(0, Math.min(100, value));
       this.muted = false;
-      this.$emit("input", evt);
+      this.$emit("input", normaLizedValue);
     }
   }
 };
 </script>
-<style>
-.volume-slider .v-icon.v-icon {
-  font-size: 16px;
-}
+<style lang="sass" scoped>
+@import '~vuetify/src/styles/styles.sass'
+
+.volume-slider
+  ::v-deep .v-icon.v-icon
+    font-size: 16px
+  &.muted
+    ::v-deep .v-icon.v-icon
+      color: map-get($grey, 'base')
 </style>

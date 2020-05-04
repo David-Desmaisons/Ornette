@@ -1,17 +1,16 @@
 <template>
   <v-app-bar id="top-menu" :clipped-left="true" absolute app>
-    <v-app-bar-nav-icon @click.stop="toggleMenu"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click.stop="toggleMenu"/>
 
-    <v-toolbar-title v-text="title"></v-toolbar-title>
+    <v-toolbar-title v-text="title"/>
 
-    <v-spacer></v-spacer>
+    <v-spacer/>
 
-    <icon-button :x-small="true" :command="window.Minimize" icon="remove">
-    </icon-button>
+    <icon-button :x-small="true" :command="window.Minimize" icon="remove"/>
 
-    <icon-button :command="window.Normalize" :icon="middleIcon"> </icon-button>
+    <icon-button :command="window.Normalize" :icon="middleIcon"/>
 
-    <icon-button :command="window.Close" icon="close"> </icon-button>
+    <icon-button :command="window.Close" icon="close"/>
   </v-app-bar>
 </template>
 

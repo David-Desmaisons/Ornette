@@ -54,63 +54,52 @@ export default {
 };
 </script>
 
-<style scoped="true">
-.simple-player {
-  width: 210px;
-  height: 120px;
-  display: grid;
-  grid-template-columns: 2fr 3fr 2fr;
-  grid-template-rows: 25px 18px 40px 30px;
-  grid-column-gap: 2px;
-}
+<style lang="sass" scoped>
+.simple-player
+  width: 210px
+  height: 120px
+  display: grid
+  grid-template-columns: 2fr 3fr 2fr
+  grid-template-rows: 25px 18px 40px 30px
+  grid-column-gap: 2px
+  font-size: 10px
 
-.simple-player div {
-  align-self: center;
-  place-self: center;
-}
+  div
+    align-self: center
+    place-self: center
 
-.simple-player .time {
-  grid-column: 1 / span 1;
-  grid-row-start: 1;
-  margin-bottom: 0;
-  font-size: 20px;
-  text-align: center;
-  align-self: center;
-  place-self: center;
-}
+  .time
+    grid-column: 1 / span 1
+    grid-row-start: 1
+    margin-bottom: 0
+    font-size: 20px
+    text-align: center
+    align-self: center
+    place-self: center
 
-.simple-player {
-  font-size: 10px;
-}
+  .slider.player
+    height: 30px
+    width: 100%
+    grid-column: 1 / span 3
+    grid-row-start: 2
 
-.simple-player .slider.player {
-  height: 30px;
-  width: 100%;
-  grid-column: 1 / span 3;
-  grid-row-start: 2;
-}
+  .slider.volume
+    width: 100%
+    grid-column: 1 / span 4
+    grid-row-start: 4
 
-.simple-player .slider.volume {
-  width: 100%;
-  grid-column: 1 / span 4;
-  grid-row-start: 4;
-}
+  .track-name
+    width: 100%
+    grid-column: 2 / span 2
+    grid-row-start: 1
+    place-self: center
 
-.simple-player .track-name {
-  width: 100%;
-  grid-column: 2 / span 2;
-  grid-row-start: 1;
-  place-self: center;
-}
+  .control
+    grid-column: 2 / span 2
+    grid-row-start: 3
+    justify-self: end
 
-.simple-player .control {
-  grid-column: 2 / span 2;
-  grid-row-start: 3;
-  justify-self: end;
-}
-
-.simple-player .control-minor {
-  grid-row-start: 3;
-  grid-column: 1 / span 1;
-}
+  .control-minor
+    grid-row-start: 3
+    grid-column: 1 / span 1
 </style>

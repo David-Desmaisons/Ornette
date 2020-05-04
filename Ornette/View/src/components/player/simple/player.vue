@@ -1,5 +1,5 @@
 <template>
-  <div class="simple-player">
+  <v-card class="simple-player">
     <p class="time">{{ player.PositionInSeconds | formatTime }}</p>
 
     <marquee class="track-name">{{ player.CurrentTrack | track }}</marquee>
@@ -16,8 +16,8 @@
 
     <play-mode :player="player" class="control-minor" />
 
-    <volume class="slider volume" v-model="player.Volume" />
-  </div>
+    <volume class="volume" v-model="player.Volume" />
+  </v-card>
 </template>
 
 <script>
@@ -56,11 +56,13 @@ export default {
 
 <style lang="sass" scoped>
 .simple-player
-  width: 210px
-  height: 120px
+  padding: 12px
+  width: 240px
+  height: 130px
   display: grid
   grid-template-columns: 2fr 3fr 2fr
-  grid-template-rows: 25px 18px 40px 30px
+  grid-template-rows: auto
+  grid-template-areas: "time track track" "position position position" "playmode play play" "volume volume volume"
   grid-column-gap: 2px
   font-size: 10px
 
@@ -69,8 +71,7 @@ export default {
     place-self: center
 
   .time
-    grid-column: 1 / span 1
-    grid-row-start: 1
+    grid-area: time
     margin-bottom: 0
     font-size: 20px
     text-align: center
@@ -80,26 +81,21 @@ export default {
   .slider.player
     height: 30px
     width: 100%
-    grid-column: 1 / span 3
-    grid-row-start: 2
+    grid-area: position
 
-  .slider.volume
+  .volume
     width: 100%
-    grid-column: 1 / span 4
-    grid-row-start: 4
+    grid-area: volume
 
   .track-name
     width: 100%
-    grid-column: 2 / span 2
-    grid-row-start: 1
+    grid-area: track
     place-self: center
 
   .control
-    grid-column: 2 / span 2
-    grid-row-start: 3
+    grid-area: play
     justify-self: end
 
   .control-minor
-    grid-row-start: 3
-    grid-column: 1 / span 1
+    grid-area: playmode
 </style>

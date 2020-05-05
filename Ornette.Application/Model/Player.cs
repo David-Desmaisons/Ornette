@@ -16,6 +16,7 @@ namespace Ornette.Application.Model
         private IDisposable _Listener;
         private readonly Subject<NextTrack> _CurrentTrackSubject = new Subject<NextTrack>();
         private readonly Subject<PlayEvent> _EventsSubject = new Subject<PlayEvent>();
+        private readonly Subject<int> _PositionSubject = new Subject<int>();
         private Track _CurrentTrack;
         private ITrackOrderLogic _TrackOrderLogic;
 
@@ -54,6 +55,7 @@ namespace Ornette.Application.Model
             CurrentTrack = trackFlow.Select(tr => tr.Track).ObserveOn(DispatcherScheduler.Current);
             Events = _EventsSubject.ObserveOn(DispatcherScheduler.Current);
             trackFlow.Subscribe(UpdatePlayer);
+            _PositionSubject.Throttle(TimeSpan.FromMilliseconds(50)).Subscribe(UpdatePositionInSeconds);
         }
 
         public void SetCurrentTrack(Track value)
@@ -69,6 +71,11 @@ namespace Ornette.Application.Model
         }
 
         public void SetPositionInSeconds(int value)
+        {
+            _PositionSubject.OnNext(value);
+        }
+
+        private void UpdatePositionInSeconds(int value)
         {
             _TrackPlayer?.SetPositionInSeconds(value);
         }

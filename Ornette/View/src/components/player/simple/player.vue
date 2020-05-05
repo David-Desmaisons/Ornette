@@ -61,7 +61,7 @@ export default {
   height: 130px
   display: grid
   grid-template-columns: 2fr 3fr 2fr
-  grid-template-rows: auto
+  grid-template-rows: 30px 30px auto
   grid-template-areas: "time track track" "position position position" "playmode play play" "volume volume volume"
   grid-column-gap: 2px
   font-size: 10px

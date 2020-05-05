@@ -19,6 +19,10 @@ export default {
     value: {
       type: Number,
       required: true
+    },
+    wheelIncrement:{
+      type: Number,
+      default: 5
     }
   },
   data() {
@@ -53,7 +57,7 @@ export default {
       this.updateValue(evt);
     },
     wheel(evt) {
-      const change = evt.deltaY < 0 ? 10 : -10;
+      const change = evt.deltaY < 0 ? this.wheelIncrement : -this.wheelIncrement;
       const value = this.muted ? this.lastVolume : this.value;
       this.updateValue(value + change);
     },

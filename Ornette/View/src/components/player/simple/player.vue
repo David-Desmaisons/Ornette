@@ -4,10 +4,11 @@
 
     <marquee class="track-name">{{ player.CurrentTrack | track }}</marquee>
 
-    <v-slider class="slider player"
+    <v-slider
+      class="slider player"
       v-if="player.CurrentTrack"
       v-model="player.PositionInSeconds"
-      :max="player.CurrentTrack | totalSeconds"  
+      :max="player.CurrentTrack | totalSeconds"
       :hide-details="true"
       :dense="true"
     />

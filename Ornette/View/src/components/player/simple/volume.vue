@@ -14,59 +14,10 @@
   </v-slider>
 </template>
 <script>
+import {mixins} from "./mixins/volume";
+
 export default {
-  props: {
-    value: {
-      type: Number,
-      required: true
-    },
-    wheelIncrement: {
-      type: Number,
-      default: 5
-    }
-  },
-  data() {
-    return {
-      muted: false,
-      lastVolume: this.value
-    };
-  },
-  computed: {
-    icon() {
-      return this.value === 0
-        ? "volume_off"
-        : this.value >= 50
-        ? "volume_up"
-        : "volume_down";
-    },
-    volumeValue() {
-      return this.muted ? this.lastVolume : this.value;
-    },
-    color() {
-      return this.muted ? "grey" : undefined;
-    }
-  },
-  methods: {
-    mute() {
-      this.muted = !this.muted;
-      const newValue = this.muted ? 0 : this.lastVolume;
-      this.lastVolume = this.value;
-      this.$emit("input", newValue);
-    },
-    change(evt) {
-      this.updateValue(evt);
-    },
-    wheel(evt) {
-      const change =
-        evt.deltaY < 0 ? this.wheelIncrement : -this.wheelIncrement;
-      this.updateValue(this.volumeValue + change);
-    },
-    updateValue(value) {
-      const normaLizedValue = Math.max(0, Math.min(100, value));
-      this.muted = false;
-      this.$emit("input", normaLizedValue);
-    }
-  }
+  mixins
 };
 </script>
 <style lang="sass" scoped>

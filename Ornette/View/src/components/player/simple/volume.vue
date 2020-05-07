@@ -5,6 +5,7 @@
     :value="volumeValue"
     :color="color"
     :max="100"
+    :hide-details="true"
     :prepend-icon="icon"
     @click:prepend="mute"
     @change="change"
@@ -75,8 +76,6 @@ export default {
   ::v-deep
     .v-icon.v-icon
       font-size: 16px
-    .v-messages
-      display: none
     .v-input__slot
       margin-bottom: 0
   &.muted

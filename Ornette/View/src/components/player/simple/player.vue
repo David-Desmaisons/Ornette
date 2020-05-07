@@ -4,11 +4,11 @@
 
     <marquee class="track-name">{{ player.CurrentTrack | track }}</marquee>
 
-    <v-slider
+    <v-slider class="slider player"
       v-if="player.CurrentTrack"
       v-model="player.PositionInSeconds"
-      :max="player.CurrentTrack | totalSeconds"
-      class="slider player"
+      :max="player.CurrentTrack | totalSeconds"  
+      :hide-details="true"
       :dense="true"
     />
 
@@ -58,9 +58,9 @@ export default {
 .simple-player
   padding: 12px
   display: grid
-  grid-template-columns: 2fr 3fr 2fr
+  grid-template-columns: 2fr 5fr
   grid-template-rows: 30px 32px auto
-  grid-template-areas: "time track track" "position position position" "playmode play play" "volume volume volume"
+  grid-template-areas: "time track" "position position" "playmode play" "volume volume"
   grid-column-gap: 10px
   font-size: 10px
 
@@ -80,8 +80,6 @@ export default {
     width: 100%
     grid-area: position
     ::v-deep
-      .v-messages
-        display: none
       .v-input__slot
         margin-bottom: 0
 

@@ -6,8 +6,8 @@ const simpleMixin = {
       return this.value === 0
         ? "volume_off"
         : this.value >= 50
-          ? "volume_up"
-          : "volume_down";
+        ? "volume_up"
+        : "volume_down";
     },
     color() {
       return this.muted ? "grey" : undefined;
@@ -15,8 +15,6 @@ const simpleMixin = {
   }
 };
 
-const mixins = [mixin, simpleMixin]
+const mixins = [mixin, simpleMixin];
 
-export {
-  mixins
-}
+export { mixins };

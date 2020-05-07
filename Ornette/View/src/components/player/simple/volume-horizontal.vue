@@ -14,7 +14,7 @@
   </v-slider>
 </template>
 <script>
-import {mixins} from "./mixins/volume";
+import { mixins } from "./mixins/volume";
 
 export default {
   mixins

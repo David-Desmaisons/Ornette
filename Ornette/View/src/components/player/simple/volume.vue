@@ -5,7 +5,6 @@
     :value="volumeValue"
     :color="color"
     :max="100"
-    :height="30"
     :prepend-icon="icon"
     @click:prepend="mute"
     @change="change"
@@ -20,7 +19,7 @@ export default {
       type: Number,
       required: true
     },
-    wheelIncrement:{
+    wheelIncrement: {
       type: Number,
       default: 5
     }
@@ -57,9 +56,9 @@ export default {
       this.updateValue(evt);
     },
     wheel(evt) {
-      const change = evt.deltaY < 0 ? this.wheelIncrement : -this.wheelIncrement;
-      const value = this.muted ? this.lastVolume : this.value;
-      this.updateValue(value + change);
+      const change =
+        evt.deltaY < 0 ? this.wheelIncrement : -this.wheelIncrement;
+      this.updateValue(this.volumeValue + change);
     },
     updateValue(value) {
       const normaLizedValue = Math.max(0, Math.min(100, value));
@@ -73,8 +72,13 @@ export default {
 @import '~vuetify/src/styles/styles.sass'
 
 .volume-slider
-  ::v-deep .v-icon.v-icon
-    font-size: 16px
+  ::v-deep
+    .v-icon.v-icon
+      font-size: 16px
+    .v-messages
+      display: none
+    .v-input__slot
+      margin-bottom: 0
   &.muted
     ::v-deep .v-icon.v-icon
       color: map-get($grey, 'base')

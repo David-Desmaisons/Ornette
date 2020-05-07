@@ -57,13 +57,11 @@ export default {
 <style lang="sass" scoped>
 .simple-player
   padding: 12px
-  width: 240px
-  height: 130px
   display: grid
   grid-template-columns: 2fr 3fr 2fr
-  grid-template-rows: 30px 30px auto
+  grid-template-rows: 30px 32px auto
   grid-template-areas: "time track track" "position position position" "playmode play play" "volume volume volume"
-  grid-column-gap: 2px
+  grid-column-gap: 10px
   font-size: 10px
 
   div
@@ -79,9 +77,13 @@ export default {
     place-self: center
 
   .slider.player
-    height: 30px
     width: 100%
     grid-area: position
+    ::v-deep
+      .v-messages
+        display: none
+      .v-input__slot
+        margin-bottom: 0
 
   .volume
     width: 100%

@@ -20,9 +20,7 @@ export default {
   render: function(h, context) {
     const {
       props: { value, wheelIncrement, vertical: isVertical },
-      data: {
-        staticClass
-      },
+      data: { staticClass },
       listeners
     } = context;
     const component = isVertical ? vertical : horizontal;

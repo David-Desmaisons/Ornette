@@ -17,7 +17,7 @@
 
     <play-mode :player="player" class="control-minor" />
 
-    <volume class="volume" v-model="player.Volume" />
+    <volume vertical class="volume" v-model="player.Volume" />
   </v-card>
 </template>
 
@@ -59,10 +59,10 @@ export default {
 .simple-player
   padding: 12px
   display: grid
-  grid-template-columns: 2fr 5fr
+  grid-template-columns: 2fr auto 1fr
   grid-template-rows: 30px 32px auto
-  grid-template-areas: "time track" "position position" "playmode play" "volume volume"
-  grid-column-gap: 10px
+  grid-template-areas: "time track volume" "position position volume" "playmode play volume"
+  grid-column-gap: 5px
   font-size: 10px
 
   div
@@ -85,7 +85,7 @@ export default {
         margin-bottom: 0
 
   .volume
-    width: 100%
+    height: 100%
     grid-area: volume
 
   .track-name
@@ -95,7 +95,6 @@ export default {
 
   .control
     grid-area: play
-    justify-self: end
 
   .control-minor
     grid-area: playmode

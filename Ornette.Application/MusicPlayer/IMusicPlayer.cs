@@ -4,7 +4,7 @@ namespace Ornette.Application.MusicPlayer
 {
     public interface IMusicPlayer  : IDisposable
     {
-        double Volume { get; set; }
+        int Volume { get; set; }
 
         ITrackPlayer CreateTrackPlayer(string path);
     }

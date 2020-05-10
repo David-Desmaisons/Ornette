@@ -18,6 +18,9 @@ function onCommand({ id }) {
 let playId;
 
 function onPlay(player) {
+  if (playId) {
+    return;
+  }
   playId = setInterval(() => {
     player.PositionInSeconds++;
   }, 1000);
@@ -26,11 +29,12 @@ function onPlay(player) {
 
 function onPause() {
   clearInterval(playId);
+  playId = null;
 }
 
 function onStop(player) {
   player.PositionInSeconds = 0;
-  clearInterval(playId);
+  onPause();
 }
 
 const getPlayer = vm => vm.CurrentViewModel.Player;

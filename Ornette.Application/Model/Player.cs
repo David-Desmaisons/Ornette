@@ -24,7 +24,7 @@ namespace Ornette.Application.Model
         public IObservable<Track> CurrentTrack { get; }
         public IObservable<PlayEvent> Events { get; }
 
-        public double Volume
+        public int Volume
         {
             get => _MusicPlayer.Volume;
             set => _MusicPlayer.Volume = value;
@@ -55,7 +55,7 @@ namespace Ornette.Application.Model
             CurrentTrack = trackFlow.Select(tr => tr.Track).ObserveOn(DispatcherScheduler.Current);
             Events = _EventsSubject.ObserveOn(DispatcherScheduler.Current);
             trackFlow.Subscribe(UpdatePlayer);
-            _PositionSubject.Throttle(TimeSpan.FromMilliseconds(50)).Subscribe(UpdatePositionInSeconds);
+            _PositionSubject.Throttle(TimeSpan.FromMilliseconds(25)).Subscribe(UpdatePositionInSeconds);
         }
 
         public void SetCurrentTrack(Track value)

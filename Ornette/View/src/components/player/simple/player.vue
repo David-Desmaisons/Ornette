@@ -4,20 +4,13 @@
 
     <marquee class="track-name">{{ player.CurrentTrack | track }}</marquee>
 
-    <v-slider
-      class="slider player"
-      v-if="player.CurrentTrack"
-      v-model="player.PositionInSeconds"
-      :max="player.CurrentTrack | totalSeconds"
-      :hide-details="true"
-      :dense="true"
-    />
+    <position dot class="position" :player="player" />
 
     <play-control :player="player" class="control" />
 
     <play-mode :player="player" class="control-minor" />
 
-    <volume vertical class="volume" v-model="player.Volume" />
+    <volume class="volume" vertical v-model="player.Volume" />
   </v-card>
 </template>
 
@@ -25,6 +18,7 @@
 import volume from "./volume";
 import playMode from "./playMode";
 import playControl from "./playControl";
+import position from "./position/position";
 
 export default {
   props: {
@@ -36,24 +30,16 @@ export default {
   components: {
     playMode,
     playControl,
+    position,
     volume
-  },
-  computed: {
-    toogleValue() {
-      const res = [];
-      if (this.player.AutoReplay) res.push(1);
-      if (this.player.RandomPlay) res.push(0);
-      return res;
-    }
-  },
-  methods: {
-    changeToogle(evt) {
-      this.player.AutoReplay = evt.includes(1);
-      this.player.RandomPlay = evt.includes(0);
-    }
   }
 };
 </script>
+
+<style lang="sass">
+$themeColor: orange
+@import '~vue-slider-component/lib/theme/default.scss'
+</style>
 
 <style lang="sass" scoped>
 .simple-player
@@ -77,12 +63,10 @@ export default {
     align-self: center
     place-self: center
 
-  .slider.player
-    width: 100%
+  .position
+    margin-left: 0px
+    margin-right: 0px
     grid-area: position
-    ::v-deep
-      .v-input__slot
-        margin-bottom: 0
 
   .volume
     height: 100%

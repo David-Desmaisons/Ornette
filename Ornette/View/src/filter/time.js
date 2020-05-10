@@ -14,9 +14,9 @@ function timeSpan(value, type = "M") {
     : `${formattedMinute}:${format(Milliseconds, 3)}`;
 }
 
-function totalSeconds(value) {
+function totalSeconds(value, defaultValue = 0) {
   if (value === null) {
-    return 0;
+    return defaultValue;
   }
   const {
     MetaData: { Duration }

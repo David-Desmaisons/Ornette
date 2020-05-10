@@ -1,6 +1,7 @@
 import "material-design-icons/iconfont/material-icons.css";
 import "@mdi/font/css/materialdesignicons.css";
 import "font-awesome/css/font-awesome.css";
+import "vue-slider-component/dist-css/vue-slider-component.css";
 
 import Vue_Router from "vue-router";
 import { router } from "@/neutronium/route";

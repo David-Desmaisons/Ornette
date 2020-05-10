@@ -11,7 +11,7 @@ namespace Ornette.Application.Model
 
         bool AutoReplay { get; set; }
         bool RandomPlay { get; set; }
-        double Volume { get; set; }
+        int Volume { get; set; }
         ObservableCollection<Track> Tracks { get; }
 
         void SetCurrentTrack(Track track);

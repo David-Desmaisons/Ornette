@@ -31,11 +31,10 @@ namespace Music.Adapter.Bass
             return this;
         }
 
-        public double Volume
+        public int Volume
         {
-            get => Un4seen.Bass.Bass.BASS_GetConfig(BASSConfig.BASS_CONFIG_GVOL_STREAM) / 100d;
-            set => Un4seen.Bass.Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_GVOL_STREAM,
-                (int)(Math.Truncate(value * 100)));
+            get => (int)Math.Round(Un4seen.Bass.Bass.BASS_GetConfig(BASSConfig.BASS_CONFIG_GVOL_STREAM) / 100d) ;
+            set => Un4seen.Bass.Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_GVOL_STREAM, value * 100);
         }
 
         public static IMusicPlayer Init(string email, string password)

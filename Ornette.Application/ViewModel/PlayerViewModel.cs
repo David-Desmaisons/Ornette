@@ -17,7 +17,7 @@ namespace Ornette.Application.ViewModel
 
         public ObservableCollection<Track> Tracks => _Player.Tracks;
 
-        public double Volume
+        public int Volume
         {
             get => _Player.Volume;
             set => _Player.Volume = value;

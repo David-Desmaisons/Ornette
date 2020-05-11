@@ -6,7 +6,7 @@ export default {
     },
     wheelIncrement: {
       type: Number,
-      default: 5
+      default: 2
     }
   },
   data() {
@@ -31,8 +31,7 @@ export default {
       this.updateValue(evt);
     },
     wheel(evt) {
-      const change =
-        evt.deltaY < 0 ? this.wheelIncrement : -this.wheelIncrement;
+      const change = - (evt.deltaY / 100) *  this.wheelIncrement;
       this.updateValue(this.volumeValue + change);
     },
     updateValue(value) {

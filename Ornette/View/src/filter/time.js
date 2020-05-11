@@ -24,9 +24,9 @@ function totalSeconds(value, defaultValue = 0) {
   return Duration.TotalSeconds;
 }
 
-function formatTime(value) {
+function formatTime(value, defaultValue = null) {
   if (value === null) {
-    return null;
+    return defaultValue;
   }
   const minutes = Math.trunc(value / 60);
   const seconds = value % 60;

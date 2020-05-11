@@ -1,6 +1,6 @@
 <template>
   <v-card class="simple-player">
-    <p class="time">{{ player.PositionInSeconds | formatTime }}</p>
+    <p class="time">{{ player.PositionInSeconds | formatTime("--:--") }}</p>
 
     <marquee class="track-name">{{ player.CurrentTrack | track }}</marquee>
 

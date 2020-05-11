@@ -73,11 +73,6 @@ namespace Ornette.Application.Model
             _TrackPlayer?.SetPositionInSeconds(value);
         }
 
-        private void UpdatePositionInSeconds(int value)
-        {
-            _TrackPlayer?.SetPositionInSeconds(value);
-        }
-
         public void Play()
         {
             if (_CurrentTrack == null)

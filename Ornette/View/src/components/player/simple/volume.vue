@@ -1,16 +1,19 @@
 <template>
   <div
     class="volume-slider"
-    :class="{ muted, vertical }"
+    :class="{ muted, vertical, retracted }"
     @wheel.prevent="wheel"
+    @mouseover.prevent="onHover(true)"
+    @mouseleave.prevent="onHover(false)"
   >
-    <v-btn icon small @click="mute">
+    <v-btn class="volume" icon small @click="mute">
       <v-icon small :color="color">
         {{ icon }}
       </v-icon>
     </v-btn>
 
     <VueSlider
+      v-if="!retracted"
       class="slider"
       :value="volumeValue"
       :max="100"
@@ -39,16 +42,33 @@ export default {
     vertical: {
       type: Boolean,
       default: false
+    },
+    expandable: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
-      tooltip: "active"
+      tooltip: "active",
+      quarter: 0,
+      show: null
     };
+  },
+  created() {
+    const show = !this.expandable;
+    this.show = show;
+    this.quarter = show ? 4 : 0;
   },
   methods: {
     format(value) {
       return `${value}%`;
+    },
+    onHover(value) {
+      if (!this.expandable) {
+        return;
+      }
+      this.show = value;
     }
   },
   computed: {
@@ -65,14 +85,41 @@ export default {
     direction() {
       return this.vertical ? "btt" : undefined;
     },
+    size() {
+      return `${(100 * this.quarter) / 4}%`;
+    },
     height() {
-      return this.vertical ? "100%" : 4;
+      return this.vertical ? this.size : 4;
     },
     width() {
-      return this.vertical ? 4 : "100%";
+      return this.vertical ? 4 : this.size;
+    },
+    retracted() {
+      return this.quarter === 0;
     }
   },
   watch: {
+    retracted: {
+      immediate: true,
+      handler(value) {
+        this.$emit("retractChange", value);
+      }
+    },
+    show(value) {
+      const { _interval } = this;
+      if (_interval) {
+        clearInterval(_interval);
+      }
+      this._interval = setInterval(() => {
+        const newValue = this.quarter + (value ? 1 : -1);
+        const quarter = Math.min(4, Math.max(newValue, 0));
+        this.quarter = quarter;
+        if (quarter === 0 || quarter === 4) {
+          clearInterval(this._interval);
+          this._interval = null;
+        }
+      }, 20);
+    },
     value(newValue) {
       if (newValue === 0 && this.muted) {
         return;
@@ -99,16 +146,39 @@ export default {
   border-style: solid
   border-width: thin
   box-shadow: none
-  opacity: 0.8
-  padding-right: 8px
+  opacity: 0.92
+  padding-top: 0px
+  padding-right: 5px
   border-color: rgba(255, 255, 255, 0.12)
+  transition: all 0.5s ease-in
+  background-color: #1E1E1E
+
+  &:not(.vertical)::v-deep
+    button.v-btn.volume
+      border-radius: 4px 0px 0px 4px
+
+  .slider
+    margin-left: 2px
+    margin-bottom: 0px
+
+  &.retracted
+    max-height: 28px
 
   &.muted
     ::v-deep
       .slider .vue-slider-process
-        background-color: map-get($grey, 'base')
+          background-color: map-get($grey, 'base')
+
   &.vertical
     flex-direction: column-reverse
     padding-right: 0px
-    padding-top: 8px
+    padding-top: 5px
+
+    ::v-deep
+      button.v-btn.volume
+        border-radius: 0px 0px 4px 4px
+
+    .slider
+      margin-bottom: 1px
+      margin-left: 0px
 </style>

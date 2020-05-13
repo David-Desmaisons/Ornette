@@ -1,5 +1,5 @@
 <template>
-  <v-card class="simple-player">
+  <v-card class="simple-player" :class="{ retracted }">
     <p class="time">{{ player.PositionInSeconds | formatTime("--:--") }}</p>
 
     <marquee class="track-name">{{ player.CurrentTrack | track }}</marquee>
@@ -10,7 +10,13 @@
 
     <play-mode :player="player" class="control-minor" />
 
-    <volume class="volume" vertical v-model="player.Volume" />
+    <volume
+      class="volume"
+      v-model="player.Volume"
+      vertical
+      expandable
+      @retractChange="retractChange"
+    />
   </v-card>
 </template>
 
@@ -32,6 +38,16 @@ export default {
     playControl,
     position,
     volume
+  },
+  data() {
+    return {
+      retracted: true
+    };
+  },
+  methods: {
+    retractChange(value) {
+      this.retracted = value;
+    }
   }
 };
 </script>
@@ -51,6 +67,11 @@ $themeColor: orange
   grid-column-gap: 5px
   font-size: 10px
 
+  &.retracted
+    grid-template-areas: "time track track" "position position position" "playmode play volume"
+    .position
+      grid-area: position
+
   div
     align-self: center
     place-self: center
@@ -66,11 +87,17 @@ $themeColor: orange
   .position
     margin-left: 0px
     margin-right: 0px
-    grid-area: position
+    grid-area: none
+    grid-column: 1 / 4
+    grid-row: 2
+    width: 100%
 
   .volume
     height: 100%
     grid-area: volume
+    align-self: end
+    transition: all 0.5s ease-in
+    z-index: 1
 
   .track-name
     width: 100%

@@ -74,6 +74,8 @@
     <Compile Include="Infra\IRandomProvider.cs" />
     <Compile Include="Infra\RandomProvider.cs" />
     <Compile Include="Model\IPlayer.cs" />
+    <Compile Include="Model\Descriptions\ArtistDescription.cs" />
+    <Compile Include="Model\Descriptions\AlbumDescription.cs" />
     <Compile Include="Model\TrackOrder\ITrackOrderLogicFactory.cs" />
     <Compile Include="Model\TrackOrder\ITrackOrderLogic.cs" />
     <Compile Include="Model\TrackOrder\RandomTrackOrderLogic.cs" />
@@ -86,7 +88,7 @@
     <Compile Include="MusicPlayer\PlayState.cs" />
     <Compile Include="Model\Track.cs" />
     <Compile Include="MusicPlayer\PlayEvent.cs" />
-    <Compile Include="Model\TrackMetaData.cs" />
+    <Compile Include="Model\Descriptions\TrackDescription.cs" />
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

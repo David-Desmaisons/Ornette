@@ -1,14 +1,16 @@
-﻿namespace Ornette.Application.Model
+﻿using Ornette.Application.Model.Descriptions;
+
+namespace Ornette.Application.Model
 {
     public class Track
     {
         public string Path { get; }
-        public TrackMetaData MetaData { get; }
+        public TrackDescription MetaData { get; }
 
-        public Track(string path, TrackMetaData metaData)
+        public Track(string path, TrackDescription description)
         {
             Path = path;
-            MetaData = metaData;
+            MetaData = description;
         }
     }
 }

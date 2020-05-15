@@ -151,13 +151,21 @@ export default {
   padding-right: 5px
   border-color: rgba(255, 255, 255, 0.12)
   transition: all 0.5s ease-in
-  background-color: #1E1E1E
+  &:hover
+    background-color: rgba(255, 255, 255, 0.18)
+    
+
+  ::v-deep
+    button.v-btn.volume
+      &:not(.v-btn--text):not(.v-btn--outlined):before
+        opacity: 0
 
   &:not(.vertical)::v-deep
     button.v-btn.volume
       border-radius: 4px 0px 0px 4px
 
   .slider
+    
     margin-left: 2px
     margin-bottom: 0px
 

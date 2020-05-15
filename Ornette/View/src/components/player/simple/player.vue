@@ -97,7 +97,7 @@ $themeColor: orange
     grid-area: volume
     align-self: end
     transition: all 0.5s ease-in
-    z-index: 1
+    z-index: 10
 
   .track-name
     width: 100%

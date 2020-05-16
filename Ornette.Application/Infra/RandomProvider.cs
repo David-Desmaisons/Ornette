@@ -8,8 +8,7 @@ namespace Ornette.Application.Infra
 
         public int Next(int maxValue)
         {
-            var random = new Random();
-            return random.Next(maxValue);
+            return _Random.Next(maxValue);
         }
     }
 }

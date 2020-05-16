@@ -158,7 +158,7 @@
       <HintPath>..\packages\MoreCollection.2.0.0\lib\net45\MoreCollection.dll</HintPath>
     </Reference>
     <Reference Include="Neutronium.BuildingBlocks.Application, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Neutronium.BuildingBlocks.Application.1.2.0\lib\net472\Neutronium.BuildingBlocks.Application.dll</HintPath>
+      <HintPath>..\packages\Neutronium.BuildingBlocks.Application.1.3.0\lib\net472\Neutronium.BuildingBlocks.Application.dll</HintPath>
     </Reference>
     <Reference Include="Neutronium.BuildingBlocks.ApplicationTools, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Neutronium.BuildingBlocks.ApplicationTools.1.2.0\lib\net472\Neutronium.BuildingBlocks.ApplicationTools.dll</HintPath>
@@ -248,9 +248,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\AboutModel.cs" />
+    <Compile Include="ViewModel\Pages\AboutModel.cs" />
     <Compile Include="ViewModel\Common\GlobalApplicationInformation.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\Pages\MainViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -342,6 +342,11 @@
     <Content Include="View\vue.config.js" />
     <Content Include="View\jest.config.js" />
     <Content Include="View\postcss.config.js" />
+    <Resource Include="Wpf\Icons\pause.png" />
+    <Resource Include="Wpf\Icons\play.png" />
+    <Resource Include="Wpf\Icons\skip-backward.png" />
+    <Resource Include="Wpf\Icons\skip-forward.png" />
+    <Resource Include="Wpf\Icons\stop.png" />
     <Resource Include="View\public\favicon.ico" />
     <Content Include="View\public\index.html" />
     <Content Include="View\src\install.js" />

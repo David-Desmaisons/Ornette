@@ -6,10 +6,9 @@ using Neutronium.BuildingBlocks.Application.ViewModels;
 using Neutronium.BuildingBlocks.Application.WindowServices;
 using Neutronium.MVVMComponents;
 using Neutronium.WPF.ViewModel;
-using Ornette;
 using Ornette.ViewModel.Common;
 
-namespace Music.Converter
+namespace Ornette
 {
     /// <summary>
     /// Builder for application main viewModel.

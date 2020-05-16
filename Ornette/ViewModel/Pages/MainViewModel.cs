@@ -1,7 +1,6 @@
-﻿using Ornette.Application.Model;
-using Ornette.Application.ViewModel;
+﻿using Ornette.Application.ViewModel;
 
-namespace Ornette.ViewModel
+namespace Ornette.ViewModel.Pages
 {
     /// <summary>
     /// ViewModel for the "main" route

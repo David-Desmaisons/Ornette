@@ -13,6 +13,7 @@ using Ornette.Application.Model.TrackOrder;
 using Ornette.Application.MusicPlayer;
 using Ornette.ServiceLocator;
 using Ornette.ViewModel;
+using Ornette.ViewModel.Pages;
 
 namespace Ornette
 {

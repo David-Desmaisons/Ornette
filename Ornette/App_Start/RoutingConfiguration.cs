@@ -23,7 +23,7 @@ namespace Ornette
         {
             var convention = routeBuilder.GetTemplateConvention("{vm}");
             typeof(RoutingConfiguration).GetTypesFromSameAssembly()
-                .InNamespace("Ornette.ViewModel")
+                .InNamespace("Ornette.ViewModel.Pages")
                 .Register(convention);
         }
     }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using Music.Converter;
 using Neutronium.BuildingBlocks.Application.Navigation;
 using Neutronium.BuildingBlocks.Application.ViewModels;
 using Neutronium.BuildingBlocks.SetUp;

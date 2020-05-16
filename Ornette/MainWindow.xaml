@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:WPF="clr-namespace:Neutronium.WPF;assembly=Neutronium.WPF" x:Class="Ornette.MainWindow"
+        xmlns:wpf="clr-namespace:Neutronium.WPF;assembly=Neutronium.WPF" x:Class="Ornette.MainWindow"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         Icon="Content\logo.png"
@@ -12,17 +12,34 @@
         Height="940"
         Name="Root"
         BorderThickness="1"
-        Title="MainWindow">
+        Title="Ornette">
     <i:Interaction.Behaviors>
-        <WPF:Chromeless />
+        <wpf:Chromeless />
     </i:Interaction.Behaviors>
     <Window.Resources>
-        <WPF:BoolToHiddenConverter x:Key="BoolToHidden"/>
+        <wpf:BoolToHiddenConverter x:Key="BoolToHidden"/>
+        <ImageSource x:Key="Previous">Wpf/Icons/skip-backward.png</ImageSource>
+        <ImageSource x:Key="Play">Wpf/Icons/play.png</ImageSource>
+        <ImageSource x:Key="Pause">Wpf/Icons/pause.png</ImageSource>
+        <ImageSource x:Key="Stop">Wpf/Icons/stop.png</ImageSource>
+        <ImageSource x:Key="Next">Wpf/Icons/skip-forward.png</ImageSource>
     </Window.Resources>
     <Grid>
-        <WPF:HTMLViewControl x:Name="HtmlView" DebugCommands="{Binding ElementName=Root, Path=SetUp.DebugCommands}" IsDebug="{Binding ElementName=Root, Path=SetUp.Debug}" Uri="{Binding ElementName=Root, Path=SetUp.Uri}"  />
+        <wpf:HTMLViewControl x:Name="HtmlView" DebugCommands="{Binding ElementName=Root, Path=SetUp.DebugCommands}" IsDebug="{Binding ElementName=Root, Path=SetUp.Debug}" Uri="{Binding ElementName=Root, Path=SetUp.Uri}"  />
     </Grid>
     <Window.Visibility>
         <Binding ElementName="HtmlView" Path="IsHTMLLoaded" Converter="{StaticResource BoolToHidden}"/>
     </Window.Visibility>
+
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo Description="{Binding Path=CurrentViewModel.Player.CurrentTrack.MetaData.Name}">
+            <TaskbarItemInfo.ThumbButtonInfos>
+                <ThumbButtonInfo Description="Back" ImageSource="{StaticResource Previous}" Command="{Binding Path=CurrentViewModel.Player.Back}"/>
+                <ThumbButtonInfo Description="Play" ImageSource="{StaticResource Play}" Command="{Binding Path=CurrentViewModel.Player.Play}"/>
+                <ThumbButtonInfo Description="Pause" ImageSource="{StaticResource Pause}" Command="{Binding Path=CurrentViewModel.Player.Pause}"/>
+                <ThumbButtonInfo Description="Stop" ImageSource="{StaticResource Stop}" Command="{Binding Path=CurrentViewModel.Player.Stop}"/>
+                <ThumbButtonInfo Description="Next" ImageSource="{StaticResource Next}" Command="{Binding Path=CurrentViewModel.Player.Next}"/>
+            </TaskbarItemInfo.ThumbButtonInfos>
+        </TaskbarItemInfo>
+    </Window.TaskbarItemInfo>
 </Window>

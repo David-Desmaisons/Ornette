@@ -36,9 +36,6 @@ export default {
     formatTime
   },
   computed: {
-    max() {
-      return this.player.CurrentTrack;
-    },
     disabled() {
       return this.player.CurrentTrack === null;
     },

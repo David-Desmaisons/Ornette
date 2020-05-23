@@ -4,7 +4,7 @@ using Neutronium.BuildingBlocks.Application.Navigation;
 using Neutronium.BuildingBlocks.Application.ViewModels;
 using Neutronium.BuildingBlocks.SetUp;
 
-namespace Ornette
+namespace Ornette.UI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

@@ -1,6 +1,8 @@
-﻿using Ornette.Application.ViewModel;
+﻿using MoreCollection.Extensions;
+using Ornette.Application.Io;
+using Ornette.Application.ViewModel;
 
-namespace Ornette.ViewModel.Pages
+namespace Ornette.UI.ViewModel.Pages
 {
     /// <summary>
     /// ViewModel for the "main" route
@@ -8,10 +10,15 @@ namespace Ornette.ViewModel.Pages
     public class MainViewModel : Neutronium.BuildingBlocks.ViewModel
     {
         public PlayerViewModel Player { get; }
+        private readonly IIoReader _Reader;
 
-        public MainViewModel(PlayerViewModel player)
+        public MainViewModel(PlayerViewModel player, IIoReader reader)
         {
             Player = player;
+            _Reader = reader;
+
+            Player.Tracks.AddRange(
+                _Reader.GetDirectoryTracks("C:\\"));
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Neutronium.BuildingBlocks.Application.ViewModels;
 using Ornette.Application.ViewModel;
-using Ornette.ViewModel.Common;
+using Ornette.UI.ViewModel.Common;
 
-namespace Ornette.ViewModel.Pages
+namespace Ornette.UI.ViewModel.Pages
 {
     /// <summary>
     /// ViewModel for the "about" route

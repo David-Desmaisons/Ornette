@@ -6,9 +6,9 @@ using Neutronium.BuildingBlocks.Application.ViewModels;
 using Neutronium.BuildingBlocks.Application.WindowServices;
 using Neutronium.MVVMComponents;
 using Neutronium.WPF.ViewModel;
-using Ornette.ViewModel.Common;
+using Ornette.UI.ViewModel.Common;
 
-namespace Ornette
+namespace Ornette.UI
 {
     /// <summary>
     /// Builder for application main viewModel.

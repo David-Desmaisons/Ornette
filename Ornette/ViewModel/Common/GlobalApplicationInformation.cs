@@ -1,6 +1,6 @@
 ﻿using Neutronium.BuildingBlocks.Application.ViewModels;
 
-namespace Ornette.ViewModel.Common
+namespace Ornette.UI.ViewModel.Common
 {
     public class GlobalApplicationInformation
     {

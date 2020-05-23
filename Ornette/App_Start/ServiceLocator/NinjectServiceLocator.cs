@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CommonServiceLocator;
 using Ninject;
 
-namespace Ornette.ServiceLocator
+namespace Ornette.UI
 {
     /// <summary>
     /// ServiceLocator implementation for Ninject

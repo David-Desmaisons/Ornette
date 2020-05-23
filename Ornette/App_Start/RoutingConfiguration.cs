@@ -1,7 +1,7 @@
 ﻿using Neutronium.BuildingBlocks.Application.Navigation;
 using Neutronium.Core.Navigation.Routing;
 
-namespace Ornette
+namespace Ornette.UI
 {
     /// <summary>
     /// Configure Routing
@@ -23,7 +23,7 @@ namespace Ornette
         {
             var convention = routeBuilder.GetTemplateConvention("{vm}");
             typeof(RoutingConfiguration).GetTypesFromSameAssembly()
-                .InNamespace("Ornette.ViewModel.Pages")
+                .InNamespace("Ornette.UI.ViewModel.Pages")
                 .Register(convention);
         }
     }

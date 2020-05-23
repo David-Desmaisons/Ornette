@@ -19,9 +19,9 @@ function totalSeconds(value, defaultValue = 0) {
     return defaultValue;
   }
   const {
-    MetaData: { Duration }
+    MetaData: { Duration: { TotalSeconds } }
   } = value;
-  return Duration.TotalSeconds;
+  return Math.round(TotalSeconds);
 }
 
 function formatTime(value, defaultValue = null) {

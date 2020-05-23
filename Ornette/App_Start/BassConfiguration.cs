@@ -1,4 +1,4 @@
-﻿namespace Ornette
+﻿namespace Ornette.UI
 {
     public static class BassConfiguration
     {

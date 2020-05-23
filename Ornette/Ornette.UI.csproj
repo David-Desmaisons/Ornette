@@ -15,7 +15,7 @@
     <ProjectGuid>{D57E1D81-59CF-42B2-8A1E-73F98E56166D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ornette</RootNamespace>
+    <RootNamespace>Ornette.UI</RootNamespace>
     <AssemblyName>Ornette</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -154,8 +154,8 @@
     <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Windows7APICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
     </Reference>
-    <Reference Include="MoreCollection, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MoreCollection.2.0.0\lib\net45\MoreCollection.dll</HintPath>
+    <Reference Include="MoreCollection, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MoreCollection.2.0.1\lib\net45\MoreCollection.dll</HintPath>
     </Reference>
     <Reference Include="Neutronium.BuildingBlocks.Application, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Neutronium.BuildingBlocks.Application.1.3.0\lib\net472\Neutronium.BuildingBlocks.Application.dll</HintPath>
@@ -368,6 +368,10 @@
     <ProjectReference Include="..\Ornette.Application\Ornette.Application.csproj">
       <Project>{224daeaf-b8d9-42d5-9c7e-d3ebf57a9ba9}</Project>
       <Name>Ornette.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ornette.IO\Ornette.IO.csproj">
+      <Project>{377A1F75-7719-4A45-97AF-0172A62F081B}</Project>
+      <Name>Ornette.IO</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

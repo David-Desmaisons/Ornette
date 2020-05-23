@@ -4,7 +4,7 @@ using Neutronium.BuildingBlocks.Application.Navigation;
 using Neutronium.BuildingBlocks.Application.WindowServices;
 using Neutronium.BuildingBlocks.ApplicationTools;
 
-namespace Ornette
+namespace Ornette.UI
 {
     /// <summary>
     /// Application lifecycle implementation that will be used as a singleton.

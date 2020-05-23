@@ -1,7 +1,7 @@
 ﻿using System;
 using CommonServiceLocator;
 
-namespace Ornette
+namespace Ornette.UI
 {
     /// <summary>
     /// Dependency Injection used during bootstrap to encapsulate IOC implementation

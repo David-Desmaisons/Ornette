@@ -8,14 +8,14 @@ using Neutronium.Core.WebBrowserEngine.Window;
 using Neutronium.WPF.Internal;
 using Ninject;
 using Ornette.Application.Infra;
+using Ornette.Application.Io;
 using Ornette.Application.Model;
 using Ornette.Application.Model.TrackOrder;
 using Ornette.Application.MusicPlayer;
-using Ornette.ServiceLocator;
-using Ornette.ViewModel;
-using Ornette.ViewModel.Pages;
+using Ornette.IO;
+using Ornette.UI.ViewModel.Pages;
 
-namespace Ornette
+namespace Ornette.UI
 {
     /// <summary>
     /// RegisterSingleton dependency injection for the application
@@ -62,6 +62,7 @@ namespace Ornette
             kernel.Bind<IApplicationLifeCycle>().To<ApplicationLifeCycle>();
             kernel.Bind<MainViewModel>().ToSelf().InSingletonScope();
             kernel.Bind<IPlayer>().To<Player>().InSingletonScope();
+            kernel.Bind<IIoReader>().To<IoReader>().InSingletonScope();
             kernel.Bind<ITrackOrderLogicFactory>().To<TrackOrderLogicFactory>().InSingletonScope();
             kernel.Bind<IRandomProvider>().To<RandomProvider>();
             kernel.Bind<IMusicPlayer>().ToMethod(_ => BassMusicPlayer.Init(BassConfiguration.Email, BassConfiguration.Password)).InSingletonScope();

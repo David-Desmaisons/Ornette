@@ -7,7 +7,7 @@ using Neutronium.JavascriptFramework.Vue;
 using Neutronium.WebBrowserEngine.ChromiumFx;
 using Neutronium.WPF;
 
-namespace Ornette
+namespace Ornette.UI
 {
     /// <summary>
     /// Interaction logic for App.xaml

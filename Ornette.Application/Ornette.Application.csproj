@@ -75,6 +75,9 @@
     <Compile Include="Infra\RandomProvider.cs" />
     <Compile Include="Io\FileExtension.cs" />
     <Compile Include="Io\IIoReader.cs" />
+    <Compile Include="Model\Descriptions\AlbumDescriptionBuilder.cs" />
+    <Compile Include="Model\Descriptions\ImageDescription.cs" />
+    <Compile Include="Model\Descriptions\TrackDescriptionBuilder.cs" />
     <Compile Include="Model\IPlayer.cs" />
     <Compile Include="Model\Descriptions\ArtistDescription.cs" />
     <Compile Include="Model\Descriptions\AlbumDescription.cs" />

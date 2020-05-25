@@ -4,6 +4,7 @@ using System.Linq;
 using Ornette.Application.Io;
 using Ornette.Application.Model;
 using Ornette.Application.Model.Descriptions;
+using TagLib;
 
 namespace Ornette.IO
 {
@@ -25,20 +26,31 @@ namespace Ornette.IO
         {
             var tagFile = TagLib.File.Create(filePath);
             var tag = tagFile.Tag;
+            var properties = tagFile.Properties;
 
             var album = new AlbumDescriptionBuilder()
                 .SetName(tag.Album)
-                .SetArtists(tag.AlbumArtists)
+                .SetArtists(GetArtists(tag))
                 .SetGenres(tag.Genres)
                 .SetTrackCount(tag.TrackCount)
-                .SetYear(tag.Year);
+                .SetYear(tag.Year)
+                .SetImages(tag.Pictures?.Select(p => new ImageDescription(p.Filename, p.Filename, (ImageType)p.Type)));
 
             return new TrackDescriptionBuilder()
                 .SetAlbum(album)
                 .SetName(tag.Title)
                 .SetTrackNumber(tag.Track)
-                .SetDuration(tagFile.Properties.Duration)
+                .SetDuration(properties.Duration)
                 .Build();
+        }
+
+        private static string[] GetArtists(Tag tag)
+        {
+            if (tag.AlbumArtists?.Length > 0)
+                return tag.AlbumArtists;
+
+            var artist = tag.FirstAlbumArtist ?? tag.FirstPerformer;
+            return new[] { artist };
         }
     }
 }

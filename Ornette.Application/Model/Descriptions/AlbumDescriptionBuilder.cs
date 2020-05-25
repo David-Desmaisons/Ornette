@@ -1,4 +1,7 @@
-﻿namespace Ornette.Application.Model.Descriptions
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Ornette.Application.Model.Descriptions
 {
     public class AlbumDescriptionBuilder
     {
@@ -44,9 +47,15 @@
             return this;
         }
 
-        public AlbumDescriptionBuilder SeImages(ImageDescription[] images)
+        public AlbumDescriptionBuilder SetImages(ImageDescription[] images)
         {
             Images = images;
+            return this;
+        }
+
+        public AlbumDescriptionBuilder SetImages(IEnumerable<ImageDescription> images)
+        {
+            Images = images?.ToArray();
             return this;
         }
     }

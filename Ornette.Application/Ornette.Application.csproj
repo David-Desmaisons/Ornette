@@ -76,6 +76,7 @@
     <Compile Include="Io\FileExtension.cs" />
     <Compile Include="Io\IIoReader.cs" />
     <Compile Include="Model\Descriptions\AlbumDescriptionBuilder.cs" />
+    <Compile Include="Model\Descriptions\TrackPositionDescription.cs" />
     <Compile Include="Model\Descriptions\ImageDescription.cs" />
     <Compile Include="Model\Descriptions\ImageType.cs" />
     <Compile Include="Model\Descriptions\TrackDescriptionBuilder.cs" />

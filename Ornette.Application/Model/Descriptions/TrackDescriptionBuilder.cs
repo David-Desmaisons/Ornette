@@ -9,7 +9,7 @@ namespace Ornette.Application.Model.Descriptions
             return new TrackDescription(Name, Album, TrackNumber, Duration);
         }
 
-        public uint? TrackNumber { get;  private set; }
+        public TrackPositionDescription TrackNumber { get;  private set; }
         public string Name { get;  private set; }
         public TimeSpan? Duration { get; private set;}
         private Func<AlbumDescription> _AlbumDescriptionBuilder = () => null;
@@ -17,7 +17,7 @@ namespace Ornette.Application.Model.Descriptions
 
         public TrackDescriptionBuilder SetTrackNumber(uint? trackNumber)
         {
-            TrackNumber = trackNumber;
+            TrackNumber = trackNumber.HasValue ? TrackPositionDescription.FromTrackPosition(trackNumber.Value) : null;
             return this;
         }
 

@@ -28,7 +28,7 @@ namespace Ornette.IO
             var tag = tagFile.Tag;
             var properties = tagFile.Properties;
 
-            var album = new AlbumDescriptionBuilder()
+            var albumBuilder = new AlbumDescriptionBuilder()
                 .SetName(tag.Album)
                 .SetArtists(GetArtists(tag))
                 .SetGenres(tag.Genres)
@@ -37,7 +37,7 @@ namespace Ornette.IO
                 .SetImages(tag.Pictures?.Select(p => new ImageDescription(p.Filename, p.Filename, (ImageType)p.Type)));
 
             return new TrackDescriptionBuilder()
-                .SetAlbum(album)
+                .SetAlbum(albumBuilder)
                 .SetName(tag.Title)
                 .SetTrackNumber(tag.Track)
                 .SetDuration(properties.Duration)

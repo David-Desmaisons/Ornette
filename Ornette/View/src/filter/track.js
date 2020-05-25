@@ -5,9 +5,16 @@ function track(value) {
     return "";
   }
   const {
-    MetaData: { Duration, Name, TrackNumber }
+    MetaData: {
+      Album: { Artists },
+      Duration,
+      Name,
+      TrackNumber
+    }
   } = value;
-  return `${TrackNumber}-${Name} (${timeSpan(Duration)})`;
+  return `${TrackNumber} - ${Artists.join(", ")} - ${Name} (${timeSpan(
+    Duration
+  )})`;
 }
 
 export { track };

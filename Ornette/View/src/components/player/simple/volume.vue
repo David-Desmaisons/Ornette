@@ -153,19 +153,21 @@ export default {
   transition: all 0.5s ease-in
   &:hover
     background-color: rgba(255, 255, 255, 0.18)
-    
+
 
   ::v-deep
     button.v-btn.volume
       &:not(.v-btn--text):not(.v-btn--outlined):before
         opacity: 0
 
-  &:not(.vertical)::v-deep
-    button.v-btn.volume
-      border-radius: 4px 0px 0px 4px
+  &:not(.vertical)
+    height: 30px
+    ::v-deep
+      button.v-btn.volume
+        border-radius: 4px 0px 0px 4px
 
   .slider
-    
+
     margin-left: 2px
     margin-bottom: 0px
 
@@ -181,6 +183,7 @@ export default {
     flex-direction: column-reverse
     padding-right: 0px
     padding-top: 5px
+    width: 30px
 
     ::v-deep
       button.v-btn.volume

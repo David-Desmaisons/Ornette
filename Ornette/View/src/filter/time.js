@@ -19,7 +19,9 @@ function totalSeconds(value, defaultValue = 0) {
     return defaultValue;
   }
   const {
-    MetaData: { Duration: { TotalSeconds } }
+    MetaData: {
+      Duration: { TotalSeconds }
+    }
   } = value;
   return Math.round(TotalSeconds);
 }

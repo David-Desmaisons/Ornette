@@ -31,12 +31,12 @@ namespace Ornette.Application.Model.Descriptions
 
         public static TrackPositionDescription FromTrackPositionAndDiscSide(uint trackPosition, string side)
         {
-            return new TrackPositionDescription(trackPosition, side : side);
+            return new TrackPositionDescription(trackPosition, side: side);
         }
 
         public int CompareTo(TrackPositionDescription other)
         {
-            return (other==null) ? 1 : String.Compare(Position, other.Position, StringComparison.Ordinal);
+            return (other == null) ? 1 : string.Compare(Position, other.Position, StringComparison.Ordinal);
         }
     }
 }

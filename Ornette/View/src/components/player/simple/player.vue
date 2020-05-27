@@ -59,10 +59,9 @@ $themeColor: orange
 
 <style lang="sass" scoped>
 .simple-player
-  width: 270px
   padding: 12px
   display: grid
-  grid-template-columns: 2fr auto 30px
+  grid-template-columns: 60px 150px 30px
   grid-template-rows: 30px 32px auto
   grid-template-areas: "time track volume" "position position volume" "playmode play volume"
   grid-column-gap: 5px

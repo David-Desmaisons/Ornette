@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Ornette.Application.Infra;
 using Ornette.Application.Io;
 using Ornette.Application.Model;
 using Ornette.Application.Model.Descriptions;
@@ -34,7 +35,7 @@ namespace Ornette.IO
                 .SetGenres(tag.Genres)
                 .SetTrackCount(tag.TrackCount)
                 .SetYear(tag.Year)
-                .SetImages(tag.Pictures?.Select(p => new ImageDescription(p.Filename, p.Filename, (ImageType)p.Type)));
+                .SetImages(tag.Pictures?.Select(GetImage));
 
             return new TrackDescriptionBuilder()
                 .SetAlbum(albumBuilder)
@@ -42,6 +43,12 @@ namespace Ornette.IO
                 .SetTrackNumber(tag.Track)
                 .SetDuration(properties.Duration)
                 .Build();
+        }
+
+        private static ImageDescription GetImage(IPicture picture)
+        {
+            var url = UrlHelper.BuildFromByteArray(picture.MimeType, picture.Data.Data);
+            return new ImageDescription(url, picture.Filename, (ImageType) picture.Type);
         }
 
         private static string[] GetArtists(Tag tag)

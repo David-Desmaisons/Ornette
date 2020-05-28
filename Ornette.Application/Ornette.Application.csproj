@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="Infra\IRandomProvider.cs" />
     <Compile Include="Infra\RandomProvider.cs" />
+    <Compile Include="Infra\UrlHelper.cs" />
     <Compile Include="Io\FileExtension.cs" />
     <Compile Include="Io\IIoReader.cs" />
     <Compile Include="Model\Descriptions\AlbumDescriptionBuilder.cs" />

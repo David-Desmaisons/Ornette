@@ -9,7 +9,7 @@ function track(value) {
       Album: { Artists },
       Duration,
       Name,
-      TrackNumber: {Position}
+      TrackNumber: { Position }
     }
   } = value;
   return `${Position} - ${Artists.join(", ")} - ${Name} (${timeSpan(

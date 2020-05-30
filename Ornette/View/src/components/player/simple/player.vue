@@ -27,6 +27,7 @@ import playControl from "./playControl";
 import position from "./position/position";
 
 export default {
+  name: "simplePlayer",
   props: {
     player: {
       required: true,
@@ -59,10 +60,12 @@ $themeColor: orange
 
 <style lang="sass" scoped>
 .simple-player
+  width: fit-content
+  height: fit-content
   padding: 12px
   display: grid
   grid-template-columns: 60px 150px 30px
-  grid-template-rows: 30px 32px auto
+  grid-template-rows: 30px 32px 30px
   grid-template-areas: "time track volume" "position position volume" "playmode play volume"
   grid-column-gap: 5px
   font-size: 10px

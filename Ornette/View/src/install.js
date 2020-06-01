@@ -9,7 +9,7 @@ import VueI18n from "vue-i18n";
 import messages from "./message";
 import Notifications from "vue-notification";
 import { formatTime, timeSpan, totalSeconds } from "./filter/time";
-import { track } from "./filter/track";
+import { join, track } from "./filter/track";
 import iconButton from "./components/button/iconButton";
 import textButton from "./components/button/textButton";
 
@@ -89,6 +89,7 @@ function install(Vue) {
   Vue.filter("formatTime", formatTime);
   Vue.filter("track", track);
   Vue.filter("totalSeconds", totalSeconds);
+  Vue.filter("join", join);
 }
 
 /*eslint no-unused-vars: ["error", { "args": "none" }]*/

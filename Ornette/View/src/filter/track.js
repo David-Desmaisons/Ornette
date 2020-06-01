@@ -1,5 +1,9 @@
 import { timeSpan } from "./time";
 
+function join(value, separator = ",") {
+  return value.join(separator);
+}
+
 function track(value) {
   if (value === null) {
     return "";
@@ -12,9 +16,7 @@ function track(value) {
       TrackNumber: { Position }
     }
   } = value;
-  return `${Position} - ${Artists.join(", ")} - ${Name} (${timeSpan(
-    Duration
-  )})`;
+  return `${Position} - ${join(Artists)} - ${Name} (${timeSpan(Duration)})`;
 }
 
-export { track };
+export { join, track };

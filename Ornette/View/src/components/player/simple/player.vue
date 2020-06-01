@@ -63,6 +63,7 @@ $themeColor: orange
   width: fit-content
   height: fit-content
   padding: 12px
+  margin: 2px
   display: grid
   grid-template-columns: 60px 150px 30px
   grid-template-rows: 30px 32px 30px

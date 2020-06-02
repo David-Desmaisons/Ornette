@@ -1,15 +1,17 @@
 <template>
-  <div v-if="album" class="album-display">
+  <div v-if="album" class="album-display" :class="{ horizontal }">
     <img
       class="main main-image"
       v-if="currentImageUri"
       :src="currentImageUri"
+      :style="style"
     />
     <slot class="main" v-else name="no-art" />
 
+    <span class="album-title">{{ album.Name }}</span>
+
     <span class="album-artist">{{ album.Artists | join }}</span>
 
-    <span class="album-title">{{ album.Name }}</span>
   </div>
 </template>
 <script>
@@ -18,6 +20,14 @@ export default {
   props: {
     album: {
       type: Object
+    },
+    size: {
+      type: String,
+      default: "150px"
+    },
+    horizontal: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -26,6 +36,13 @@ export default {
     };
   },
   computed: {
+    style() {
+      const { size } = this;
+      return {
+        "max-width": size,
+        "max-height": size
+      };
+    },
     currentImageUri() {
       const {
         album: { Images },
@@ -39,14 +56,29 @@ export default {
 <style lang="sass" scoped>
 .album-display
   display: grid
-  grid-template-rows: 1fr auto auto
   grid-template-columns: auto
+  grid-template-rows: 1fr auto auto
+  grid-template-areas: "image" "artist" "title"
+  grid-row-gap: 2px
+  grid-column-gap: 8px
   width: fit-content
   height: fit-content
   margin: 2px
 
+  &.horizontal
+    grid-template-columns: 1fr auto
+    grid-template-rows: 1fr 1fr
+    grid-template-areas: "image artist" "image title"
+    align-self: center
+
+    span.album-artist
+      align-self: start
+
+    span.album-title
+      align-self: end
+
   .main
-    width: 150px
+    grid-area: image
 
     &.main-image
       text-align: center
@@ -54,17 +86,19 @@ export default {
       margin-left: auto
       margin-right: auto
       border-radius: 2%
+      width: auto
+      height: auto
 
   span
     text-align: center
 
-    &.album-artist
+    &.album-title
       font-weight: bold
       font-size: 16px
-      align-self: center
+      grid-area: artist
 
-    &.album-title
+    &.album-artist
       font-style: italic
-      font-size: 12px
-      align-self: center
+      font-size: 14px
+      grid-area: title
 </style>

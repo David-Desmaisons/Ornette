@@ -1,9 +1,21 @@
 <template>
   <main>
     <v-content>
-      <v-container fluid class="main-container">
+      <v-container
+        fluid
+        class="main-container"
+      >
         <v-layout>
           <simplePlayer :player="viewModel.Player" />
+          <albumDisplayer
+            :album="currentAlbum"
+            horizontal
+          />
+          <tracksList
+            :tracks="tracks"
+            :currentTrack="currentTrack"
+            @click="click"
+          />
         </v-layout>
       </v-container>
     </v-content>
@@ -11,7 +23,9 @@
 </template>
 
 <script>
-import simplePlayer from "../components/player/simple/player";
+import simplePlayer from "@/components/player/simple/player";
+import albumDisplayer from "@/components/album/albumDisplayer";
+import tracksList from "@/components/track/tracksList";
 
 const props = {
   viewModel: Object
@@ -20,7 +34,39 @@ const props = {
 export default {
   props,
   components: {
-    simplePlayer
+    simplePlayer,
+    albumDisplayer,
+    tracksList
+  },
+  methods: {
+    click(track) {
+      const {
+        viewModel: { Player }
+      } = this;
+      Player.CurrentTrack = track;
+    }
+  },
+  computed: {
+    currentAlbum() {
+      const {
+        viewModel: { Player }
+      } = this;
+      return Player.CurrentTrack === null
+        ? null
+        : Player.CurrentTrack.MetaData.Album;
+    },
+    currentTrack() {
+      const {
+        viewModel: { Player }
+      } = this;
+      return Player.CurrentTrack;
+    },
+    tracks() {
+      const {
+        viewModel: { Player }
+      } = this;
+      return Player.Tracks;
+    }
   }
 };
 </script>

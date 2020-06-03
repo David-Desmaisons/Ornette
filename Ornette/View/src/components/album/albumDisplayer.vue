@@ -11,7 +11,6 @@
     <span class="album-title">{{ album.Name }}</span>
 
     <span class="album-artist">{{ album.Artists | join }}</span>
-
   </div>
 </template>
 <script>

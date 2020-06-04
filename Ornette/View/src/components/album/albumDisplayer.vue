@@ -1,5 +1,5 @@
 <template>
-  <div v-if="album" class="album-display" :class="{ horizontal }">
+  <v-card class="album-display" v-if="album" :class="{ horizontal }">
     <img
       class="main main-image"
       v-if="currentImageUri"
@@ -11,7 +11,7 @@
     <span class="album-title">{{ album.Name }}</span>
 
     <span class="album-artist">{{ album.Artists | join }}</span>
-  </div>
+  </v-card>
 </template>
 <script>
 export default {
@@ -63,12 +63,12 @@ export default {
   width: fit-content
   height: fit-content
   margin: 2px
+  padding: 4px
 
   &.horizontal
     grid-template-columns: 1fr auto
     grid-template-rows: 1fr 1fr
     grid-template-areas: "image artist" "image title"
-    align-self: center
 
     span.album-artist
       align-self: start

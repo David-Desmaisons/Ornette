@@ -1,20 +1,14 @@
 <template>
   <main>
     <v-content>
-      <v-container
-        fluid
-        class="main-container"
-      >
+      <v-container fluid class="main-container">
         <v-layout>
           <simplePlayer :player="viewModel.Player" />
-          <albumDisplayer
-            :album="currentAlbum"
-            horizontal
-          />
+          <albumDisplayer :album="currentAlbum" horizontal />
           <tracksList
             :tracks="tracks"
             :currentTrack="currentTrack"
-            @click="click"
+            @choosen="choosen"
           />
         </v-layout>
       </v-container>
@@ -39,7 +33,7 @@ export default {
     tracksList
   },
   methods: {
-    click(track) {
+    choosen(track) {
       const {
         viewModel: { Player }
       } = this;

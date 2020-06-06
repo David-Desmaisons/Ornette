@@ -10,8 +10,9 @@ import messages from "./message";
 import Notifications from "vue-notification";
 import iconButton from "./components/button/iconButton";
 import textButton from "./components/button/textButton";
-import * as filterTime from "./filter/time";
-import * as filterTrack from "./filter/track";
+import * as filtersTime from "./filter/time";
+import * as filtersTrack from "./filter/track";
+import * as filters from "./filter/utils";
 
 import Vuetify, {
   VApp,
@@ -91,8 +92,9 @@ function install(Vue) {
   Vue.use(Notifications);
   Vue.component("iconButton", iconButton);
   Vue.component("textButton", textButton);
-  addFilters(Vue, filterTime);
-  addFilters(Vue, filterTrack);
+  addFilters(Vue, filtersTime);
+  addFilters(Vue, filtersTrack);
+  addFilters(Vue, filters);
 }
 
 /*eslint no-unused-vars: ["error", { "args": "none" }]*/

@@ -2,11 +2,12 @@
   <v-card class="album-display" v-if="album" :class="{ horizontal }">
     <img
       class="main main-image"
-      v-if="currentImageUri"
-      :src="currentImageUri"
-      :style="style"
+      v-if="imageUri"
+      :src="imageUri"
+      :style="size | imageStyle"
     />
-    <slot class="main" v-else name="no-art" />
+    <slot v-else class="main" name="no-art" :album="album" :size="size">
+    </slot>
 
     <span class="album-title">{{ album.Name }}</span>
 
@@ -35,19 +36,9 @@ export default {
     };
   },
   computed: {
-    style() {
-      const { size } = this;
-      return {
-        "max-width": size,
-        "max-height": size
-      };
-    },
-    currentImageUri() {
-      const {
-        album: { Images },
-        imageIndex
-      } = this;
-      return Images.length > 0 ? Images[imageIndex].Uri : null;
+    imageUri() {
+      const { album, imageIndex, constructor } = this;
+      return constructor.filter("albumImage")(album, imageIndex);
     }
   }
 };

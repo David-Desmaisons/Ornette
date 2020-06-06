@@ -24,4 +24,9 @@ function albumImage(value, index = 0) {
   return Images.length > 0 ? Images[index].Uri : null;
 }
 
-export { albumImage, join, track };
+function albumHasImage(value) {
+  const { Images } = value;
+  return Images.length > 0;
+}
+
+export { albumImage, albumHasImage, join, track };

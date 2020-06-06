@@ -3,7 +3,7 @@
     <v-content>
       <v-container fluid class="main-container">
         <v-layout>
-          <simplePlayer :player="viewModel.Player" /> 
+          <simplePlayer :player="viewModel.Player" />
           <tracksList
             :tracks="tracks"
             :currentTrack="currentTrack"
@@ -19,7 +19,6 @@
             :currentTrack="currentTrack"
             @choosen="choosen"
           />
-         
         </v-layout>
       </v-container>
     </v-content>
@@ -31,7 +30,6 @@ import simplePlayer from "@/components/player/simple/player";
 import albumDisplayer from "@/components/album/albumDisplayer";
 import tracksList from "@/components/track/tracksList";
 import completeTrack from "@/components/track/completeTrack";
-
 
 const props = {
   viewModel: Object

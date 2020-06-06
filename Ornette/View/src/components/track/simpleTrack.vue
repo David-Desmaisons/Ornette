@@ -1,5 +1,5 @@
 <template>
-  <div class="track-item" >
+  <div class="track-item">
     <div class="position">{{ track.MetaData.TrackNumber.Position }}</div>
     <div class="name">{{ track.MetaData.Name }}</div>
     <div class="duration">{{ track.MetaData.Duration | timeSpan }}</div>

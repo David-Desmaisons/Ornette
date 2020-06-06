@@ -2,9 +2,8 @@
   <div class="track-item">
     <img
       class="main-image"
-      :style="style"
-      v-if="currentImageUri"
-      :src="currentImageUri"
+      :style="size | imageStyle"
+      :src="track.MetaData.Album | albumImage"
     />
     <div class="artist">{{ track.MetaData.Album.Artists | join }}</div>
     <div class="name">{{ track.MetaData.Name }}</div>
@@ -22,25 +21,6 @@ export default {
     size: {
       required: false,
       default: "50px"
-    }
-  },
-  computed: {
-    style() {
-      const { size } = this;
-      return {
-        "max-width": size,
-        "max-height": size
-      };
-    },
-    currentImageUri() {
-      const {
-        track: {
-          MetaData: {
-            Album: { Images }
-          }
-        }
-      } = this;
-      return Images.length > 0 ? Images[0].Uri : null;
     }
   }
 };

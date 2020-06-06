@@ -8,10 +8,10 @@ import { router } from "@/neutronium/route";
 import VueI18n from "vue-i18n";
 import messages from "./message";
 import Notifications from "vue-notification";
-import { formatTime, timeSpan, totalSeconds } from "./filter/time";
-import { join, track } from "./filter/track";
 import iconButton from "./components/button/iconButton";
 import textButton from "./components/button/textButton";
+import * as filterTime from "./filter/time";
+import * as filterTrack from "./filter/track";
 
 import Vuetify, {
   VApp,
@@ -44,6 +44,12 @@ import Vuetify, {
   VSpacer,
   VSlider
 } from "vuetify/lib";
+
+function addFilters(Vue, filters) {
+  Object.keys(filters).forEach(key => {
+    Vue.filter(key, filters[key]);
+  });
+}
 
 function install(Vue) {
   Vue.use(Vuetify, {
@@ -85,11 +91,8 @@ function install(Vue) {
   Vue.use(Notifications);
   Vue.component("iconButton", iconButton);
   Vue.component("textButton", textButton);
-  Vue.filter("timeSpan", timeSpan);
-  Vue.filter("formatTime", formatTime);
-  Vue.filter("track", track);
-  Vue.filter("totalSeconds", totalSeconds);
-  Vue.filter("join", join);
+  addFilters(Vue, filterTime);
+  addFilters(Vue, filterTrack);
 }
 
 /*eslint no-unused-vars: ["error", { "args": "none" }]*/

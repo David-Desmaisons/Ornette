@@ -6,8 +6,7 @@
       :src="imageUri"
       :style="size | imageStyle"
     />
-    <slot v-else class="main" name="no-art" :album="album" :size="size">
-    </slot>
+    <slot v-else class="main" name="no-art" :album="album" :size="size"> </slot>
 
     <span class="album-title">{{ album.Name }}</span>
 
@@ -15,6 +14,7 @@
   </v-card>
 </template>
 <script>
+import { albumImage } from "@/filter/track";
 export default {
   name: "albumDisplayer",
   props: {
@@ -37,8 +37,8 @@ export default {
   },
   computed: {
     imageUri() {
-      const { album, imageIndex, constructor } = this;
-      return constructor.filter("albumImage")(album, imageIndex);
+      const { album, imageIndex } = this;
+      return albumImage(album, imageIndex);
     }
   }
 };

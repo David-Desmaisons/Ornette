@@ -1,15 +1,18 @@
 <template>
-  <v-list class="track-list" dense>
-    <v-list-item-group v-model="index" color="primary">
-      <v-list-item class="track-item" v-for="track in tracks" :key="track.Path">
-        <div class="position">{{ track.MetaData.TrackNumber.Position }}</div>
-        <div class="name">{{ track.MetaData.Name }}</div>
-        <div class="duration">{{ track.MetaData.Duration | timeSpan }}</div>
-      </v-list-item>
-    </v-list-item-group>
-  </v-list>
+  <v-card class="track-list">
+    <v-list dense>
+      <v-list-item-group v-model="index" color="primary">
+        <v-list-item v-for="track in tracks" :key="track.Path">
+          <slot name="track" :track="track">
+            <trackDisplay :track="track" />
+          </slot>
+        </v-list-item>
+      </v-list-item-group>
+    </v-list>
+  </v-card>
 </template>
 <script>
+import trackDisplay from "./simpleTrack";
 export default {
   name: "tracks-list",
   props: {
@@ -21,6 +24,9 @@ export default {
       required: false,
       type: Object
     }
+  },
+  components: {
+    trackDisplay
   },
   computed: {
     index: {
@@ -42,22 +48,9 @@ export default {
 </script>
 <style lang="sass" scoped>
 .track-list
-  font-size: 12px
+  margin: 2px
+  height: fit-content
 
-  .track-item
-    display: flex
-    flex-direction: row
-    &.selected
-      background-color: red
-
-    div
-      &.position
-        width: 20px
-
-      &.name
-        flex-grow: 1
-
-      &.duration
-        width: 30px
-        margin-left: 10px
+  ::v-deep.track-item
+    flex-grow: 1
 </style>

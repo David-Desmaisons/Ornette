@@ -69,7 +69,7 @@ $themeColor: orange
   grid-template-rows: 30px 32px 30px
   grid-template-areas: "time track volume" "position position volume" "playmode play volume"
   grid-column-gap: 5px
-  font-size: 10px
+  font-size: 12px
 
   &.retracted
     grid-template-areas: "time track track" "position position position" "playmode play volume"

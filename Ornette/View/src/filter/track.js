@@ -19,4 +19,9 @@ function track(value) {
   return `${Position} - ${join(Artists)} - ${Name} (${timeSpan(Duration)})`;
 }
 
-export { join, track };
+function albumImage(value, index = 0) {
+  const { Images } = value;
+  return Images.length > 0 ? Images[index].Uri : null;
+}
+
+export { albumImage, join, track };

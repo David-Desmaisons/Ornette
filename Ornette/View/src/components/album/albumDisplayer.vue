@@ -6,7 +6,9 @@
       :src="imageUri"
       :style="size | imageStyle"
     />
-    <slot v-else class="main" name="no-art" :album="album" :size="size"> </slot>
+    <slot v-else name="no-art" :album="album" :size="size" :class="'main'">
+      <noAlbum class="main no-art" :style="size | svgStyle"/>
+    </slot>
 
     <span class="album-title">{{ album.Name }}</span>
 
@@ -14,9 +16,13 @@
   </v-card>
 </template>
 <script>
+import noAlbum from "./noAlbum";
 import { albumImage } from "@/filter/track";
 export default {
   name: "albumDisplayer",
+  components:{
+    noAlbum
+  },
   props: {
     album: {
       type: Object
@@ -56,10 +62,14 @@ export default {
   margin: 2px
   padding: 4px
 
+  &:not(.horizontal)
+    padding-bottom: 6px
+
   &.horizontal
     grid-template-columns: 1fr auto
     grid-template-rows: 1fr 1fr
     grid-template-areas: "image artist" "image title"
+    padding-right: 6px
 
     span.album-artist
       align-self: start
@@ -67,7 +77,7 @@ export default {
     span.album-title
       align-self: end
 
-  .main
+  ::v-deep.main
     grid-area: image
 
     &.main-image

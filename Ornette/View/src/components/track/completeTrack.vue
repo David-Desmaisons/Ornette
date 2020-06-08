@@ -3,14 +3,20 @@
     <img
       class="main-image"
       :style="size | imageStyle"
-      :src="track.MetaData.Album | albumImage"
+      v-if="imageUri"
+      :src="imageUri"
     />
+    <slot v-else name="no-art" :album="album" :size="size" :class="'main'">
+      <noAlbum class="main-image no-art" :style="size | svgStyle"/>
+    </slot>
     <div class="artist">{{ track.MetaData.Album.Artists | join }}</div>
     <div class="name">{{ track.MetaData.Name }}</div>
     <div class="duration">{{ track.MetaData.Duration | timeSpan }}</div>
   </div>
 </template>
 <script>
+import noAlbum from "../album/noAlbum";
+import { albumImage } from "@/filter/track";
 export default {
   name: "track-complete",
   props: {
@@ -21,6 +27,15 @@ export default {
     size: {
       required: false,
       default: "50px"
+    }
+  },
+  components:{
+    noAlbum
+  },
+  computed: {
+    imageUri() {
+      const { track:{ MetaData: { Album } } } = this;
+      return albumImage(Album);
     }
   }
 };
@@ -37,14 +52,17 @@ export default {
   font-size: 12px
   padding: 6px 0 6px 0
 
-  img.main-image
-      text-align: center
-      display: block
-      border-radius: 2%
-      width: auto
-      height: auto
-      grid-area: image
-      justify-self: start
+  .main-image
+    grid-area: image
+    align-self: center
+    justify-self: start
+
+    &img
+    text-align: center
+    display: block
+    border-radius: 2%
+    width: auto
+    height: auto
 
   div
     &.artist

@@ -7,8 +7,8 @@ function imageStyle(size) {
 
 function svgStyle(size) {
   return {
-    "width": size,
-    "height": size
+    width: size,
+    height: size
   };
 }
 

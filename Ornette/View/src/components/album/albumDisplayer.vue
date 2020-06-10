@@ -1,14 +1,6 @@
 <template>
   <v-card class="album-display" v-if="album" :class="{ horizontal }">
-    <img
-      class="main main-image"
-      v-if="imageUri"
-      :src="imageUri"
-      :style="size | imageStyle"
-    />
-    <slot v-else name="no-art" :album="album" :size="size" :class="'main'">
-      <noAlbum class="main no-art" :style="size | svgStyle"/>
-    </slot>
+    <cover :size="size" :album="album" class="main" />
 
     <span class="album-title">{{ album.Name }}</span>
 
@@ -16,16 +8,16 @@
   </v-card>
 </template>
 <script>
-import noAlbum from "./noAlbum";
-import { albumImage } from "@/filter/track";
+import cover from "../cover/cover";
 export default {
   name: "albumDisplayer",
-  components:{
-    noAlbum
+  components: {
+    cover
   },
   props: {
     album: {
-      type: Object
+      type: Object,
+      required: true
     },
     size: {
       type: String,
@@ -34,17 +26,6 @@ export default {
     horizontal: {
       type: Boolean,
       default: false
-    }
-  },
-  data() {
-    return {
-      imageIndex: 0
-    };
-  },
-  computed: {
-    imageUri() {
-      const { album, imageIndex } = this;
-      return albumImage(album, imageIndex);
     }
   }
 };
@@ -79,15 +60,6 @@ export default {
 
   ::v-deep.main
     grid-area: image
-
-    &.main-image
-      text-align: center
-      display: block
-      margin-left: auto
-      margin-right: auto
-      border-radius: 2%
-      width: auto
-      height: auto
 
   span
     text-align: center

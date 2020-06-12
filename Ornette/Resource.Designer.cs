@@ -142,6 +142,15 @@ namespace Ornette.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DesignTime Demo.
+        /// </summary>
+        internal static string Menu_Test {
+            get {
+                return ResourceManager.GetString("Menu_Test", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         internal static string Ok {

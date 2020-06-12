@@ -9,10 +9,11 @@
             :currentTrack="currentTrack"
             @choosen="choosen"
           >
-            <template slot="track" scope="{track}">
+            <template slot="track" slot-scope="{ track }">
               <completeTrack :track="track" />
             </template>
           </tracksList>
+          <albumTracks :album="currentAlbum" :tracks="tracks" />
           <albumDisplayer :album="currentAlbum" />
           <albumDisplayer :album="currentAlbum" horizontal />
           <tracksList
@@ -29,6 +30,8 @@
 <script>
 import simplePlayer from "@/components/player/simple/player";
 import albumDisplayer from "@/components/album/albumDisplayer";
+import albumTracks from "@/components/album/albumTracks";
+
 import tracksList from "@/components/track/tracksList";
 import completeTrack from "@/components/track/completeTrack";
 
@@ -40,6 +43,7 @@ export default {
   name: "demo",
   props,
   components: {
+    albumTracks,
     simplePlayer,
     albumDisplayer,
     tracksList,

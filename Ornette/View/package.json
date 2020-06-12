@@ -21,6 +21,7 @@
     "neutronium-vue-command-mixin": "^1.4.1",
     "neutronium-vue-resultcommand-topromise": "^1.1.0",
     "neutronium-vue-simple-command-mixin": "^1.1.0",
+    "node-vibrant": "^3.1.5",
     "sass": "^1.26.3",
     "vue": "^2.6.11",
     "vue-i18n": "^8.4.0",

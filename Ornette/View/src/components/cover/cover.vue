@@ -1,5 +1,5 @@
 <template>
-  <div class="cover" :style="size | svgStyle">
+  <div class="cover" :style="size | style">
     <img
       class="main main-image"
       v-if="imageUri"
@@ -7,7 +7,7 @@
       :style="size | imageStyle"
     />
     <slot v-else name="no-art" :album="album" :size="size" :class="'main'">
-      <noCover class="main no-art" :style="size | svgStyle" />
+      <noCover class="main no-art" :style="size | style" />
     </slot>
   </div>
 </template>
@@ -33,6 +33,14 @@ export default {
   },
   components: {
     noCover
+  },
+  watch: {
+    imageUri: {
+      handler(value) {
+        this.$emit("imageSource", value);
+      },
+      immediate: true
+    }
   },
   computed: {
     imageUri() {

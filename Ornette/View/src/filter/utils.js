@@ -5,11 +5,11 @@ function imageStyle(size) {
   };
 }
 
-function svgStyle(size) {
+function style(size) {
   return {
     width: size,
     height: size
   };
 }
 
-export { imageStyle, svgStyle };
+export { imageStyle, style };

@@ -1,10 +1,15 @@
 <template>
-  <v-card class="album-display" v-if="album" :class="{ horizontal }">
-    <cover :size="size" :album="album" class="main" />
+  <v-card class="album-display" v-if="album" :class="type" :style="style">
+    <cover
+      :size="size"
+      :album="album"
+      class="main"
+      @imageSource="onImageSource"
+    />
 
-    <span class="album-title">{{ album.Name }}</span>
+    <span v-if="showInfo" class="album-title">{{ album.Name }}</span>
 
-    <span class="album-artist">{{ album.Artists | join }}</span>
+    <span v-if="showInfo" class="album-artist">{{ album.Artists | join }}</span>
   </v-card>
 </template>
 <script>
@@ -23,9 +28,26 @@ export default {
       type: String,
       default: "150px"
     },
-    horizontal: {
-      type: Boolean,
-      default: false
+    type: {
+      type: String,
+      default: "vertical"
+    }
+  },
+  computed: {
+    showInfo() {
+      const { type, hasImage } = this;
+      return type !== "compact" || !hasImage;
+    }
+  },
+  data() {
+    return {
+      hasImage: false
+    };
+  },
+  methods: {
+    onImageSource(value) {
+      this.hasImage = value !== null;
+      this.$emit("imageSource", value);
     }
   }
 };
@@ -41,9 +63,25 @@ export default {
   width: fit-content
   height: fit-content
   margin: 2px
-  padding: 4px
 
-  &:not(.horizontal)
+  &.compact
+    grid-template-columns: auto
+    grid-template-rows: 50% 50%
+    grid-template-areas: "artist" "title"
+    grid-gap: 0
+    box-shadow: none
+
+    ::v-deep.main
+      grid-column: 1
+      grid-row: 1 / 3
+
+    span.album-artist
+      align-self: start
+
+    span.album-title
+      align-self: end
+
+  &.vertical
     padding-bottom: 6px
 
   &.horizontal

@@ -1,8 +1,9 @@
 <template>
   <v-card class="album-tracks" :style="style">
-    <cover
+    <albumDisplayer
       :size="size"
       :album="album"
+      type="compact"
       class="main"
       @imageSource="onImageSource"
     />
@@ -17,7 +18,7 @@
   </v-card>
 </template>
 <script>
-import cover from "../cover/cover";
+import albumDisplayer from "./albumDisplayer";
 import palette from "../helper/palette";
 import * as Vibrant from "node-vibrant";
 
@@ -37,7 +38,7 @@ export default {
     }
   },
   components: {
-    cover,
+    albumDisplayer,
     palette
   },
   data() {
@@ -76,11 +77,14 @@ export default {
   display: grid
   grid-template-columns: min-content min-content
   gap: 8px
-  padding: 4px
   width: fit-content
   height: fit-content
   border-radius: 2%
   transition: background-color 50ms linear, color 50ms linear
+  margin: 2px
+
+  .main
+    margin: 0px
 
   .tracks
     padding-left: 8px

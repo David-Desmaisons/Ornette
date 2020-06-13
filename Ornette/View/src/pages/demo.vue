@@ -14,8 +14,9 @@
             </template>
           </tracksList>
           <albumTracks :album="currentAlbum" :tracks="tracks" />
+          <albumDisplayer :album="currentAlbum" type="compact" />
           <albumDisplayer :album="currentAlbum" />
-          <albumDisplayer :album="currentAlbum" horizontal />
+          <albumDisplayer :album="currentAlbum" type="horizontal" />
           <tracksList
             :tracks="tracks"
             :currentTrack="currentTrack"

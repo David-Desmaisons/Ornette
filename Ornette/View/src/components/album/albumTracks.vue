@@ -92,7 +92,18 @@ export default {
     padding-top: 4px
     display: flex
     flex-flow: row wrap
-    overflow: auto
+    overflow: overlay
+
+    &::-webkit-scrollbar
+      width: 4px
+
+    &::-webkit-scrollbar-track
+      background: transparent
+
+    &::-webkit-scrollbar-thumb
+      background-color: currentColor
+      border-radius: 3px
+      border: 3px solid transparent
 
     .track-item
       width: 100%

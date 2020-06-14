@@ -13,7 +13,6 @@
 export default {
   props: {
     palette: {
-      required: true,
       type: Object
     }
   }

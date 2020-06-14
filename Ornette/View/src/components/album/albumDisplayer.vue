@@ -1,5 +1,5 @@
 <template>
-  <v-card class="album-display" v-if="album" :class="type" :style="style">
+  <v-card class="album-display" v-if="album" :class="type">
     <cover
       :size="size"
       :album="album"

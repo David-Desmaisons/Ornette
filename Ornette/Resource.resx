@@ -144,7 +144,7 @@
   <data name="Menu_main" xml:space="preserve">
     <value>Main</value>
   </data>
-  <data name="Menu_Test" xml:space="preserve">
+  <data name="Menu_test" xml:space="preserve">
     <value>DesignTime Demo</value>
   </data>
   <data name="Ok" xml:space="preserve">

@@ -23,32 +23,32 @@
             @choosen="choosen"
           />
         </v-layout>
+        <bar :player="viewModel.Player" />
       </v-container>
     </v-content>
   </main>
 </template>
 
 <script>
-import simplePlayer from "@/components/player/simple/player";
+import simplePlayer from "@/components/player/simple";
+import bar from "@/components/player/bar";
 import albumDisplayer from "@/components/album/albumDisplayer";
 import albumTracks from "@/components/album/albumTracks";
-
 import tracksList from "@/components/track/tracksList";
 import completeTrack from "@/components/track/completeTrack";
 
-const props = {
-  viewModel: Object
-};
-
 export default {
   name: "demo",
-  props,
+  props: {
+    viewModel: Object
+  },
   components: {
     albumTracks,
     simplePlayer,
     albumDisplayer,
     tracksList,
-    completeTrack
+    completeTrack,
+    bar
   },
   methods: {
     choosen(track) {

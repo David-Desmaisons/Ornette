@@ -4,14 +4,11 @@ import demo from "./pages/demo";
 
 import { isDesignTime } from "@/infra/environment";
 
-const designTime = isDesignTime();
-window.console.log({ designTime });
-
 const routeDefinitions = [
   { name: "main", component: main, menu: { icon: "fa-television" } },
   { name: "about", component: about, menu: { icon: "info" } }
 ];
-if (designTime) {
+if (isDesignTime()) {
   routeDefinitions.splice(1, 0, {
     name: "test",
     component: demo,

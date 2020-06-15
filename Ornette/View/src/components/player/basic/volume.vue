@@ -1,7 +1,7 @@
 <template>
   <div
     class="volume-slider"
-    :class="{ muted, vertical, retracted }"
+    :class="{ muted, vertical, retracted, asButton }"
     @wheel.prevent="wheel"
     @mouseover.prevent="onHover(true)"
     @mouseleave.prevent="onHover(false)"
@@ -42,6 +42,10 @@ export default {
     vertical: {
       type: Boolean,
       default: false
+    },
+    asButton: {
+      type: Boolean,
+      default: true
     },
     expandable: {
       type: Boolean,
@@ -142,17 +146,18 @@ export default {
   display: flex
   flex-direction: row
   align-items: center
-  border-radius: 4px
-  border-style: solid
-  border-width: thin
   box-shadow: none
   opacity: 0.92
   padding-top: 0px
   padding-right: 5px
-  border-color: rgba(255, 255, 255, 0.12)
   transition: all 0.5s ease-in
-  &:hover
-    background-color: rgba(255, 255, 255, 0.18)
+  &.asButton
+    border-radius: 4px
+    border-style: solid
+    border-width: thin
+    border-color: rgba(255, 255, 255, 0.12)
+    &:hover
+      background-color: rgba(255, 255, 255, 0.18)
 
 
   ::v-deep

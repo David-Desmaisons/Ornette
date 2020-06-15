@@ -12,14 +12,11 @@
         <div class="name">{{ track.MetaData.Name }}</div>
         <div class="duration">{{ track.MetaData.Duration | timeSpan }}</div>
       </div>
-
-      <palette :palette="palette" />
     </div>
   </v-card>
 </template>
 <script>
 import albumDisplayer from "./albumDisplayer";
-import palette from "../helper/palette";
 import * as Vibrant from "node-vibrant";
 
 export default {
@@ -38,8 +35,7 @@ export default {
     }
   },
   components: {
-    albumDisplayer,
-    palette
+    albumDisplayer
   },
   data() {
     return {

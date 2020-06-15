@@ -21,8 +21,7 @@ export default {
   },
   props: {
     album: {
-      type: Object,
-      required: true
+      type: Object
     },
     size: {
       type: String,

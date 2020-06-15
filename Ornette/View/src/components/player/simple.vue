@@ -2,7 +2,7 @@
   <v-card class="simple-player" :class="{ retracted }">
     <p class="time">{{ player.PositionInSeconds | formatTime("--:--") }}</p>
 
-    <marquee class="track-name">{{ player.CurrentTrack | track }}</marquee>
+    <marquee class="track-name">{{ player.CurrentTrack | trackName }}</marquee>
 
     <position dot class="position" :player="player" />
 
@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import volume from "./volume";
-import playMode from "./playMode";
-import playControl from "./playControl";
-import position from "./position/position";
+import volume from "./basic/volume";
+import playMode from "./basic/playMode";
+import playControl from "./basic/playControl";
+import position from "./basic/position";
 
 export default {
   name: "simplePlayer",

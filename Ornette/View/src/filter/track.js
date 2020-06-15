@@ -4,7 +4,7 @@ function join(value, separator = ",") {
   return value.join(separator);
 }
 
-function track(value) {
+function trackName(value) {
   if (value === null) {
     return "";
   }
@@ -19,6 +19,16 @@ function track(value) {
   return `${Position} - ${join(Artists)} - ${Name} (${timeSpan(Duration)})`;
 }
 
+function album(value) {
+  if (value === null) {
+    return null;
+  }
+  const {
+    MetaData: { Album }
+  } = value;
+  return Album;
+}
+
 function albumImage(value, index = 0) {
   const { Images } = value;
   return Images.length > 0 ? Images[index].Uri : null;
@@ -29,4 +39,4 @@ function albumHasImage(value) {
   return Images.length > 0;
 }
 
-export { albumImage, albumHasImage, join, track };
+export { album, albumImage, albumHasImage, join, trackName };

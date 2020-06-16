@@ -16,11 +16,11 @@
 <script>
 import cover from "../cover/cover";
 import volume from "./basic/volume";
-import position from "./basic/position";
-
+import position from "./position/completePosition";
 import { album } from "@/filter/track";
 
 export default {
+  name: "bar-control",
   props: {
     player: {
       type: Object,
@@ -49,7 +49,7 @@ $mid-heigth: $height/2
   padding: 0 5px 0 0px
   height: $height
   display: grid
-  grid-template-columns: $height minmax($height, 1fr) 1fr 2fr 1fr minmax(100px, 1fr)
+  grid-template-columns: $height minmax($height, 1fr) 1fr 3fr 1fr minmax(100px, 1fr)
   grid-template-rows: $mid-heigth $mid-heigth
   grid-template-areas: "image album-artist play-control position repeat-control volume-control" "image track play-control position repeat-control volume-control"
   font-size: 10px

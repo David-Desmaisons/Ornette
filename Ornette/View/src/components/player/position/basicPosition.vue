@@ -19,6 +19,7 @@ import VueSlider from "vue-slider-component";
 import { formatTime } from "@/filter/time";
 
 export default {
+  name: "position",
   props: {
     player: {
       required: true,

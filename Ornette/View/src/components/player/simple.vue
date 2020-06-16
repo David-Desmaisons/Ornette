@@ -23,8 +23,8 @@
 <script>
 import volume from "./basic/volume";
 import playMode from "./basic/playMode";
-import playControl from "./basic/playControl";
-import position from "./basic/position";
+import playControl from "./playControl/completePlay";
+import position from "./position/basicPosition";
 
 export default {
   name: "simplePlayer",

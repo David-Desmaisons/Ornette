@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  name: "complete-play",
   props: {
     player: {
       required: true,

@@ -3,7 +3,7 @@
     :color="color"
     :disabled="!canExecute"
     @click.stop="execute"
-    v-bind="attrs"
+    v-bind="$attrs"
   >
     {{ text }}
   </v-btn>
@@ -22,12 +22,6 @@ export default {
     color: {
       type: String,
       default: "primary"
-    }
-  },
-  computed: {
-    attrs() {
-      const { small, $attrs } = this;
-      return { small, ...$attrs };
     }
   },
   inheritAttrs: false

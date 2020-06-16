@@ -11,12 +11,16 @@
     <position class="position" :player="player" />
 
     <volume class="volume-control" v-model="player.Volume" :asButton="false" />
+
+    <playControl class="play-control" :player="player"/>
   </v-card>
 </template>
 <script>
 import cover from "../cover/cover";
 import volume from "./basic/volume";
 import position from "./position/completePosition";
+import playControl from "./playControl/shortPlay";
+
 import { album } from "@/filter/track";
 
 export default {
@@ -38,6 +42,7 @@ export default {
   components: {
     cover,
     volume,
+    playControl,
     position
   }
 };
@@ -49,7 +54,7 @@ $mid-heigth: $height/2
   padding: 0 5px 0 0px
   height: $height
   display: grid
-  grid-template-columns: $height minmax($height, 1fr) 1fr 3fr 1fr minmax(100px, 1fr)
+  grid-template-columns: $height auto minmax(140px, 1fr)  minmax(180px,3fr) 1fr minmax(90px, 1fr)
   grid-template-rows: $mid-heigth $mid-heigth
   grid-template-areas: "image album-artist play-control position repeat-control volume-control" "image track play-control position repeat-control volume-control"
   font-size: 10px
@@ -74,6 +79,11 @@ $mid-heigth: $height/2
 
   .image
     grid-area: image
+
+  .play-control
+    grid-area: play-control
+    align-self: center
+    text-align: center
 
   ::v-deep
     span.album-title

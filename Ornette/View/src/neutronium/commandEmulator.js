@@ -44,11 +44,11 @@ function onPause(player) {
 }
 
 function onStop(player) {
+  onPause(player);
   player.State = {
     intValue: 2
   };
   player.PositionInSeconds = 0;
-  onPause();
 }
 
 function onNext(player) {

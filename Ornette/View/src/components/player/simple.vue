@@ -22,7 +22,7 @@
 
 <script>
 import volume from "./basic/volume";
-import playMode from "./basic/playMode";
+import playMode from "./playMode/simple";
 import playControl from "./playControl/completePlay";
 import position from "./position/basicPosition";
 

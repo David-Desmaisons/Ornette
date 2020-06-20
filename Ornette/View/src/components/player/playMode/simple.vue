@@ -2,14 +2,15 @@
   <v-btn-toggle
     class="play-mode"
     multiple
+    :borderless="borderless"
     :value="toogleValue"
     @change="changeToogle"
   >
-    <v-btn small icon>
+    <v-btn small icon :fab="borderless">
       <v-icon x-small>mdi-shuffle-variant</v-icon>
     </v-btn>
 
-    <v-btn small icon>
+    <v-btn small icon :fab="borderless">
       <v-icon x-small>mdi-repeat</v-icon>
     </v-btn>
   </v-btn-toggle>
@@ -21,6 +22,10 @@ export default {
     player: {
       required: true,
       type: Object
+    },
+    borderless: {
+      required: false,
+      default: false
     }
   },
   computed: {

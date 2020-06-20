@@ -2,9 +2,7 @@
   <v-card class="bar">
     <cover :album="album" size="54px" />
 
-    <span v-if="album" class="album-artist"
-      >{{ album.Artists | join }} - {{ album.Name }}</span
-    >
+    <div v-if="album" class="album-artist">{{ album.Artists | join }}</div>
 
     <span v-if="player.CurrentTrack" class="track">{{ metaData.Name }}</span>
 
@@ -12,7 +10,9 @@
 
     <volume class="volume-control" v-model="player.Volume" :asButton="false" />
 
-    <playControl class="play-control" :player="player"/>
+    <playControl class="play-control" :player="player" />
+
+    <playMode class="play-mode" :player="player" borderless />
   </v-card>
 </template>
 <script>
@@ -20,7 +20,7 @@ import cover from "../cover/cover";
 import volume from "./basic/volume";
 import position from "./position/completePosition";
 import playControl from "./playControl/shortPlay";
-
+import playMode from "./playMode/simple";
 import { album } from "@/filter/track";
 
 export default {
@@ -43,31 +43,36 @@ export default {
     cover,
     volume,
     playControl,
-    position
+    position,
+    playMode
   }
 };
 </script>
 <style lang="sass" scoped>
 $height: 54px
 $mid-heigth: $height/2
+
 .bar
   padding: 0 5px 0 0px
   height: $height
   display: grid
-  grid-template-columns: $height auto minmax(140px, 1fr)  minmax(180px,3fr) 1fr minmax(90px, 1fr)
+  grid-template-columns: $height auto minmax(140px, 2fr)  minmax(180px,8fr) 1fr auto minmax(90px, 2fr)
   grid-template-rows: $mid-heigth $mid-heigth
-  grid-template-areas: "image album-artist play-control position repeat-control volume-control" "image track play-control position repeat-control volume-control"
+  grid-template-areas: "image track play-control position . play-mode volume-control" "image album-artist play-control position . play-mode volume-control"
   font-size: 10px
   grid-gap: 0px 5px
 
   .album-artist
+    margin-bottom: 5px
     grid-area: album-artist
-    font-weight: bold
-    align-self: end
+    align-self: start
+    opacity: 0.8
 
   .track
+    margin-top: 5px
     grid-area: track
-    align-self: start
+    align-self: end
+    font-weight: bold
 
   .volume-control
     grid-area: volume-control
@@ -85,7 +90,7 @@ $mid-heigth: $height/2
     align-self: center
     text-align: center
 
-  ::v-deep
-    span.album-title
-      font-size: 10px
+  .play-mode
+    grid-area: play-mode
+    align-self: center
 </style>

@@ -107,7 +107,7 @@ export default {
       grid-area: artist
 
     &.album-artist
-      font-style: italic
+      opacity: $subtopic-opacity
       font-size: 14px
       grid-area: title
 </style>

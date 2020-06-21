@@ -26,10 +26,13 @@ export default {
   div
     &.position
       width: 20px
+      opacity: $subtopic-opacity
+
 
     &.name
       flex-grow: 1
 
     &.duration
       margin-left: 10px
+      opacity: $subtopic-opacity
 </style>

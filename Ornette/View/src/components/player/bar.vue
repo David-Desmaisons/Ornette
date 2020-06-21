@@ -63,12 +63,15 @@ $mid-heigth: $height/2
   grid-gap: 0px 5px
 
   .album-artist
+    @include text-not-wrapped
     margin-bottom: 5px
     grid-area: album-artist
     align-self: start
-    opacity: 0.8
+    opacity: $subtopic-opacity
+
 
   .track
+    @include text-not-wrapped
     margin-top: 5px
     grid-area: track
     align-self: end

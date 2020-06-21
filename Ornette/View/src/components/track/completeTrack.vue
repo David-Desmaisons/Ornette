@@ -46,7 +46,7 @@ export default {
     &.artist
       grid-area: artist
       font-size: 10px
-      font-style: italic
+      opacity: $subtopic-opacity
       justify-self: start
       align-self: start
 
@@ -59,4 +59,5 @@ export default {
       grid-area: duration
       align-self: center
       justify-self: end
+      opacity: $subtopic-opacity
 </style>

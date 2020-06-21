@@ -1,7 +1,14 @@
 @import '~vuetify/src/styles/settings/_variables.scss'
   
-$slider-thumb-focused-size-increase: 0px !default
-$slider-transition: .1s map-get($transition, 'swing') !default
-$slider-horizontal-right: 0px !default
-$slider-horizontal-left: 4px !default
-$slider-vertical-min-height: 50px !default
+$slider-thumb-focused-size-increase: 0px
+$slider-transition: .1s map-get($transition, 'swing')
+$slider-horizontal-right: 0px
+$slider-horizontal-left: 4px
+$slider-vertical-min-height: 50px
+
+$subtopic-opacity: 0.7
+
+@mixin text-not-wrapped()
+  white-space: nowrap
+  text-overflow: ellipsis
+  overflow: hidden

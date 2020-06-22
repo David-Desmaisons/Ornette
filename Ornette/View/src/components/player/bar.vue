@@ -8,11 +8,11 @@
 
     <position class="position" :player="player" />
 
-    <volume class="volume-control" v-model="player.Volume" :asButton="false" />
-
     <playControl class="play-control" :player="player" />
 
     <playMode class="play-mode" :player="player" borderless />
+    
+    <volume class="volume-control" v-model="player.Volume" :asButton="false" />
   </v-card>
 </template>
 <script>
@@ -81,6 +81,7 @@ $mid-heigth: $height/2
   .volume-control
     grid-area: volume-control
     align-self: center
+    margin-right: 30px
 
   .position
     grid-area: position
@@ -97,5 +98,5 @@ $mid-heigth: $height/2
   .play-mode
     grid-area: play-mode
     align-self: center
-    overflow: hidden 
+    overflow: hidden
 </style>

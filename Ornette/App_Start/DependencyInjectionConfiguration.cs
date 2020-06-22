@@ -12,6 +12,7 @@ using Ornette.Application.Io;
 using Ornette.Application.Model;
 using Ornette.Application.Model.TrackOrder;
 using Ornette.Application.MusicPlayer;
+using Ornette.Application.ViewModel;
 using Ornette.IO;
 using Ornette.UI.ViewModel.Pages;
 
@@ -61,6 +62,7 @@ namespace Ornette.UI
             kernel.Bind<IDispatcher>().ToConstant(new WPFUIDispatcher(window.Dispatcher));
             kernel.Bind<IApplicationLifeCycle>().To<ApplicationLifeCycle>();
             kernel.Bind<MainViewModel>().ToSelf().InSingletonScope();
+            kernel.Bind<PlayerViewModel>().ToSelf().InSingletonScope();
             kernel.Bind<IPlayer>().To<Player>().InSingletonScope();
             kernel.Bind<IIoReader>().To<IoReader>().InSingletonScope();
             kernel.Bind<ITrackOrderLogicFactory>().To<TrackOrderLogicFactory>().InSingletonScope();

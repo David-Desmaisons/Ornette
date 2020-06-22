@@ -1,25 +1,26 @@
 <template>
   <v-app id="main-application">
-    <side-menu v-model="drawer" :items="menu"> </side-menu>
+    <side-menu v-model="drawer" :items="menu" />
 
     <top-menu
       v-model="drawer"
       :title="viewModel.ApplicationInformation.Name"
       :window="viewModel.Window"
-    >
-    </top-menu>
+    />
 
-    <modal v-model="modal" :viewModel="viewModel.Modal"> </modal>
+    <modal v-model="modal" :viewModel="viewModel.Modal" />
 
-    <application-notification ref="notification" @notified="onNotified">
-    </application-notification>
+    <application-notification ref="notification" @notified="onNotified" />
 
     <transition mode="out-in">
-      <router-view :viewModel="viewModel.CurrentViewModel"></router-view>
+      <router-view :viewModel="viewModel.CurrentViewModel" />
     </transition>
 
-    <application-footer :year="viewModel.ApplicationInformation.Year">
-    </application-footer>
+    <application-footer
+      :year="viewModel.ApplicationInformation.Year"
+      :showBar="$route.meta.showBar"
+      :player="player"
+    />
   </v-app>
 </template>
 
@@ -66,6 +67,14 @@ export default {
   methods: {
     /*eslint no-unused-vars: ["error", { "args": "none" }]*/
     onNotified(notification) {}
+  },
+  computed: {
+    player() {
+      const {
+        viewModel: { CurrentViewModel }
+      } = this;
+      return CurrentViewModel === null ? null : CurrentViewModel.Player;
+    }
   },
   watch: {
     "viewModel.Router.Route": function(name) {

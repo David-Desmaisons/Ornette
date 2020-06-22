@@ -2,9 +2,10 @@ import Router from "vue-router";
 import routeDefinitions from "@/routeDefinitions";
 import { toPromise } from "neutronium-vue-resultcommand-topromise";
 
-function route({ name, children, component }) {
+function route({ name, children, component, meta }) {
   return {
     exact: true,
+    meta,
     path: `/${name}`,
     name: name,
     children,

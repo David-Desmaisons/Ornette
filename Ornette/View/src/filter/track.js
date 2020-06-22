@@ -30,6 +30,9 @@ function album(value) {
 }
 
 function albumImage(value, index = 0) {
+  if (value === null) {
+    return null;
+  }
   const { Images } = value;
   return Images.length > 0 ? Images[index].Uri : null;
 }

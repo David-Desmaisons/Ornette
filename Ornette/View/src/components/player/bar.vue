@@ -1,6 +1,6 @@
 <template>
   <v-card class="bar">
-    <cover :album="album" size="54px" />
+    <cover v-if="album" :album="album" size="54px" />
 
     <div v-if="album" class="album-artist">{{ album.Artists | join }}</div>
 
@@ -56,11 +56,12 @@ $mid-heigth: $height/2
   padding: 0 5px 0 0px
   height: $height
   display: grid
-  grid-template-columns: $height auto minmax(140px, 2fr)  minmax(180px,8fr) 1fr auto minmax(90px, 2fr)
+  grid-template-columns: $height minmax(0,3*$height) minmax(140px, 2fr)  minmax(170px,8fr) minmax(0,1fr) auto minmax(80px, 2fr)
   grid-template-rows: $mid-heigth $mid-heigth
   grid-template-areas: "image track play-control position . play-mode volume-control" "image album-artist play-control position . play-mode volume-control"
   font-size: 10px
   grid-gap: 0px 5px
+  min-width: 420px + $height
 
   .album-artist
     @include text-not-wrapped
@@ -96,4 +97,5 @@ $mid-heigth: $height/2
   .play-mode
     grid-area: play-mode
     align-self: center
+    overflow: hidden 
 </style>

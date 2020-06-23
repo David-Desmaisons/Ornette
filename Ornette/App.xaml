@@ -13,6 +13,5 @@
         <ImageSource x:Key="Next">Wpf/Icons/skip-forward.png</ImageSource>
         <Color x:Key="Dark">#272727</Color>
         <Brush x:Key="DarkBrush">#272727</Brush>
-        <Color x:Key="Dark3">#121212</Color>
     </chromiumFxInfra:ChromiumFxWebBrowserApp.Resources>
 </chromiumFxInfra:ChromiumFxWebBrowserApp>

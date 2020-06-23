@@ -59,7 +59,7 @@ namespace Ornette.UI
 
         private void MainWindow_OnStateChanged(object sender, EventArgs e)
         {
-            BorderThickness = (WindowState == WindowState.Maximized) ? new Thickness(2,8,2,8) : new Thickness(2);
+            BorderThickness = (WindowState == WindowState.Maximized) ? new Thickness(8) : new Thickness(2);
         }
     }
 }

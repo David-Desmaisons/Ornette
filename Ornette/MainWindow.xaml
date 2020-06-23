@@ -11,19 +11,14 @@
         Width ="1500"
         Height="940"
         Name="Root"
-        BorderThickness="1"
+        BorderThickness="2"
+        BorderBrush="{StaticResource DarkBrush}"
+        Background="{StaticResource DarkBrush}"
+        StateChanged="MainWindow_OnStateChanged"
         Title="Ornette">
     <i:Interaction.Behaviors>
-        <wpf:Chromeless />
+        <wpf:Chromeless Thickness="2"/>
     </i:Interaction.Behaviors>
-    <Window.Resources>
-        <wpf:BoolToHiddenConverter x:Key="BoolToHidden"/>
-        <ImageSource x:Key="Previous">Wpf/Icons/skip-backward.png</ImageSource>
-        <ImageSource x:Key="Play">Wpf/Icons/play.png</ImageSource>
-        <ImageSource x:Key="Pause">Wpf/Icons/pause.png</ImageSource>
-        <ImageSource x:Key="Stop">Wpf/Icons/stop.png</ImageSource>
-        <ImageSource x:Key="Next">Wpf/Icons/skip-forward.png</ImageSource>
-    </Window.Resources>
     <Grid>
         <wpf:HTMLViewControl x:Name="HtmlView" DebugCommands="{Binding ElementName=Root, Path=SetUp.DebugCommands}" IsDebug="{Binding ElementName=Root, Path=SetUp.Debug}" Uri="{Binding ElementName=Root, Path=SetUp.Uri}"  />
     </Grid>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Windows;
 using Neutronium.BuildingBlocks.Application.Navigation;
 using Neutronium.BuildingBlocks.Application.ViewModels;
 using Neutronium.BuildingBlocks.SetUp;
@@ -54,6 +55,11 @@ namespace Ornette.UI
         {
             base.OnClosed(e);
             this.HtmlView.Dispose();
+        }
+
+        private void MainWindow_OnStateChanged(object sender, EventArgs e)
+        {
+            BorderThickness = (WindowState == WindowState.Maximized) ? new Thickness(2,8,2,8) : new Thickness(2);
         }
     }
 }

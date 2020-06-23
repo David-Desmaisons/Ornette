@@ -2,7 +2,17 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:chromiumFxInfra="clr-namespace:Neutronium.WebBrowserEngine.ChromiumFx;assembly=Neutronium.WebBrowserEngine.ChromiumFx"
+             xmlns:wpf="clr-namespace:Neutronium.WPF;assembly=Neutronium.WPF"
              StartupUri="MainWindow.xaml">
     <chromiumFxInfra:ChromiumFxWebBrowserApp.Resources>
+        <wpf:BoolToHiddenConverter x:Key="BoolToHidden"/>
+        <ImageSource x:Key="Previous">Wpf/Icons/skip-backward.png</ImageSource>
+        <ImageSource x:Key="Play">Wpf/Icons/play.png</ImageSource>
+        <ImageSource x:Key="Pause">Wpf/Icons/pause.png</ImageSource>
+        <ImageSource x:Key="Stop">Wpf/Icons/stop.png</ImageSource>
+        <ImageSource x:Key="Next">Wpf/Icons/skip-forward.png</ImageSource>
+        <Color x:Key="Dark">#272727</Color>
+        <Brush x:Key="DarkBrush">#272727</Brush>
+        <Color x:Key="Dark3">#121212</Color>
     </chromiumFxInfra:ChromiumFxWebBrowserApp.Resources>
 </chromiumFxInfra:ChromiumFxWebBrowserApp>

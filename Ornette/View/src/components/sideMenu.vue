@@ -7,6 +7,7 @@
     @input="drawerChanged"
     :marginTop="0"
     :maxHeight="0"
+    :miniVariantWidth="54"
     app
   >
     <v-divider></v-divider>

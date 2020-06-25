@@ -36,6 +36,7 @@ export default {
 <style lang="sass" scoped>
 .footer
   padding: 0
+  z-index: 10
 
   .footer-text
     margin: 10px

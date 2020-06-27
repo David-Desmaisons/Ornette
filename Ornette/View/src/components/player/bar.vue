@@ -11,7 +11,7 @@
     <playControl class="play-control" :player="player" />
 
     <playMode class="play-mode" :player="player" borderless />
-    
+
     <volume class="volume-control" v-model="player.Volume" :asButton="false" />
   </v-card>
 </template>
@@ -56,7 +56,7 @@ $mid-heigth: $height/2
   padding: 0 5px 0 0px
   height: $height
   display: grid
-  grid-template-columns: $height minmax(0,3*$height) minmax(140px, 2fr)  minmax(170px,8fr) minmax(0,1fr) auto minmax(80px, 2fr)
+  grid-template-columns: $height minmax(0,3*$height) minmax(140px, 2fr)  minmax(170px,8fr) minmax(0,1fr) auto minmax(90px, 2fr)
   grid-template-rows: $mid-heigth $mid-heigth
   grid-template-areas: "image track play-control position . play-mode volume-control" "image album-artist play-control position . play-mode volume-control"
   font-size: 10px
@@ -81,7 +81,7 @@ $mid-heigth: $height/2
   .volume-control
     grid-area: volume-control
     align-self: center
-    margin-right: 30px
+    margin-right: 10px
 
   .position
     grid-area: position

@@ -46,8 +46,3 @@ export default {
   }
 };
 </script>
-
-<style lang="sass">
-$themeColor: orange
-@import '~vue-slider-component/lib/theme/default.scss'
-</style>

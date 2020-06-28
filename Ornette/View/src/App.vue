@@ -90,8 +90,10 @@ export default {
 };
 </script>
 
-<style lang="css">
-#main-application {
-  -webkit-app-region: no-drag;
-}
+<style lang="sass">
+#main-application
+  -webkit-app-region: no-drag
+
+$themeColor: $main-color
+@import '~vue-slider-component/lib/theme/default.scss'
 </style>

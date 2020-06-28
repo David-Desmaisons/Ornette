@@ -4,6 +4,7 @@
       <v-container fluid class="main-container">
         <v-layout>
           <simplePlayer :player="viewModel.Player" />
+          <completePlay :player="viewModel.Player" />
           <tracksList
             :tracks="tracks"
             :currentTrack="currentTrack"
@@ -36,6 +37,7 @@ import albumDisplayer from "@/components/album/albumDisplayer";
 import albumTracks from "@/components/album/albumTracks";
 import tracksList from "@/components/track/tracksList";
 import completeTrack from "@/components/track/completeTrack";
+import completePlay from "@/components/player/playControl/completeCompactPlay";
 
 export default {
   name: "demo",
@@ -48,6 +50,7 @@ export default {
     albumDisplayer,
     tracksList,
     completeTrack,
+    completePlay,
     bar
   },
   methods: {

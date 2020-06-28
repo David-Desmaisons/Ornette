@@ -10,7 +10,7 @@
 
     <playControl class="play-control" :player="player" />
 
-    <playMode class="play-mode" :player="player" borderless />
+    <playMode class="play-mode" :player="player" :borderless="true" />
 
     <volume class="volume-control" v-model="player.Volume" :asButton="false" />
   </v-card>

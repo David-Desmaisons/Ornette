@@ -1,7 +1,8 @@
 <template>
   <v-btn-toggle
-    class="play-mode"
     multiple
+    class="play-mode"
+    :class="{ borderless }"
     :borderless="borderless"
     :value="toogleValue"
     @change="changeToogle"
@@ -44,3 +45,16 @@ export default {
   }
 };
 </script>
+<style lang="sass" scoped>
+.play-mode
+  &.borderless
+    ::v-deep
+      button.v-btn.v-btn--active
+        .v-icon
+          background-color: transparent
+          color: $main-color
+          opacity: 1
+
+    button.v-btn:before
+      background-color: transparent
+</style>

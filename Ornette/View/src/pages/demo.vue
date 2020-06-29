@@ -24,6 +24,8 @@
             @choosen="choosen"
           />
         </v-layout>
+        <bar2 :player="viewModel.Player" />
+
         <bar :player="viewModel.Player" />
       </v-container>
     </v-content>
@@ -33,6 +35,8 @@
 <script>
 import simplePlayer from "@/components/player/simple";
 import bar from "@/components/player/bar";
+import bar2 from "@/components/player/compactBar";
+
 import albumDisplayer from "@/components/album/albumDisplayer";
 import albumTracks from "@/components/album/albumTracks";
 import tracksList from "@/components/track/tracksList";
@@ -51,6 +55,7 @@ export default {
     tracksList,
     completeTrack,
     completePlay,
+    bar2,
     bar
   },
   methods: {

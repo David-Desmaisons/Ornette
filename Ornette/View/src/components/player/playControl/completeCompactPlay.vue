@@ -38,16 +38,6 @@ export default {
     isPlaying() {
       return this.player.State.intValue === 4;
     }
-  },
-  methods: {
-    toggleRandom() {
-      const { player } = this;
-      this.player.RandomPlay = !player.RandomPlay;
-    },
-    toggleRepeat() {
-      const { player } = this;
-      player.AutoReplay = !player.AutoReplay;
-    }
   }
 };
 </script>
@@ -55,6 +45,8 @@ export default {
 .compact
   width: fit-content
   height: fit-content
+  display: flex
+  align-items: center
 
   .mode
     opacity: $subtopic-opacity

@@ -67,7 +67,6 @@ $mid-heigth: $height/2
     align-self: start
     opacity: $subtopic-opacity
 
-
   .track
     @include text-not-wrapped
     margin-top: 5px
@@ -94,12 +93,9 @@ $mid-heigth: $height/2
     justify-self: center
 
   ::v-deep
-    .vue-slider-rail
-      background-color: transparent
-
-    &.volume-control
+    .position
       .vue-slider-rail
-        background-color: $bgColor
+        background-color: $light-main-color
 
     .vue-slider-dot-tooltip
       z-index: 10

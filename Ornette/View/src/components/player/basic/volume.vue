@@ -7,7 +7,7 @@
     @mouseleave.prevent="onHover(false)"
   >
     <v-btn class="volume" icon small @click="mute">
-      <v-icon small :color="color">
+      <v-icon :small="asButton" :x-small="!asButton" :color="color">
         {{ icon }}
       </v-icon>
     </v-btn>
@@ -151,6 +151,7 @@ export default {
   padding-top: 0px
   padding-right: 5px
   transition: all 0.5s ease-in
+
   &.asButton
     border-radius: 4px
     border-style: solid

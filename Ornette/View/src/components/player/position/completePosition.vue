@@ -51,4 +51,7 @@ export default {
   *
     align-self: center
     text-align: center
+
+  .time
+    opacity: $subtopic-opacity
 </style>

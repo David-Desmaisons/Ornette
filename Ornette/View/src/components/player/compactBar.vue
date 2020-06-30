@@ -8,6 +8,8 @@
 
     <position class="position" :player="player" />
 
+    <textualPosition class="textual-position" :player="player" />
+
     <playControl class="play-control" :player="player" />
 
     <volume class="volume-control" v-model="player.Volume" :asButton="false" />
@@ -17,6 +19,8 @@
 import cover from "../cover/cover";
 import volume from "./basic/volume";
 import position from "./position/basicPosition";
+import textualPosition from "./position/textualPosition";
+
 import playControl from "./playControl/completeCompactPlay";
 import { album } from "@/filter/track";
 
@@ -40,7 +44,8 @@ export default {
     cover,
     volume,
     playControl,
-    position
+    position,
+    textualPosition
   }
 };
 </script>
@@ -53,9 +58,9 @@ $mid-heigth: $height/2
   padding: 0 5px 0 0px
   height: $height + $position-height
   display: grid
-  grid-template-columns: $height minmax(0,1fr) minmax(auto, 4fr) minmax(90px, 1fr)
+  grid-template-columns: $height minmax(0,1fr) minmax(auto, 4fr) auto minmax(90px, 1fr)
   grid-template-rows: $position-height $mid-heigth $mid-heigth
-  grid-template-areas: "position position position position" "image track play-control volume-control" "image album-artist play-control volume-control"
+  grid-template-areas: "position position position position position" "image track play-control textual-position volume-control" "image album-artist play-control textual-position volume-control"
   font-size: 10px
   grid-gap: 0px 5px
   min-width: 360px
@@ -83,6 +88,10 @@ $mid-heigth: $height/2
     grid-area: position
     align-self: center
     z-index: 0
+
+  .textual-position
+    grid-area: textual-position
+    align-self: center
 
   .image
     grid-area: image

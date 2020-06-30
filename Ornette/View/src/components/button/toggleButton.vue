@@ -37,6 +37,6 @@ button.mode-button
     color: $main-color
     opacity: 1
 
-  &.v-btn:before
+  &:not(:hover).v-btn--active.v-btn:before
     background-color: transparent
 </style>

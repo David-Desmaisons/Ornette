@@ -3,6 +3,7 @@
     class="slider player"
     :disabled="disabled"
     v-model="player.PositionInSeconds"
+    :key="key"
     :max="player.CurrentTrack | totalSeconds(100)"
     :duration="0.1"
     :dotSize="dotSize"
@@ -42,6 +43,21 @@ export default {
     },
     dotSize() {
       return this.dot && !this.disabled ? 10 : 0;
+    },
+    key() {
+      const {
+        player: { CurrentTrack }
+      } = this;
+      if (CurrentTrack === null) {
+        return "";
+      }
+      const {
+        MetaData: {
+          Name,
+          TrackNumber: { Position }
+        }
+      } = CurrentTrack;
+      return `${Name}-${Position}`;
     }
   }
 };

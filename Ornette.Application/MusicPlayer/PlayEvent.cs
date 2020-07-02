@@ -2,12 +2,12 @@
 {
     public class PlayEvent
     {
-        public int? PositionInSeconds { get; }
+        public decimal? PositionInSeconds { get; }
         public PlayState State { get; }
 
         public static PlayEvent Ready { get; } = new PlayEvent(null, PlayState.Ready);
 
-        public PlayEvent(int? positionInSeconds, PlayState state)
+        public PlayEvent(decimal? positionInSeconds, PlayState state)
         {
             PositionInSeconds = positionInSeconds;
             State = state;

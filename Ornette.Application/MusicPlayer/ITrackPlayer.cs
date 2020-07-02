@@ -14,6 +14,6 @@ namespace Ornette.Application.MusicPlayer
 
         void Pause();
 
-        void SetPositionInSeconds(int value);
+        void SetPositionInSeconds(decimal value);
     }
 }

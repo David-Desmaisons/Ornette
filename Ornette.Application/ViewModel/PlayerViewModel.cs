@@ -12,7 +12,7 @@ namespace Ornette.Application.ViewModel
     {
         private readonly IPlayer _Player;
         private readonly ObservableAsPropertyHelper<Track> _CurrentTrackMapper;
-        private readonly ObservableAsPropertyHelper<int?> _PositionMapper;
+        private readonly ObservableAsPropertyHelper<decimal?> _PositionMapper;
         private readonly ObservableAsPropertyHelper<PlayState> _StateMapper;
 
         public ObservableCollection<Track> Tracks => _Player.Tracks;
@@ -41,7 +41,7 @@ namespace Ornette.Application.ViewModel
             set => _Player.SetCurrentTrack(value);
         }
 
-        public int? PositionInSeconds
+        public decimal? PositionInSeconds
         {
             get => _PositionMapper.Value;
             set

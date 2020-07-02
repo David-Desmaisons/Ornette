@@ -68,7 +68,7 @@ namespace Ornette.Application.Model
             _CurrentTrackSubject.OnNext(nextTrack);
         }
 
-        public void SetPositionInSeconds(int value)
+        public void SetPositionInSeconds(decimal value)
         {
             _TrackPlayer?.SetPositionInSeconds(value);
         }

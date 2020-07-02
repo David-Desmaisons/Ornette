@@ -26,12 +26,12 @@ function totalSeconds(value, defaultValue = 0) {
   return Math.round(TotalSeconds);
 }
 
-function formatTime(value, defaultValue = null) {
+function formatTime(value, defaultValue = null, showMilliseconds = false) {
   if (value === null) {
     return defaultValue;
   }
   const minutes = Math.trunc(value / 60);
-  const seconds = value % 60;
+  const seconds = showMilliseconds ? value % 60 : Math.round(value % 60);
   return `${format(minutes)}:${format(seconds)}`;
 }
 

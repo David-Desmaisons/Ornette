@@ -15,7 +15,7 @@ namespace Ornette.Application.Model
         ObservableCollection<Track> Tracks { get; }
 
         void SetCurrentTrack(Track track);
-        void SetPositionInSeconds(int value);
+        void SetPositionInSeconds(decimal value);
         void Play();
         void Pause();
         void Stop();

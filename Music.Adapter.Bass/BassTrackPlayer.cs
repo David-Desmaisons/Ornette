@@ -93,13 +93,13 @@ namespace Music.Adapter.Bass
             _Timer.Dispose();
         }
 
-        public void SetPositionInSeconds(int value)
+        public void SetPositionInSeconds(decimal value)
         {
             if (State == PlayState.Ready)
             {
                 _Restart = false;
             }
-            var position = Un4seen.Bass.Bass.BASS_ChannelSeconds2Bytes(_Stream, value);
+            var position = Un4seen.Bass.Bass.BASS_ChannelSeconds2Bytes(_Stream, (double)value);
             Un4seen.Bass.Bass.BASS_ChannelSetPosition(_Stream, position);
             EmitEvent();
         }
@@ -109,9 +109,9 @@ namespace Music.Adapter.Bass
             return _EventEmitter.Subscribe(observer);
         }
 
-        private void EmitEvent(int? position = null)
+        private void EmitEvent(decimal? position = null)
         {
-            position = position ?? (int)CurrentPositionInSeconds;
+            position = position ?? (decimal)CurrentPositionInSeconds;
             var @event = new PlayEvent(position, State);
             _EventEmitter.OnNext(@event);
         }

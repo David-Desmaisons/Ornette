@@ -31,7 +31,7 @@ namespace Music.Adapter.Bass
         {
         }
 
-        public void SetPositionInSeconds(int value)
+        public void SetPositionInSeconds(decimal value)
         {
         }
 

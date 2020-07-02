@@ -3,7 +3,7 @@
     <span class="time">{{
       player.PositionInSeconds | formatTime("--:--")
     }}</span>
-    <span>/</span>
+    <span class="separator">/</span>
     <span class="time">{{
       player.CurrentTrack.MetaData.Duration | timeSpan
     }}</span>
@@ -23,7 +23,12 @@ export default {
 <style lang="sass" scoped>
 .complete-position
   opacity: $subtopic-opacity
+  display: flex
 
   *
-    margin: 5px
+    margin-right: 4px
+    align-self: center
+
+  .separator
+    font-size: larger
 </style>

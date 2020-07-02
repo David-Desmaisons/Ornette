@@ -1,6 +1,6 @@
 <template>
   <v-card class="bar">
-    <cover v-if="album" :album="album" size="54px" />
+    <cover v-if="album" :album="album" size="60px" />
 
     <div v-if="album" class="album-artist">{{ album.Artists | join }}</div>
 
@@ -50,24 +50,23 @@ export default {
 };
 </script>
 <style lang="sass" scoped>
-$height: 54px
+$height: 60px
 $position-height: 4px
-$mid-heigth: $height/2
+$mid-heigth: ($height - $position-height)/2
 
 .bar
-  padding: 0 5px 0 0px
   height: $height + $position-height
   display: grid
   grid-template-columns: $height minmax(0,1fr) minmax(auto, 4fr) auto minmax(90px, 1fr)
   grid-template-rows: $position-height $mid-heigth $mid-heigth
-  grid-template-areas: "position position position position position" "image track play-control textual-position volume-control" "image album-artist play-control textual-position volume-control"
+  grid-template-areas: "image position position position position" "image track play-control textual-position volume-control" "image album-artist play-control textual-position volume-control"
   font-size: 10px
-  grid-gap: 0px 5px
   min-width: 360px
 
   .album-artist
     @include text-not-wrapped
     margin-bottom: 5px
+    margin-left: 5px
     grid-area: album-artist
     align-self: start
     opacity: $subtopic-opacity
@@ -75,6 +74,7 @@ $mid-heigth: $height/2
   .track
     @include text-not-wrapped
     margin-top: 5px
+    margin-left: 5px
     grid-area: track
     align-self: end
     font-weight: bold
@@ -83,6 +83,7 @@ $mid-heigth: $height/2
     grid-area: volume-control
     align-self: center
     justify-self: stretch
+    padding-right: 15px
 
   .position
     grid-area: position

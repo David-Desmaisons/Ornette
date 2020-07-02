@@ -1,12 +1,12 @@
 <template>
-  <v-footer class="footer" :fixed="fixed" app height="56">
+  <v-footer class="footer" :fixed="fixed" app height="60">
     <bar class="bar" v-if="showBar" :player="player" />
     <span v-else class="footer-text">&copy; {{ year }} - David Desmaisons</span>
   </v-footer>
 </template>
 
 <script>
-import bar from "@/components/player/bar";
+import bar from "@/components/player/compactBar";
 export default {
   name: "application-footer",
   props: {

@@ -10,6 +10,8 @@ import messages from "./message";
 import Notifications from "vue-notification";
 import iconButton from "./components/button/iconButton";
 import textButton from "./components/button/textButton";
+import fadeTransition from "./components/transition/fade.vue";
+
 import * as filtersTime from "./filter/time";
 import * as filtersTrack from "./filter/track";
 import * as filters from "./filter/utils";
@@ -92,6 +94,7 @@ function install(Vue) {
   Vue.use(Notifications);
   Vue.component("iconButton", iconButton);
   Vue.component("textButton", textButton);
+  Vue.component("fadeTransition", fadeTransition);
   addFilters(Vue, filtersTime);
   addFilters(Vue, filtersTrack);
   addFilters(Vue, filters);

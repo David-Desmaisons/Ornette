@@ -1,7 +1,11 @@
 <template>
   <v-footer class="footer" :fixed="fixed" app height="60">
-    <bar class="bar" v-if="showBar" :player="player" />
-    <span v-else class="footer-text">&copy; {{ year }} - David Desmaisons</span>
+    <fade-transition>
+      <bar class="bar" v-if="showBar" :player="player" />
+      <span v-else class="footer-text"
+        >&copy; {{ year }} - David Desmaisons</span
+      >
+    </fade-transition>
   </v-footer>
 </template>
 

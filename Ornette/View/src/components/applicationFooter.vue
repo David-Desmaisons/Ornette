@@ -2,9 +2,7 @@
   <v-footer class="footer" :fixed="fixed" app height="60">
     <fade-transition>
       <bar class="bar" v-if="showBar" :player="player" />
-      <span v-else class="footer-text"
-        >&copy; {{ year }} - David Desmaisons</span
-      >
+      <span v-else class="footer-text">&copy; {{ year }} - {{ by }}</span>
     </fade-transition>
   </v-footer>
 </template>
@@ -21,6 +19,10 @@ export default {
     year: {
       type: Number,
       required: false
+    },
+    by: {
+      type: String,
+      required: true
     },
     showBar: {
       type: Boolean,

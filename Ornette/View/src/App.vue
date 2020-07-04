@@ -18,6 +18,7 @@
 
     <application-footer
       :year="viewModel.ApplicationInformation.Year"
+      :by="viewModel.ApplicationInformation.MadeBy"
       :showBar="$route.meta.showBar"
       :player="player"
     />

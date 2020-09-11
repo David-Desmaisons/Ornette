@@ -26,11 +26,11 @@
 </template>
 
 <script>
-import sideMenu from "./components/sideMenu";
-import applicationFooter from "./components/applicationFooter";
-import topMenu from "./components/topMenu";
-import modal from "./components/modal";
-import applicationNotification from "./components/applicationNotification";
+import sideMenu from "./components/application/sideMenu";
+import applicationFooter from "./components/application/footer";
+import topMenu from "./components/application/topMenu";
+import modal from "./components/application/modal";
+import applicationNotification from "./components/application/notification";
 import { menu } from "@/neutronium/route";
 
 import routeDefinitions from "./routeDefinitions";

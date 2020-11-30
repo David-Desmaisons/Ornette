@@ -1,10 +1,10 @@
 ﻿using Neutronium.MVVMComponents;
 using Neutronium.MVVMComponents.Relay;
 using Ornette.Application.Model;
-using Ornette.Application.MusicPlayer;
 using ReactiveUI;
 using System.Collections.ObjectModel;
 using System.Reactive.Linq;
+using Ornette.Application.Player;
 
 namespace Ornette.Application.ViewModel
 {

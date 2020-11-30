@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Ornette.Application.MusicPlayer;
+using Ornette.Application.Player;
 
 namespace Ornette.Application.Model
 {

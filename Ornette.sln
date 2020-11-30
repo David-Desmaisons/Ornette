@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Music.Adapter.Bass", "Music
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ornette.IO", "Ornette.IO\Ornette.IO.csproj", "{377A1F75-7719-4A45-97AF-0172A62F081B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2B5A95BB-4402-457C-9417-C7540920D2A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ornette.Application.Tests", "Tests\Ornette.Application.Tests\Ornette.Application.Tests.csproj", "{8986E38E-A6E9-4BC5-A58F-E12495B8CE12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,9 +73,24 @@ Global
 		{377A1F75-7719-4A45-97AF-0172A62F081B}.Release|x64.Build.0 = Release|Any CPU
 		{377A1F75-7719-4A45-97AF-0172A62F081B}.Release|x86.ActiveCfg = Release|Any CPU
 		{377A1F75-7719-4A45-97AF-0172A62F081B}.Release|x86.Build.0 = Release|Any CPU
+		{8986E38E-A6E9-4BC5-A58F-E12495B8CE12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8986E38E-A6E9-4BC5-A58F-E12495B8CE12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8986E38E-A6E9-4BC5-A58F-E12495B8CE12}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8986E38E-A6E9-4BC5-A58F-E12495B8CE12}.Debug|x64.Build.0 = Debug|Any CPU
+		{8986E38E-A6E9-4BC5-A58F-E12495B8CE12}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8986E38E-A6E9-4BC5-A58F-E12495B8CE12}.Debug|x86.Build.0 = Debug|Any CPU
+		{8986E38E-A6E9-4BC5-A58F-E12495B8CE12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8986E38E-A6E9-4BC5-A58F-E12495B8CE12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8986E38E-A6E9-4BC5-A58F-E12495B8CE12}.Release|x64.ActiveCfg = Release|Any CPU
+		{8986E38E-A6E9-4BC5-A58F-E12495B8CE12}.Release|x64.Build.0 = Release|Any CPU
+		{8986E38E-A6E9-4BC5-A58F-E12495B8CE12}.Release|x86.ActiveCfg = Release|Any CPU
+		{8986E38E-A6E9-4BC5-A58F-E12495B8CE12}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8986E38E-A6E9-4BC5-A58F-E12495B8CE12} = {2B5A95BB-4402-457C-9417-C7540920D2A6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {88934522-3494-4CD2-9595-9A29FF6EEB9A}

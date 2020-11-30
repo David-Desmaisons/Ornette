@@ -1,5 +1,5 @@
-﻿using Ornette.Application.MusicPlayer;
-using System;
+﻿using System;
+using Ornette.Application.Player;
 using Un4seen.Bass;
 
 namespace Music.Adapter.Bass

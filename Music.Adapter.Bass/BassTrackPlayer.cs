@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reactive.Subjects;
 using System.Timers;
-using Ornette.Application.MusicPlayer;
+using Ornette.Application.Player;
 
 namespace Music.Adapter.Bass
 {

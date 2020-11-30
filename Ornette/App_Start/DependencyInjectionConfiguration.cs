@@ -11,7 +11,7 @@ using Ornette.Application.Infra;
 using Ornette.Application.Io;
 using Ornette.Application.Model;
 using Ornette.Application.Model.TrackOrder;
-using Ornette.Application.MusicPlayer;
+using Ornette.Application.Player;
 using Ornette.Application.ViewModel;
 using Ornette.IO;
 using Ornette.UI.ViewModel.Pages;

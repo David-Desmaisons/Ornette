@@ -1,4 +1,4 @@
-﻿namespace Ornette.Application.MusicPlayer
+﻿namespace Ornette.Application.Player
 {
     public class PlayEvent
     {

@@ -3,5 +3,7 @@
     public interface IConvertContext
     {
         TargetDestination Destination { get; }
+
+        ISourceDefinition Source { get; }
     }
 }

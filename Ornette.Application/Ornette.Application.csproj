@@ -73,9 +73,11 @@
   <ItemGroup>
     <Compile Include="Converter\ConvertContext.cs" />
     <Compile Include="Converter\ConvertedFile.cs" />
-    <Compile Include="Converter\ConvertUpdate.cs" />
+    <Compile Include="Converter\IConvertUpdate.cs" />
     <Compile Include="Converter\IMusicConverter.cs" />
     <Compile Include="Converter\IMusicConverterBuilder.cs" />
+    <Compile Include="Converter\ISourceDefinition.cs" />
+    <Compile Include="Converter\SourceType.cs" />
     <Compile Include="Converter\TargetDestination.cs" />
     <Compile Include="Infra\IRandomProvider.cs" />
     <Compile Include="Infra\RandomProvider.cs" />

@@ -2,8 +2,12 @@
 
 namespace Ornette.Application.Converter
 {
-    public interface IMusicConverterBuilder
+    public interface IMusicConverterBuilder<in T> where T: ImportCommand
     {
-        IMusicConverter BuildFromDirectory(FolderImporterCommand command);
+        IMusicConverter Build(T command);
+    }
+
+    public interface IMusicConverterBuilder : IMusicConverterBuilder<FolderConverterCommand>
+    {
     }
 }

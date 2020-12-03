@@ -71,11 +71,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converter\Command\FolderImporterCommand.cs" />
+    <Compile Include="Converter\Command\FolderConverterCommand.cs" />
     <Compile Include="Converter\Command\ImportCommand.cs" />
-    <Compile Include="Converter\Command\Mp3Encoding.cs" />
-    <Compile Include="Converter\Command\Mp3EncodingMode.cs" />
-    <Compile Include="Converter\Command\Mp3EncodingQuality.cs" />
+    <Compile Include="Converter\Mp3\Mp3Encoding.cs" />
+    <Compile Include="Converter\Mp3\Mp3EncodingMode.cs" />
+    <Compile Include="Converter\Mp3\Mp3EncodingQuality.cs" />
     <Compile Include="Converter\ConvertedFile.cs" />
     <Compile Include="Converter\IConvertUpdate.cs" />
     <Compile Include="Converter\IMusicConverter.cs" />

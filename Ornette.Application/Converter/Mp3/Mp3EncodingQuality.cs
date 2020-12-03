@@ -1,4 +1,4 @@
-﻿namespace Ornette.Application.Converter.Command
+﻿namespace Ornette.Application.Converter.Mp3
 {
     public enum Mp3EncodingQuality
     {

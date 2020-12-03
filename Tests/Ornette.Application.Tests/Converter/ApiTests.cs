@@ -2,6 +2,7 @@
 using Xunit;
 using Ornette.Application.Converter;
 using Ornette.Application.Converter.Command;
+using Ornette.Application.Converter.Mp3;
 using Xunit.Abstractions;
 
 namespace Ornette.Application.Tests.Converter
@@ -22,8 +23,8 @@ namespace Ornette.Application.Tests.Converter
         public void CheckApi()
         {
             var builder = default(IMusicConverterBuilder);
-            var command = new FolderImporterCommand(_Directory, _DirectoryTarget, Mp3Encoding.HighestStandard);
-            var converter = builder.BuildFromDirectory(command);
+            var command = new FolderConverterCommand(_Directory, _DirectoryTarget, Mp3Encoding.HighestStandard);
+            var converter = builder.Build(command);
             converter.Start().Subscribe(file => _TestOutputHelper.WriteLine(file.Path));
         }
     }

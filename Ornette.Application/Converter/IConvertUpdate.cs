@@ -1,7 +1,9 @@
-﻿namespace Ornette.Application.Converter
+﻿using Ornette.Application.Converter.Command;
+
+namespace Ornette.Application.Converter
 {
     public interface IConvertUpdate
     {
-        IConvertContext Context { get; }
+        ImportCommand ContextCommand { get; }
     }
 }

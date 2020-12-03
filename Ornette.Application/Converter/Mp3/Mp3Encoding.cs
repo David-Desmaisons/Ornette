@@ -1,6 +1,4 @@
-﻿using Ornette.Application.Converter.Command;
-
-namespace Ornette.Application.Converter.Mp3
+﻿namespace Ornette.Application.Converter.Mp3
 {
     public class Mp3Encoding
     {

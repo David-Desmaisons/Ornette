@@ -86,7 +86,7 @@
     <Compile Include="Infra\UrlHelper.cs" />
     <Compile Include="Io\FileExtension.cs" />
     <Compile Include="Io\IIoReader.cs" />
-    <Compile Include="Message\Feedback.cs" />
+    <Compile Include="Message\IFeedback.cs" />
     <Compile Include="Message\MessageType.cs" />
     <Compile Include="Model\Descriptions\AlbumDescriptionBuilder.cs" />
     <Compile Include="Model\Descriptions\TrackPositionDescription.cs" />

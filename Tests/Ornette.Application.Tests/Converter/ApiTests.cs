@@ -22,10 +22,9 @@ namespace Ornette.Application.Tests.Converter
         [Fact]
         public void CheckApi()
         {
-            var builder = default(IMusicConverterBuilder);
+            var converter = default(IMusicConverter);
             var command = new FolderConverterCommand(_Directory, _DirectoryTarget, Mp3Encoding.HighestStandard);
-            var converter = builder.Build(command);
-            converter.Start().Subscribe(file => _TestOutputHelper.WriteLine(file.Path));
+            converter.Convert(command).Subscribe(file => _TestOutputHelper.WriteLine(file.Path));
         }
     }
 }

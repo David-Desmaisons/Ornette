@@ -72,7 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converter\Command\CdConverterCommand.cs" />
-    <Compile Include="Converter\Command\FolderConverterCommand.cs" />
+    <Compile Include="Converter\Command\Mp3ConverterCommand.cs" />
     <Compile Include="Converter\Command\ImportCommand.cs" />
     <Compile Include="Converter\Mp3\Mp3Encoding.cs" />
     <Compile Include="Converter\Mp3\Mp3EncodingMode.cs" />

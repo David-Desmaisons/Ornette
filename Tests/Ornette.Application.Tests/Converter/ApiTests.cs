@@ -22,8 +22,8 @@ namespace Ornette.Application.Tests.Converter
         [Fact]
         public void CheckApi()
         {
-            var converter = default(IMusicConverter<FolderConverterCommand>);
-            var command = new FolderConverterCommand(_Directory, _DirectoryTarget, Mp3Encoding.HighestStandard);
+            var converter = default(IMusicConverter<Mp3ConverterCommand>);
+            var command = new Mp3ConverterCommand(_Directory, _DirectoryTarget, Mp3Encoding.HighestStandard);
             converter.Convert(command).Subscribe(file => _TestOutputHelper.WriteLine(file.Path));
         }
     }

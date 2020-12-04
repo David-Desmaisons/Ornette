@@ -71,6 +71,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter\Command\CdConverterCommand.cs" />
     <Compile Include="Converter\Command\FolderConverterCommand.cs" />
     <Compile Include="Converter\Command\ImportCommand.cs" />
     <Compile Include="Converter\Mp3\Mp3Encoding.cs" />
@@ -85,6 +86,8 @@
     <Compile Include="Infra\UrlHelper.cs" />
     <Compile Include="Io\FileExtension.cs" />
     <Compile Include="Io\IIoReader.cs" />
+    <Compile Include="Message\Feedback.cs" />
+    <Compile Include="Message\MessageType.cs" />
     <Compile Include="Model\Descriptions\AlbumDescriptionBuilder.cs" />
     <Compile Include="Model\Descriptions\TrackPositionDescription.cs" />
     <Compile Include="Model\Descriptions\ImageDescription.cs" />

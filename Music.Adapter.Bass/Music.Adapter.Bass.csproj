@@ -62,9 +62,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BassMusicPlayer.cs" />
-    <Compile Include="BrokenTrackPlayer.cs" />
-    <Compile Include="BassTrackPlayer.cs" />
+    <Compile Include="Player\BassMusicPlayer.cs" />
+    <Compile Include="Player\BrokenTrackPlayer.cs" />
+    <Compile Include="Player\BassTrackPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

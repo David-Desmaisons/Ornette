@@ -1,6 +1,6 @@
 ﻿using System;
 using CommonServiceLocator;
-using Music.Adapter.Bass;
+using Music.Adapter.Bass.Player;
 using Neutronium.BuildingBlocks.Application.LifeCycleHook;
 using Neutronium.BuildingBlocks.ApplicationTools;
 using Neutronium.BuildingBlocks.Wpf.Application;

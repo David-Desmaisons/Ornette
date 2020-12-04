@@ -1,7 +1,7 @@
 ﻿using System;
 using Ornette.Application.Player;
 
-namespace Music.Adapter.Bass
+namespace Music.Adapter.Bass.Player
 {
     public class BrokenTrackPlayer : ITrackPlayer
     {

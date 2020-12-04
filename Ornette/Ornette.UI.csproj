@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Neutronium.WebBrowserEngine.ChromiumFx.1.7.0\build\Neutronium.WebBrowserEngine.ChromiumFx.props" Condition="Exists('..\packages\Neutronium.WebBrowserEngine.ChromiumFx.1.7.0\build\Neutronium.WebBrowserEngine.ChromiumFx.props')" />
   <Import Project="..\packages\Neutronium.JavascriptFramework.Vue.1.7.0\build\Neutronium.JavascriptFramework.Vue.props" Condition="Exists('..\packages\Neutronium.JavascriptFramework.Vue.1.7.0\build\Neutronium.JavascriptFramework.Vue.props')" />

@@ -2,7 +2,7 @@
 using Ornette.Application.Player;
 using Un4seen.Bass;
 
-namespace Music.Adapter.Bass
+namespace Music.Adapter.Bass.Player
 {
     public class BassMusicPlayer : IMusicPlayer
     {

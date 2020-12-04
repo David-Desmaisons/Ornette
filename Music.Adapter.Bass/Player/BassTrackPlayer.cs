@@ -3,7 +3,7 @@ using System.Reactive.Subjects;
 using System.Timers;
 using Ornette.Application.Player;
 
-namespace Music.Adapter.Bass
+namespace Music.Adapter.Bass.Player
 {
     public class BassTrackPlayer : ITrackPlayer
     {

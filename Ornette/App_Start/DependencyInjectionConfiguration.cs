@@ -1,5 +1,6 @@
 ﻿using System;
 using CommonServiceLocator;
+using Music.Adapter.Bass.Core;
 using Music.Adapter.Bass.Player;
 using Neutronium.BuildingBlocks.Application.LifeCycleHook;
 using Neutronium.BuildingBlocks.ApplicationTools;
@@ -67,7 +68,9 @@ namespace Ornette.UI
             kernel.Bind<IIoReader>().To<IoReader>().InSingletonScope();
             kernel.Bind<ITrackOrderLogicFactory>().To<TrackOrderLogicFactory>().InSingletonScope();
             kernel.Bind<IRandomProvider>().To<RandomProvider>();
-            kernel.Bind<IMusicPlayer>().ToMethod(_ => BassMusicPlayer.Init(BassConfiguration.Email, BassConfiguration.Password)).InSingletonScope();
+            kernel.Bind<IMusicPlayer>().To<BassMusicPlayer>().InSingletonScope();
+            kernel.Bind<ISessionManager>().ToMethod(_ => new SessionManager(BassConfiguration.Email, BassConfiguration.Password)).InSingletonScope();
+
         }
     }
 }

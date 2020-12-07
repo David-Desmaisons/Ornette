@@ -2,9 +2,9 @@
 
 namespace Ornette.Application.Converter.Command
 {
-    public class Mp3ConverterCommand: ImportCommand
+    public class Mp3FolderConverterCommand: ImportCommand
     {
-        public Mp3ConverterCommand(string source, string target, Mp3Encoding targetEncoding)
+        public Mp3FolderConverterCommand(string source, string target, Mp3Encoding targetEncoding)
         {
             TargetEncoding = targetEncoding;
             Target = target;

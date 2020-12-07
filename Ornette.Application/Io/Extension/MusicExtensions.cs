@@ -1,8 +1,6 @@
-﻿using System.Linq;
-
-namespace Ornette.Application.Io
+﻿namespace Ornette.Application.Io.Extension
 {
-    public static class FileExtension
+    public static class MusicExtensions
     {
         public static string Wv => ".wv";
         public static string Flac => ".flac";
@@ -17,7 +15,7 @@ namespace Ornette.Application.Io
         public static string Wav => ".wav";
         public static string Wma => ".wma";
 
-        public static readonly string[] AllExtensions = {
+        public static readonly string[] All = {
             Mp3,
             Mp2,
             Wma,
@@ -31,5 +29,14 @@ namespace Ornette.Application.Io
             Wav,
             Wv
         };
+
+        public static string[] Convertible = {
+            Ape,
+            Flac,
+            Ogg,
+            Wav,
+            Wv
+        };
+
     }
 }

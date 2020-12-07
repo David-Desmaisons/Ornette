@@ -72,8 +72,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converter\Command\CdConverterCommand.cs" />
-    <Compile Include="Converter\Command\Mp3ConverterCommand.cs" />
+    <Compile Include="Converter\Command\Mp3CueConverterCommand.cs" />
+    <Compile Include="Converter\Command\Mp3TracksConverterCommand.cs" />
+    <Compile Include="Converter\Command\Mp3FolderConverterCommand.cs" />
     <Compile Include="Converter\Command\ImportCommand.cs" />
+    <Compile Include="Converter\Cue\CueData.cs" />
     <Compile Include="Converter\Mp3\Mp3Encoding.cs" />
     <Compile Include="Converter\Mp3\Mp3EncodingMode.cs" />
     <Compile Include="Converter\Mp3\Mp3EncodingQuality.cs" />
@@ -84,7 +87,11 @@
     <Compile Include="Infra\IRandomProvider.cs" />
     <Compile Include="Infra\RandomProvider.cs" />
     <Compile Include="Infra\UrlHelper.cs" />
-    <Compile Include="Io\FileExtension.cs" />
+    <Compile Include="Io\Extension\FileExtensions.cs" />
+    <Compile Include="Io\FolderContext.cs" />
+    <Compile Include="Io\Extension\ZippedExtensions.cs" />
+    <Compile Include="Io\Extension\ImageExtensions.cs" />
+    <Compile Include="Io\Extension\MusicExtensions.cs" />
     <Compile Include="Io\IIoReader.cs" />
     <Compile Include="Message\IFeedback.cs" />
     <Compile Include="Message\MessageType.cs" />

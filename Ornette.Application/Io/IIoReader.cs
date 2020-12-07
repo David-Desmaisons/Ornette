@@ -7,6 +7,8 @@ namespace Ornette.Application.Io
     {
         IEnumerable<Track> GetDirectoryTracks(string path);
 
+        FolderContext GetFolderContext(string path);
+
         Track GetTrack(string path);
     }
 }

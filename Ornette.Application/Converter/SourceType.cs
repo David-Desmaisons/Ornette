@@ -3,6 +3,7 @@
     public enum SourceType
     {
         CD,
-        Directory
+        Directory,
+        Track
     }
 }

@@ -3,7 +3,6 @@ using Ornette.Application.Converter.Command;
 using System;
 using System.Threading;
 using Music.Adapter.Bass.Core;
-using Un4seen.Bass;
 
 namespace Music.Adapter.Bass.Converter
 {

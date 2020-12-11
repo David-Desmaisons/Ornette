@@ -15,7 +15,6 @@ namespace Music.Adapter.Bass.Converter
             _SessionManager = sessionManager;
         }
 
-
         public IObservable<ConvertedFile> Convert(Mp3FolderConverterCommand command, CancellationToken token = default(CancellationToken), IProgress<IConvertUpdate> progress = null)
         {
             _SessionManager.Restart();

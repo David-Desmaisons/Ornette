@@ -9,6 +9,7 @@
         public static string Tiff => ".tiff";
         public static string Tif => ".tif";
         public static string Gif => ".gif";
+        public static string Jfif => ".jfif";
 
         public static readonly string[] All = {
             Jpg,
@@ -17,7 +18,8 @@
             Png,
             Tiff,
             Tif,
-            Gif
+            Gif,
+            Jfif
         };
     }
 }

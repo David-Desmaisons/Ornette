@@ -34,6 +34,9 @@
     <Reference Include="DynamicData, Version=6.14.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DynamicData.6.14.8\lib\net461\DynamicData.dll</HintPath>
     </Reference>
+    <Reference Include="MoreCollection, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MoreCollection.2.0.1\lib\net45\MoreCollection.dll</HintPath>
+    </Reference>
     <Reference Include="Neutronium.BuildingBlocks.ApplicationTools, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Neutronium.BuildingBlocks.ApplicationTools.1.2.0\lib\net472\Neutronium.BuildingBlocks.ApplicationTools.dll</HintPath>
     </Reference>
@@ -89,6 +92,7 @@
     <Compile Include="Infra\RandomProvider.cs" />
     <Compile Include="Infra\UrlHelper.cs" />
     <Compile Include="Io\Extension\FileExtensions.cs" />
+    <Compile Include="Io\Extension\FileType.cs" />
     <Compile Include="Io\FolderContext.cs" />
     <Compile Include="Io\Extension\ZippedExtensions.cs" />
     <Compile Include="Io\Extension\ImageExtensions.cs" />

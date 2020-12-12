@@ -30,12 +30,22 @@
             Wv
         };
 
-        public static string[] Convertible = {
+        public static string[] Lossless = {
             Ape,
             Flac,
             Ogg,
             Wav,
             Wv
+        };
+
+        public static readonly string[] Lossy = {
+            Mp3,
+            Mp2,
+            Wma,
+            M4A,
+            Aac,
+            Mp4,
+            Aiff
         };
 
     }

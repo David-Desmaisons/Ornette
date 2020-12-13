@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using MoreCollection.Extensions;
 
@@ -11,11 +12,16 @@ namespace Ornette.Application.Io.Extension
         public static string Xml => ".xml";
         public static string Pdf => ".pdf";
 
-        private static readonly IDictionary<string, FileType> _Dictionary = new Dictionary<string, FileType>();
+        private static readonly IDictionary<string, FileType> _ExtensionToType = new Dictionary<string, FileType>();
+        private static readonly IDictionary<FileType, string[]> _TypeToExtension = new Dictionary<FileType, string[]>();
 
-        private static void Associate(string fileName, FileType fileType) => _Dictionary.Add(fileName, fileType);
+        private static void Associate(string fileName, FileType fileType) => Associate(new [] { fileName }, fileType);
 
-        private static void Associate(string[] fileNames, FileType fileType) => fileNames.ForEach(music => Associate(music, fileType));
+        private static void Associate(string[] fileNames, FileType fileType)
+        {
+            fileNames.ForEach(music => _ExtensionToType.Add(music, fileType));
+            _TypeToExtension.Add(fileType, fileNames);
+        }
 
         static FileExtensions()
         {
@@ -37,7 +43,16 @@ namespace Ornette.Application.Io.Extension
 
         public static FileType GetFileTypeFromFileExtension(string extension)
         {
-            return _Dictionary.GetOrDefault(extension.ToLower(), FileType.Other);
+            return _ExtensionToType.GetOrDefault(extension.ToLower(), FileType.Other);
+        }
+
+        public static string[] GetExtensions(FileType extension)
+        {
+            if (extension == FileType.Other)
+            {
+                throw new ArgumentOutOfRangeException(nameof(extension));
+            }
+            return _TypeToExtension[extension];
         }
     }
 }

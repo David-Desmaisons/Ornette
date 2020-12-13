@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using MoreCollection.Extensions;
 using Ornette.Application.Infra;
 using Ornette.Application.Io;
 using Ornette.Application.Io.Extension;
 using Ornette.Application.Model;
 using Ornette.Application.Model.Descriptions;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using TagLib;
 
 namespace Ornette.IO
@@ -19,15 +20,15 @@ namespace Ornette.IO
 
         public FolderContext GetFolderContext(string path)
         {
-            var tracks = GetDirectoryTracks(path);
-            var images = GetByExtension(path, ImageExtensions.All).ToArray();
-            var cue = Directory.GetFiles(path, $"*{FileExtensions.Cue}");
             var children = new Dictionary<string, FolderContext>();
-            foreach (var directory in Directory.GetDirectories(path))
-            {
-                children.Add(directory, GetFolderContext(directory));
-            }
-            return new FolderContext(path, children, tracks.ToArray(), images, cue); ;
+            Directory.GetDirectories(path)
+                .ForEach(directory => children.Add(directory, GetFolderContext(directory)));
+
+            var fileByType = new Dictionary<FileType, string[]>();
+            Directory.GetFiles(path)
+                    .GroupBy(FileExtensions.GetFileTypeFromFileName)
+                    .ForEach(g => fileByType.Add(g.Key, g.ToArray()));
+            return new FolderContext(path, children, fileByType);
         }
 
         private static IEnumerable<string> GetByExtension(string path, IEnumerable<string> extensions)
@@ -66,7 +67,7 @@ namespace Ornette.IO
         private static ImageDescription GetImage(IPicture picture)
         {
             var url = UrlHelper.BuildFromByteArray(picture.MimeType, picture.Data.Data);
-            return new ImageDescription(url, picture.Filename, (ImageType) picture.Type);
+            return new ImageDescription(url, picture.Filename, (ImageType)picture.Type);
         }
 
         private static string[] GetArtists(Tag tag)

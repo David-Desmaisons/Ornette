@@ -1,36 +1,27 @@
-﻿using System;
+﻿using Ornette.Application.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ornette.Application.Model;
+using MoreCollection.Extensions;
+using Ornette.Application.Io.Extension;
 
 namespace Ornette.Application.Io
 {
     public class FolderContext
     {
         private readonly Dictionary<string, FolderContext> _Children;
+        private readonly Dictionary<FileType, string[]> _Files;
 
-        public FolderContext(string path, Dictionary<string, FolderContext> children,Track[] tracks, string[] images, string[] cues)
+        public FolderContext(string path, Dictionary<string, FolderContext> children, Dictionary<FileType, string[]> files)
         {
-            Images = images;
-            Cues = cues;
             _Children = children;
+            _Files = files;
             Path = path;
-            Tracks = tracks;
         }
 
-        public string Path { get;  }
-        public string[] Images { get; }
-        public string[] Cues { get;  }
-        public Track[] Tracks { get; }
-
+        public string Path { get; }
         public IReadOnlyDictionary<string, FolderContext> Children => _Children;
-        public IEnumerable<string> AllImages => Collect(ctx => ctx.Images);
-        public IEnumerable<Track> AllTracks => Collect(ctx => ctx.Tracks);
-        public IEnumerable<string> AllCues => Collect(ctx => ctx.Cues);
-
-        private IEnumerable<T> Collect<T>(Func<FolderContext, IEnumerable<T>> extractor)
-        {
-            return extractor(this).Concat(_Children.Values.SelectMany(v => v.Collect<T>(extractor)));
-        }
+        public IEnumerable<string> Get(FileType fileType) => _Files.GetOrDefault(fileType) ?? Enumerable.Empty<string>();
+        public IEnumerable<string> GetAll(FileType fileType) => Get(fileType).Concat(_Children.Values.SelectMany(v => v.Get(fileType)));
     }
-} 
+}

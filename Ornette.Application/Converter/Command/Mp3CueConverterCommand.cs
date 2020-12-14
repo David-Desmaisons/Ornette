@@ -4,7 +4,7 @@ using Ornette.Application.Model;
 
 namespace Ornette.Application.Converter.Command
 {
-    public class Mp3CueConverterCommand: ImportCommand
+    public class Mp3CueConverterCommand: Mp3ConverterCommand
     {
         public Mp3CueConverterCommand(Track[] source, CueData cue, string target, Mp3Encoding targetEncoding)
         {
@@ -17,7 +17,7 @@ namespace Ornette.Application.Converter.Command
         public Track[] Source { get; }
         public CueData Cue { get; }
         public string Target { get; }
-        public Mp3Encoding TargetEncoding { get; }
+        public override Mp3Encoding TargetEncoding { get; }
         public override SourceType SourceType => SourceType.Track;
     }
 }

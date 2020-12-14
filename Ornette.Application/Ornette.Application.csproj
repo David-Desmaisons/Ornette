@@ -75,11 +75,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converter\Command\CdConverterCommand.cs" />
+    <Compile Include="Converter\Command\Mp3ConverterCommand.cs" />
     <Compile Include="Converter\Command\Mp3CueConverterCommand.cs" />
     <Compile Include="Converter\Command\Mp3TracksConverterCommand.cs" />
     <Compile Include="Converter\Command\Mp3FolderConverterCommand.cs" />
     <Compile Include="Converter\Command\ImportCommand.cs" />
     <Compile Include="Converter\Cue\CueData.cs" />
+    <Compile Include="Converter\IConvertStrategy.cs" />
     <Compile Include="Converter\Implementation\Mp3FolderConverter.cs" />
     <Compile Include="Converter\Mp3\Mp3Encoding.cs" />
     <Compile Include="Converter\Mp3\Mp3EncodingMode.cs" />

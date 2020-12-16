@@ -79,9 +79,10 @@
     <Compile Include="Converter\Command\Mp3CueConverterCommand.cs" />
     <Compile Include="Converter\Command\Mp3TracksConverterCommand.cs" />
     <Compile Include="Converter\Command\Mp3FolderConverterCommand.cs" />
-    <Compile Include="Converter\Command\ImportCommand.cs" />
+    <Compile Include="Converter\Command\ConvertCommand.cs" />
     <Compile Include="Converter\Cue\CueData.cs" />
     <Compile Include="Converter\Implementation\ConverterDispatcher.cs" />
+    <Compile Include="Converter\Implementation\GenericConverter.cs" />
     <Compile Include="Converter\Strategy\IConverterDispatcher.cs" />
     <Compile Include="Converter\Strategy\IConvertFolderStrategy.cs" />
     <Compile Include="Converter\Implementation\Mp3FolderConverter.cs" />

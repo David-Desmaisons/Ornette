@@ -2,7 +2,7 @@
 
 namespace Ornette.Application.Converter.Command
 {
-    public class CdConverterCommand : ImportCommand
+    public class CdConverterCommand : ConvertCommand
     {
         public CdConverterCommand(string target, Mp3Encoding targetEncoding)
         {

@@ -10,14 +10,12 @@ namespace Ornette.Application.Converter.Implementation
     {
         private readonly IIoReader _IoReader;
         private readonly IConvertFolderStrategy _ConvertStrategy;
-        private readonly IMusicConverter<Mp3TracksConverterCommand> _TracksConverter;
-        private readonly IMusicConverter<Mp3CueConverterCommand> _CueConverter;
+        private readonly IMusicConverter<ConvertCommand> _Converter;
 
-        public Mp3FolderConverter(IIoReader ioReader, IConvertFolderStrategy convertStrategy, IMusicConverter<Mp3TracksConverterCommand> tracksConverter, IMusicConverter<Mp3CueConverterCommand> cueConverter)
+        public Mp3FolderConverter(IIoReader ioReader, IConvertFolderStrategy convertStrategy, IMusicConverter<ConvertCommand> converter)
         {
             _IoReader = ioReader;
-            _TracksConverter = tracksConverter;
-            _CueConverter = cueConverter;
+            _Converter = converter;
             _ConvertStrategy = convertStrategy;
         }
 
@@ -25,7 +23,7 @@ namespace Ornette.Application.Converter.Implementation
             IProgress<IConvertUpdate> progress = null)
         {
             var folderContext = _IoReader.GetFolderContext(command.Source);
-            var converterDispatcher = new ConverterDispatcher(_TracksConverter, _CueConverter, command.Target, command.TargetEncoding);
+            var converterDispatcher = new ConverterDispatcher(_Converter, command.Target, command.TargetEncoding);
             _ConvertStrategy.IntrospectFolder(folderContext, converterDispatcher, progress, token);
             return converterDispatcher.Convert(token, progress);
         }

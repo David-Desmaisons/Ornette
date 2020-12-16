@@ -2,7 +2,7 @@
 
 namespace Ornette.Application.Converter.Command
 {
-    public abstract class Mp3ConverterCommand: ImportCommand
+    public abstract class Mp3ConverterCommand: ConvertCommand
     {
         public abstract Mp3Encoding TargetEncoding { get; }
     }

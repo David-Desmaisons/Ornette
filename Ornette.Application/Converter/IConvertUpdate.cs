@@ -5,6 +5,6 @@ namespace Ornette.Application.Converter
 {
     public interface IConvertUpdate : IFeedback
     {
-        ImportCommand ContextCommand { get; }
+        ConvertCommand ContextCommand { get; }
     }
 }

@@ -5,7 +5,7 @@ namespace Ornette.Application.Converter
 {
     public class ConvertedFile
     {
-        public ConvertedFile(string path, TrackDescription description, ImportCommand context)
+        public ConvertedFile(string path, TrackDescription description, ConvertCommand context)
         {
             Path = path;
             Context = context;
@@ -14,6 +14,6 @@ namespace Ornette.Application.Converter
 
         public string Path { get; }
         public TrackDescription Description { get; }
-        public ImportCommand Context { get; }
+        public ConvertCommand Context { get; }
     }
 }

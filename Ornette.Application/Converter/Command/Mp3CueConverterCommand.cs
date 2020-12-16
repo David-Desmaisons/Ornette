@@ -6,7 +6,7 @@ namespace Ornette.Application.Converter.Command
 {
     public class Mp3CueConverterCommand: Mp3ConverterCommand
     {
-        public Mp3CueConverterCommand(Track[] source, CueData cue, string target, Mp3Encoding targetEncoding)
+        public Mp3CueConverterCommand(Track source, CueData cue, string target, Mp3Encoding targetEncoding)
         {
             TargetEncoding = targetEncoding;
             Cue = cue;
@@ -14,7 +14,7 @@ namespace Ornette.Application.Converter.Command
             Target = target;
         }
 
-        public Track[] Source { get; }
+        public Track Source { get; }
         public CueData Cue { get; }
         public string Target { get; }
         public override Mp3Encoding TargetEncoding { get; }

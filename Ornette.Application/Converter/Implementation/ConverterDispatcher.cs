@@ -7,13 +7,13 @@ using Ornette.Application.Model;
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Threading;
+using System.IO;
 
 namespace Ornette.Application.Converter.Implementation
 {
     public class ConverterDispatcher : IConverterDispatcher
     {
         private readonly IMusicConverter<ConvertCommand> _Converter;
-
         private readonly string _Target;
         private readonly Mp3Encoding _Encoding;
         private readonly List<ConvertCommand> _Commands = new List<ConvertCommand>();
@@ -33,9 +33,10 @@ namespace Ornette.Application.Converter.Implementation
             EnqueueCommand(new Mp3CueConverterCommand(source, cue, _Target, _Encoding));
         }
 
-        void IConverterDispatcher.AddForTracksConversion(Track[] source)
+        void IConverterDispatcher.AddForTracksConversion(Track[] source, string relativeDirectory)
         {
-            EnqueueCommand(new Mp3TracksConverterCommand(source, _Target, _Encoding));
+            var path = (relativeDirectory == null) ? _Target : Path.Combine(_Target,relativeDirectory);
+            EnqueueCommand(new Mp3TracksConverterCommand(source, path, _Encoding));
         }
 
         private void EnqueueCommand(ConvertCommand command) => _Commands.Add(command);

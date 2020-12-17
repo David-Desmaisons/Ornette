@@ -7,7 +7,7 @@ namespace Ornette.Application.Converter.Strategy
     {
         void AddForCueConversion(Track source, CueData cue);
 
-        void AddForTracksConversion(Track[] source);
+        void AddForTracksConversion(Track[] source, string relativeDirectory=null);
 
         void OnEnd();
     }

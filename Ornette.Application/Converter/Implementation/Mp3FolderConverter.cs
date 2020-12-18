@@ -3,6 +3,8 @@ using Ornette.Application.Converter.Strategy;
 using Ornette.Application.Io;
 using System;
 using System.Threading;
+using System.Windows.Forms;
+using Ornette.Application.Message;
 
 namespace Ornette.Application.Converter.Implementation
 {
@@ -24,7 +26,9 @@ namespace Ornette.Application.Converter.Implementation
         {
             var folderContext = _IoReader.GetFolderContext(command.Source);
             var converterDispatcher = new ConverterDispatcher(_Converter, command.Target, command.TargetEncoding);
-            _ConvertStrategy.IntrospectFolder(folderContext, converterDispatcher, progress, token);
+
+            var strategyProgress = new Progress<Feedback>(f => progress?.Report(new ConvertUpdate(f,command)));
+            _ConvertStrategy.IntrospectFolder(folderContext, converterDispatcher, strategyProgress, token);
             return converterDispatcher.Convert(token, progress);
         }
     }

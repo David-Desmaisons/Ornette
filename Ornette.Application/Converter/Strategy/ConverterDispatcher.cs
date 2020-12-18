@@ -2,14 +2,13 @@
 using Ornette.Application.Converter.Command;
 using Ornette.Application.Converter.Cue;
 using Ornette.Application.Converter.Mp3;
-using Ornette.Application.Converter.Strategy;
 using Ornette.Application.Model;
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Threading;
 using System.IO;
 
-namespace Ornette.Application.Converter.Implementation
+namespace Ornette.Application.Converter.Strategy
 {
     public class ConverterDispatcher : IConverterDispatcher
     {

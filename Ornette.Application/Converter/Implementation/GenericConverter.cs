@@ -20,7 +20,7 @@ namespace Ornette.Application.Converter.Implementation
         private void Register<T>(IMusicConverter<T> converter) where T : ConvertCommand 
             => _Converters[typeof(T)] = (command, token, progress) => converter.Convert(command as T, token, progress);
 
-        public IObservable<ConvertedFile> Convert(ConvertCommand command, CancellationToken token = default, IProgress<IConvertUpdate> progress = null)
+        public IObservable<ConvertedFile> Convert(ConvertCommand command, CancellationToken token, IProgress<IConvertUpdate> progress)
         {
             _Converters.TryGetValue(command.GetType(), out var converter);
             return converter?.Invoke(command, token, progress);

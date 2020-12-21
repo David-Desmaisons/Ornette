@@ -2,8 +2,8 @@
 using Ornette.Application.Converter.Strategy;
 using Ornette.Application.Io;
 using System;
+using System.Reactive.Linq;
 using System.Threading;
-using System.Windows.Forms;
 using Ornette.Application.Message;
 
 namespace Ornette.Application.Converter.Implementation
@@ -29,7 +29,9 @@ namespace Ornette.Application.Converter.Implementation
 
             var strategyProgress = new Progress<Feedback>(f => progress?.Report(new ConvertUpdate(f,command)));
             _ConvertStrategy.IntrospectFolder(folderContext, converterDispatcher, strategyProgress, token);
-            return converterDispatcher.Convert(token, progress);
+            return converterDispatcher
+                        .Convert(token, progress)
+                        .Select(convertedFile => new ConvertedFile(convertedFile.Path, convertedFile.Description, command));
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Ornette.IO.Tests
+namespace Ornette.IO.Implementation.Tests
 {
     public class IoReaderTest
     {

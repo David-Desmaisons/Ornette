@@ -1,15 +1,15 @@
-﻿using MoreCollection.Extensions;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using MoreCollection.Extensions;
 using Ornette.Application.Infra;
 using Ornette.Application.Io;
 using Ornette.Application.Io.Extension;
 using Ornette.Application.Model;
 using Ornette.Application.Model.Descriptions;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using TagLib;
 
-namespace Ornette.IO
+namespace Ornette.IO.Implementation
 {
     public class IoReader : IIoReader
     {

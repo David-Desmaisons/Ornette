@@ -88,6 +88,9 @@
     <Compile Include="Integration\Cue\CueSheet.cs" />
     <Compile Include="Integration\Cue\CueTrack.cs" />
     <Compile Include="Integration\Cue\ICueParser.cs" />
+    <Compile Include="Integration\Cue\Parser\IParserContext.cs" />
+    <Compile Include="Integration\Cue\Parser\SheetParserContext.cs" />
+    <Compile Include="Integration\Cue\Parser\TrackParserContext.cs" />
     <Compile Include="Message\Feedback.cs" />
     <Compile Include="Converter\Strategy\ConverterDispatcher.cs" />
     <Compile Include="Converter\Implementation\GenericConverter.cs" />

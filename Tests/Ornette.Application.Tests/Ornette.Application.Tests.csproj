@@ -81,9 +81,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Integration\Cue\Resources\Andrew Hill - Andrew!!!.cue" />
-    <None Include="Integration\Cue\Resources\Evolution.cue" />
-    <None Include="Integration\Cue\Resources\Tim Berne - Fractured Fairy Tales.cue" />
+    <None Include="Integration\Cue\Resources\Andrew Hill - Andrew!!!.cue">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Integration\Cue\Resources\Evolution.cue">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Integration\Cue\Resources\Tim Berne - Fractured Fairy Tales.cue">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

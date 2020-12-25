@@ -5,7 +5,7 @@ namespace Ornette.Application.Integration.Cue.Parser
 {
     public class TrackBuilder : ICueElementBuilder
     {
-        private readonly FileBuilder _FileBuilder;
+        private readonly ICueElementAggregator<CueTrack> _FileBuilder;
         private readonly int _Number;
         private readonly string _Type;
         private readonly IList<TimeSpan> _Index = new List<TimeSpan>();
@@ -17,38 +17,37 @@ namespace Ornette.Application.Integration.Cue.Parser
         private TimeSpan? _PostGap;
         private string _Isrc;
 
-        public TrackBuilder(FileBuilder fileBuilder, int number, string type)
+        public TrackBuilder(ICueElementAggregator<CueTrack> fileBuilder, int number, string type)
         {
             _FileBuilder = fileBuilder;
             _Number = number;
             _Type = type;
         }
 
-        public ICueElementBuilder Parse(string command, string[] parameters)
+        public ICueElementBuilder Parse(CueInstruction command)
         {
-            switch (command)
+            switch (command.Command)
             {
                 case CueCommand.Title:
-                    _Title = parameters[0];
+                    _Title = command.Parameters[0];
                     return this;
 
                 case CueCommand.Performer:
-                    _Performer = parameters[0];
+                    _Performer = command.Parameters[0];
                     return this;
 
                 case CueCommand.SongWriter:
-                    _Songwriter = parameters[0];
+                    _Songwriter = command.Parameters[0];
                     return this;
 
                 case CueCommand.Index:
-                    ParseIndex(_Index, parameters);
+                    ParseIndex(_Index, command.Parameters);
                     return this;
 
                 case CueCommand.File:
                 case CueCommand.Track:
-                    var track = Build();
-                    _FileBuilder.AddTrack(track);
-                    return _FileBuilder.Parse(command, parameters);
+                    AddBuiltTrack();
+                    return _FileBuilder.Parse(command);
 
                 default:
                     return this;
@@ -57,19 +56,19 @@ namespace Ornette.Application.Integration.Cue.Parser
 
         public ICueElementBuilder End()
         {
-            AddBuildTrack();
+            AddBuiltTrack();
             return _FileBuilder.End();
         }
 
-        private void AddBuildTrack()
+        private void AddBuiltTrack()
         {
             var track = Build();
-            _FileBuilder.AddTrack(track);
+            _FileBuilder.AddChild(track);
         }
 
         private CueTrack Build()
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         private static void ParseIndex(IList<TimeSpan> indexes, string[] parameters)

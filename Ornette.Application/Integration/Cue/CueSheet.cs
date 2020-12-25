@@ -4,10 +4,19 @@ namespace Ornette.Application.Integration.Cue
 {
     public class CueSheet
     {
-        public string Songwriter { get; set; }
-        public string Performer { get; set; }
-        public string Title { get; set; }
-        public IDictionary<string, List<string>> Remarks { get; } = new Dictionary<string, List<string>>();
-        public List<CueFile> Files = new List<CueFile>();
+        public CueSheet(string performer, string title, string songwriter, List<CueFile> files, IDictionary<string, List<string>> remarks)
+        {
+            Songwriter = songwriter;
+            Files = files;
+            Remarks = remarks;
+            Title = title;
+            Performer = performer;
+        }
+
+        public string Songwriter { get; }
+        public string Performer { get; }
+        public string Title { get; }
+        public IDictionary<string, List<string>> Remarks { get; }
+        public List<CueFile> Files { get; }
     }
 }

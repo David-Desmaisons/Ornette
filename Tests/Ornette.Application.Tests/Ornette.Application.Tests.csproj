@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Converter\ApiTests.cs" />
     <Compile Include="Integration\Cue\CueParserTest.cs" />
+    <Compile Include="Integration\Cue\Parser\CueInstructionTest.cs" />
     <Compile Include="Io\Extension\FileExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using MoreCollection.Extensions;
+using System.Linq;
+using Ornette.Application.Integration.Cue.Parser;
 
 namespace Ornette.Application.Integration.Cue
 {
@@ -7,14 +8,11 @@ namespace Ornette.Application.Integration.Cue
     {
         public CueSheet Parse(IEnumerable<string> content)
         {
-            var result = new CueSheet();
-            content.ForEach(line => Parse(line, result));
-            return result;
-        }
-
-        private static void Parse(string content, CueSheet sheet)
-        {
-
+            var result = new SheetBuilder();
+            content.Select(CueInstruction.FromLine)
+                .Aggregate<CueInstruction, ICueElementBuilder>(result, (builder, line) => builder.Parse(line))
+                .End();
+            return result.Build();
         }
     }
 }

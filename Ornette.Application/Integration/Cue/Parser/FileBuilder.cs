@@ -2,38 +2,50 @@
 
 namespace Ornette.Application.Integration.Cue.Parser
 {
-    public class FileBuilder : ICueElementBuilder
+    public class FileBuilder : ICueElementAggregator<CueTrack>
     {
-        private readonly SheetBuilder _SheetBuilder;
+        private readonly ICueElementAggregator<CueFile> _SheetBuilder;
         private readonly string _Name;
         private readonly string _Type;
         private readonly List<CueTrack> _Tracks = new List<CueTrack>();
 
-        public FileBuilder(SheetBuilder sheetBuilder, string name, string type)
+        public FileBuilder(ICueElementAggregator<CueFile> sheetBuilder, string name, string type)
         {
             _Name = name;
             _Type = type;
             _SheetBuilder = sheetBuilder;
         }
 
-        public ICueElementBuilder Parse(string command, string[] parameters)
+        public ICueElementBuilder Parse(CueInstruction command)
         {
-            switch (command)
+            switch (command.Command)
             {
                 case CueCommand.Track:
-                    return new TrackBuilder(this, int.Parse(parameters[0]), parameters[1]);
+                    return new TrackBuilder(this, int.Parse(command.Parameters[0]), command.Parameters[1]);
 
                 default:
-                    return _SheetBuilder.Parse(command, parameters);
+                    return _SheetBuilder.Parse(command);
             }
         }
 
         public ICueElementBuilder End()
         {
+            AddBuiltFile();
             return _SheetBuilder.End();
         }
 
-        public void AddTrack(CueTrack track)
+        private void AddBuiltFile()
+        {
+            var file = Build();
+            _SheetBuilder.AddChild(file);
+        }
+
+        private CueFile Build()
+        {
+            return null;
+        }
+
+        public void AddChild(CueTrack track)
         {
             _Tracks.Add(track);
         }

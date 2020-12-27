@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Ornette.Application.Integration.Cue.Parser
@@ -29,6 +30,24 @@ namespace Ornette.Application.Integration.Cue.Parser
                 .ToArray();
 
             return new CueInstruction(groups[1].Value.ToUpper(), parameters);
+        }
+
+        public CueIndex ConvertParameterToCueIndex(int index)
+        {
+            var parts = Parameters[index].Split(':');
+
+            if (parts.Length != 3)
+                throw new ArgumentOutOfRangeException();
+
+            var minutes = int.Parse(parts[0]);
+            var seconds = int.Parse(parts[1]);
+            var frames = int.Parse(parts[2]);
+            return new CueIndex(minutes, seconds, frames);
+        }
+
+        public int ConvertParameterToInt(int index)
+        {
+            return int.Parse(Parameters[index]);
         }
     }
 }

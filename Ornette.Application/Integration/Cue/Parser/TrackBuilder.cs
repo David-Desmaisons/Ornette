@@ -8,13 +8,13 @@ namespace Ornette.Application.Integration.Cue.Parser
         private readonly ICueElementAggregator<CueTrack> _FileBuilder;
         private readonly int _Number;
         private readonly string _Type;
-        private readonly IList<TimeSpan> _Index = new List<TimeSpan>();
+        private readonly IDictionary<int, CueIndex> _Index = new Dictionary<int, CueIndex>();
 
         private string _Songwriter;
         private string _Performer;
         private string _Title;
-        private TimeSpan? _PreGap;
-        private TimeSpan? _PostGap;
+        private CueIndex? _PreGap;
+        private CueIndex? _PostGap;
         private string _Isrc;
 
         public TrackBuilder(ICueElementAggregator<CueTrack> fileBuilder, int number, string type)
@@ -41,7 +41,7 @@ namespace Ornette.Application.Integration.Cue.Parser
                     return this;
 
                 case CueCommand.Index:
-                    ParseIndex(_Index, command.Parameters);
+                    _Index.Add(command.ConvertParameterToInt(0), command.ConvertParameterToCueIndex(1));
                     return this;
 
                 case CueCommand.File:
@@ -68,12 +68,7 @@ namespace Ornette.Application.Integration.Cue.Parser
 
         private CueTrack Build()
         {
-            return null;
-        }
-
-        private static void ParseIndex(IList<TimeSpan> indexes, string[] parameters)
-        {
-
+            return new CueTrack(_Number, _Type, _Title, _Performer, _Songwriter, _Isrc, _Index, _PreGap, _PostGap);
         }
     }
 }

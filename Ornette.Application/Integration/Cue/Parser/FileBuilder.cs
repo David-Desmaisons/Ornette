@@ -21,9 +21,13 @@ namespace Ornette.Application.Integration.Cue.Parser
             switch (command.Command)
             {
                 case CueCommand.Track:
-                    return new TrackBuilder(this, int.Parse(command.Parameters[0]), command.Parameters[1]);
+                    return new TrackBuilder(this,  command.ConvertParameterToInt(0), command.Parameters[1]);
+
+                case CueCommand.Index:
+                    return this;
 
                 default:
+                    AddBuiltFile();
                     return _SheetBuilder.Parse(command);
             }
         }
@@ -42,7 +46,7 @@ namespace Ornette.Application.Integration.Cue.Parser
 
         private CueFile Build()
         {
-            return null;
+            return new CueFile(_Name, _Type, _Tracks);
         }
 
         public void AddChild(CueTrack track)

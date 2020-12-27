@@ -4,8 +4,17 @@ namespace Ornette.Application.Integration.Cue
 {
     public class CueFile
     {
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public IList<CueTrack> Tracks { get; } = new List<CueTrack>();
+        public CueFile(string name, string type, IList<CueTrack> tracks)
+        {
+            Name = name;
+            Type = type;
+            Tracks = tracks;
+        }
+
+        public string Name { get; }
+        public string Type { get;  }
+        public IList<CueTrack> Tracks { get; }
+
+        public override string ToString() => $"{Name} {Type}";
     }
 }

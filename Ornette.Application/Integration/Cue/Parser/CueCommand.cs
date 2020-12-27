@@ -8,6 +8,7 @@
         internal const string Index = "INDEX";
         internal const string Track = "TRACK";
         internal const string File = "FILE";
+        internal const string Isrc = "ISRC";
         internal const string Remark = "REM";
         internal const string PostGap = "POSTGAP";
         internal const string PreGap = "PREGAP";

@@ -40,13 +40,8 @@ namespace Ornette.Application.Integration.Cue.Parser
 
         private void AddBuiltFile()
         {
-            var file = Build();
+            var file = new CueFile(_Name, _Type, _Tracks);
             _SheetBuilder.AddChild(file);
-        }
-
-        private CueFile Build()
-        {
-            return new CueFile(_Name, _Type, _Tracks);
         }
 
         public void AddChild(CueTrack track)

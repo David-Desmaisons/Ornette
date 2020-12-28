@@ -85,6 +85,9 @@
     <None Include="Integration\Cue\Resources\Andrew Hill - Andrew!!!.cue">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Integration\Cue\Resources\The Specials.cue">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Integration\Cue\Resources\Evolution.cue">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using Ornette.Application.Integration.Cue;
 using System.Collections.Generic;
 using System.IO;
@@ -11,18 +12,24 @@ namespace Ornette.Application.Tests.Integration.Cue
     {
         private readonly CueParser _CueParser;
         private readonly List<string[]> _CueContents;
+        private readonly List<string[]> _InvalidCueContents;
+
 
         public CueParserTest()
         {
             _CueParser = new CueParser();
-            _CueContents = new[] { "Andrew Hill - Andrew!!!", "Tim Berne - Fractured Fairy Tales", "Evolution" }
-                .Select(name => File.ReadAllLines($".\\Integration\\Cue\\Resources\\{name}.cue")).ToList();
+            _CueContents = new[] { "Andrew Hill - Andrew!!!", "Tim Berne - Fractured Fairy Tales", "The Specials" }
+                .Select(ToFileContent).ToList();
+
+            _InvalidCueContents = new[] { "Evolution" }.Select(ToFileContent).ToList();
         }
+
+        private static string[] ToFileContent(string fileName) => File.ReadAllLines($".\\Integration\\Cue\\Resources\\{fileName}.cue");
 
         [Theory]
         [InlineData(0, "Andrew!!!")]
         [InlineData(1, "Fractured Fairy Tales")]
-        public void Parse_Parses_FileName(int index, string expectedTitle)
+        public void Parse_Parses_Title(int index, string expectedTitle)
         {
             var res = _CueParser.Parse(_CueContents[index]);
             res.Title.Should().Be(expectedTitle);
@@ -50,12 +57,13 @@ namespace Ornette.Application.Tests.Integration.Cue
         }
 
         [Theory]
-        [InlineData(0, "Andrew Hill - Andrew!!!.wav")]
-        [InlineData(1, "Tim Berne - Fractured Fairy Tales.flac")]
-        public void Parse_Parses_File_Name(int index, string expectedFileName)
+        [InlineData(0, new[] { "Andrew Hill - Andrew!!!.wav" })]
+        [InlineData(1, new[] { "Tim Berne - Fractured Fairy Tales.flac" })]
+        [InlineData(2, new[] { "The Specials - Singles - 01 - Gangsters.wav", "The Specials - Singles - 02 - Rudi, A Message To You.wav" })]
+        public void Parse_Parses_File_Name(int index, string[] expectedFilesName)
         {
             var res = _CueParser.Parse(_CueContents[index]);
-            res.Files.Select(f => f.Name).Should().BeEquivalentTo(new string[] { expectedFileName });
+            res.Files.Select(f => f.Name).Should().BeEquivalentTo(expectedFilesName);
         }
 
         [Theory]
@@ -74,7 +82,7 @@ namespace Ornette.Application.Tests.Integration.Cue
         {
             var res = _CueParser.Parse(_CueContents[index]);
             var file = res.Files[0];
-            file.Tracks.Select(f => f.Number).Should().BeEquivalentTo(Enumerable.Range(1,expectedTrackNumber));
+            file.Tracks.Select(f => f.Number).Should().BeEquivalentTo(Enumerable.Range(1, expectedTrackNumber));
         }
 
         [Theory]
@@ -98,7 +106,7 @@ namespace Ornette.Application.Tests.Integration.Cue
         }
 
         [Theory]
-        [InlineData(0, new []{ "The Griots", "Black Monday", "Duplicity", "Le Serpent Qui Danse", "No Doubt", "Symmetry", "The Griots (alternate take)", "Symmetry (alternate take)" })]
+        [InlineData(0, new[] { "The Griots", "Black Monday", "Duplicity", "Le Serpent Qui Danse", "No Doubt", "Symmetry", "The Griots (alternate take)", "Symmetry (alternate take)" })]
         public void Parse_Parses_File_Tracks_Title(int index, IList<string> expectedNames)
         {
             var res = _CueParser.Parse(_CueContents[index]);
@@ -109,7 +117,7 @@ namespace Ornette.Application.Tests.Integration.Cue
         [Fact]
         public void Parse_Parses_File_Tracks_Index_0()
         {
-            var expectedTotalFrames = new[]
+            var expectedCueIndexes = new[]
             {
                 default(CueIndex?),
                 new CueIndex(6, 2, 55),
@@ -122,13 +130,13 @@ namespace Ornette.Application.Tests.Integration.Cue
             };
             var res = _CueParser.Parse(_CueContents[0]);
             var file = res.Files[0];
-            file.Tracks.Select(f => f.GetIndex(0)).Should().BeEquivalentTo(expectedTotalFrames);
+            file.Tracks.Select(f => f.GetIndex(0)).Should().BeEquivalentTo(expectedCueIndexes);
         }
 
         [Fact]
         public void Parse_Parses_File_Tracks_Index_1()
         {
-            var expectedTotalFrames = new[]
+            var expectedCueIndexes = new[]
             {
                 new CueIndex(0, 0, 0),
                 new CueIndex(6, 4, 73),
@@ -141,30 +149,43 @@ namespace Ornette.Application.Tests.Integration.Cue
             };
             var res = _CueParser.Parse(_CueContents[0]);
             var file = res.Files[0];
-            file.Tracks.Select(f => f.GetIndex(1)).Should().BeEquivalentTo(expectedTotalFrames);
+            file.Tracks.Select(f => f.GetIndex(1)).Should().BeEquivalentTo(expectedCueIndexes);
         }
 
         [Fact]
         public void Parse_Parses_File_Tracks_Index_2()
         {
-            var expectedTotalFrames = new[]
+            var expectedCueIndexes = new[]
             {
                 default(CueIndex?),
                 default(CueIndex?),
                 default(CueIndex?),
-                new CueIndex(34,22,34), 
+                new CueIndex(34,22,34),
                 default(CueIndex?),
                 default(CueIndex?),
             };
             var res = _CueParser.Parse(_CueContents[1]);
             var file = res.Files[0];
-            file.Tracks.Select(f => f.GetIndex(2)).Should().BeEquivalentTo(expectedTotalFrames);
+            file.Tracks.Select(f => f.GetIndex(2)).Should().BeEquivalentTo(expectedCueIndexes);
+        }
+
+        [Fact]
+        public void Parse_Parses_File_Tracks_Pregap()
+        {
+            var expectedCueIndexes = new[]
+            {
+                new CueIndex(0,0,28),
+            };
+            var res = _CueParser.Parse(_CueContents[2]);
+            var file = res.Files[1];
+            file.Tracks.Select(f => f.PreGap).Should().BeEquivalentTo(expectedCueIndexes);
         }
 
         [Fact]
         public void Parse_Not_Supported_Format_Throws()
         {
-            var res = _CueParser.Parse(_CueContents[2]);
+            Action parse = () => _CueParser.Parse(_InvalidCueContents[0]);
+            parse.Should().Throw<Exception>();
         }
     }
 }

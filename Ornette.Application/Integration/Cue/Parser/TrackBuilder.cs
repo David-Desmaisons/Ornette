@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Ornette.Application.Integration.Cue.Parser
 {
@@ -44,6 +43,14 @@ namespace Ornette.Application.Integration.Cue.Parser
                     _Index.Add(command.ConvertParameterToInt(0), command.ConvertParameterToCueIndex(1));
                     return this;
 
+                case CueCommand.PreGap:
+                    _PreGap = command.ConvertParameterToCueIndex(0);
+                    return this;
+
+                case CueCommand.PostGap:
+                    _PostGap = command.ConvertParameterToCueIndex(0);
+                    return this;
+
                 case CueCommand.File:
                 case CueCommand.Track:
                     AddBuiltTrack();
@@ -62,13 +69,8 @@ namespace Ornette.Application.Integration.Cue.Parser
 
         private void AddBuiltTrack()
         {
-            var track = Build();
+            var track = new CueTrack(_Number, _Type, _Title, _Performer, _Songwriter, _Isrc, _Index, _PreGap, _PostGap);
             _FileBuilder.AddChild(track);
-        }
-
-        private CueTrack Build()
-        {
-            return new CueTrack(_Number, _Type, _Title, _Performer, _Songwriter, _Isrc, _Index, _PreGap, _PostGap);
         }
     }
 }

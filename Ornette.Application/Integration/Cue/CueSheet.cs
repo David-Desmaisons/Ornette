@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Ornette.Application.Integration.Cue
 {
@@ -6,11 +7,15 @@ namespace Ornette.Application.Integration.Cue
     {
         public CueSheet(string performer, string title, string songwriter, List<CueFile> files, IDictionary<string, IList<string>> remarks)
         {
+            Title = title ?? throw new ArgumentNullException(nameof(title));
+            Performer = performer ?? throw new ArgumentNullException(nameof(performer));
+            Files = files ?? throw new ArgumentNullException(nameof(files));
             Songwriter = songwriter;
-            Files = files;
             Remarks = remarks;
-            Title = title;
-            Performer = performer;
+
+            if (files.Count == 0)
+                throw new ArgumentOutOfRangeException(nameof(files), "Sheet must have at least one file");
+
         }
 
         public string Songwriter { get; }

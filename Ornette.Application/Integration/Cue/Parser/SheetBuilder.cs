@@ -40,11 +40,6 @@ namespace Ornette.Application.Integration.Cue.Parser
             }
         }
 
-        public ICueElementBuilder End()
-        {
-            return this;
-        }
-
         public CueSheet Build()
         {
             return new CueSheet(_Performer, _Title, _Songwriter, _Files, _Remarks);

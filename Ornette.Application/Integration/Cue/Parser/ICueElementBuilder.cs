@@ -4,7 +4,7 @@
     {
         ICueElementBuilder Parse(CueInstruction command);
 
-        ICueElementBuilder End();
+        CueSheet Build();
     }
 
     public interface ICueElementAggregator<in T> : ICueElementBuilder

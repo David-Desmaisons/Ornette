@@ -51,6 +51,10 @@ namespace Ornette.Application.Integration.Cue.Parser
                     _PostGap = command.ConvertParameterToCueIndex(0);
                     return this;
 
+                case CueCommand.Isrc:
+                    _Isrc = command.Parameters[0];
+                    return this;
+
                 case CueCommand.File:
                 case CueCommand.Track:
                     AddBuiltTrack();
@@ -61,10 +65,10 @@ namespace Ornette.Application.Integration.Cue.Parser
             }
         }
 
-        public ICueElementBuilder End()
+        public CueSheet Build()
         {
             AddBuiltTrack();
-            return _FileBuilder.End();
+            return _FileBuilder.Build();
         }
 
         private void AddBuiltTrack()

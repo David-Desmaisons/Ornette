@@ -32,10 +32,10 @@ namespace Ornette.Application.Integration.Cue.Parser
             }
         }
 
-        public ICueElementBuilder End()
+        public CueSheet Build()
         {
             AddBuiltFile();
-            return _SheetBuilder.End();
+            return _SheetBuilder.Build();
         }
 
         private void AddBuiltFile()

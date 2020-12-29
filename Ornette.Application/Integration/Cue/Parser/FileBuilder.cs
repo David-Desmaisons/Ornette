@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 
 namespace Ornette.Application.Integration.Cue.Parser
 {
@@ -23,12 +24,13 @@ namespace Ornette.Application.Integration.Cue.Parser
                 case CueCommand.Track:
                     return new TrackBuilder(this,  command.ConvertParameterToInt(0), command.Parameters[1]);
 
-                case CueCommand.Index:
-                    return this;
 
-                default:
+                case CueCommand.File:
                     AddBuiltFile();
                     return _SheetBuilder.Parse(command);
+
+                default:
+                    throw new InvalidDataException($"Unsupported command in a file context: ${command.Command}");
             }
         }
 

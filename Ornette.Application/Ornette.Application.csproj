@@ -91,6 +91,7 @@
     <Compile Include="Integration\Cue\ICueParser.cs" />
     <Compile Include="Integration\Cue\Parser\CueCommand.cs" />
     <Compile Include="Integration\Cue\Parser\CueInstruction.cs" />
+    <Compile Include="Integration\Cue\Parser\CueParseException.cs" />
     <Compile Include="Integration\Cue\Parser\ICueElementBuilder.cs" />
     <Compile Include="Integration\Cue\Parser\FileBuilder.cs" />
     <Compile Include="Integration\Cue\Parser\SheetBuilder.cs" />

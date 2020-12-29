@@ -4,6 +4,7 @@ using Ornette.Application.Integration.Cue;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Ornette.Application.Integration.Cue.Parser;
 using Xunit;
 
 namespace Ornette.Application.Tests.Integration.Cue
@@ -185,7 +186,10 @@ namespace Ornette.Application.Tests.Integration.Cue
         public void Parse_Not_Supported_Format_Throws()
         {
             Action parse = () => _CueParser.Parse(_InvalidCueContents[0]);
-            parse.Should().Throw<Exception>();
+            parse.Should().Throw<CueParseException>()
+                .Where(exception => exception.Line == 15)
+                .WithInnerException<ArgumentOutOfRangeException>();
+
         }
     }
 }

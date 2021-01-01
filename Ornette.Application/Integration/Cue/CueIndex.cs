@@ -27,5 +27,7 @@ namespace Ornette.Application.Integration.Cue
         public int TotalFrames => TotalSeconds * 75 + Frames;
         public int TotalSeconds => Minutes * 60 + Seconds;
         public TimeSpan ToTimeSpan() => TimeSpan.FromSeconds(TotalSeconds + TotalFrames / 75);
+
+        public override string ToString() => $"{Minutes:00}:{Seconds:00}:{Frames:00}";
     }
 }

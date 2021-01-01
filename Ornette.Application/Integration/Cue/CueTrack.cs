@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MoreCollection.Extensions;
 
 namespace Ornette.Application.Integration.Cue
 {
@@ -26,6 +25,30 @@ namespace Ornette.Application.Integration.Cue
                 throw new ArgumentOutOfRangeException(nameof(index), "Track must have an INDEX 01 value");
         }
 
+        internal IEnumerable<string> Serialize()
+        {
+            yield return $"TRACK {Number:00} {Type}";
+            yield return $@"  TITLE ""{Title}""";
+            yield return $@"  PERFORMER ""{Performer}""";
+
+            if (Isrc!= null)
+                yield return $@"  ISRC {Isrc}";
+
+            if (Songwriter!=null)
+                yield return $@"  SONGWRITER ""{Songwriter}""";
+
+            if (PreGap.HasValue)
+                yield return $@"  PREGAP {PreGap}";
+
+            if (PostGap.HasValue)
+                yield return $@"  POSTGAP {PostGap}";
+
+            foreach (var index in Indexes)
+            {
+                yield return $@"  INDEX {index.Key:00} {index.Value}";
+            }
+        }
+
         public int Number { get; }
         public string Type { get; }
         public string Songwriter { get; }
@@ -37,7 +60,6 @@ namespace Ornette.Application.Integration.Cue
 
         public CueIndex? GetIndex(int index) => _Index.TryGetValue(index, out var cueIndex) ? cueIndex : default(CueIndex?);
         public IEnumerable<KeyValuePair<int, CueIndex>> Indexes => _Index.OrderBy(kvp => kvp.Key);
-
         public override string ToString() => $"{Number} {Type} - {Title}";
     }
 }

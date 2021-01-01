@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ornette.Application.Integration.Cue
 {
@@ -20,5 +21,15 @@ namespace Ornette.Application.Integration.Cue
         public IList<CueTrack> Tracks { get; }
 
         public override string ToString() => $"{Name} {Type}";
+
+        public IEnumerable<string> Serialize()
+        {
+            yield return $@"FILE ""{Name}"" {Type}";
+            foreach(var value in Tracks.SelectMany(t => t.Serialize())
+                .Select(v => $"  {v}"))
+            {
+                yield return value;
+            }
+        }
     }
 }

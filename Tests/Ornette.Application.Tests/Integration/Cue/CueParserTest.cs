@@ -191,5 +191,32 @@ namespace Ornette.Application.Tests.Integration.Cue
                 .WithInnerException<ArgumentOutOfRangeException>();
 
         }
+
+        [Fact]
+        public void Parse_Creates_Serializable_Sheet()
+        {
+            var expectedOutput = new[]
+            {          
+                @"REM COMMENT ""ExactAudioCopy v0.99pb4""",
+                @"REM DISCID ""730C0608""",
+                @"REM GENRE ""Jazz""",
+                @"PERFORMER ""Andrew Hill""",
+                @"TITLE ""Andrew!!!""",
+                @"FILE ""Andrew Hill - Andrew!!!.wav"" WAVE",
+                @"  TRACK 01 AUDIO",
+                @"    TITLE ""The Griots""",
+                @"    PERFORMER ""Andrew Hill""",
+                @"    INDEX 01 00:00:00",
+                @"  TRACK 02 AUDIO",
+                @"    TITLE ""Black Monday""",
+                @"    PERFORMER ""Andrew Hill""",
+                @"    INDEX 00 06:02:55",
+                @"    INDEX 01 06:04:73",
+            };
+            var res = _CueParser.Parse(_CueContents[0]);
+            var serialized = res.Serialize();
+
+            serialized.Should().StartWith(expectedOutput);
+        }
     }
 }

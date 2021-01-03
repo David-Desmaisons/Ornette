@@ -11,8 +11,8 @@ namespace Ornette.Application.Integration.Cue
             Title = title ?? throw new ArgumentNullException(nameof(title));
             Performer = performer ?? throw new ArgumentNullException(nameof(performer));
             Files = files ?? throw new ArgumentNullException(nameof(files));
-            Songwriter = songwriter;
             Remarks = remarks ?? throw new ArgumentNullException(nameof(remarks));
+            Songwriter = songwriter;
 
             if (files.Count == 0)
                 throw new ArgumentOutOfRangeException(nameof(files), "Sheet must have at least one file");
@@ -38,7 +38,7 @@ namespace Ornette.Application.Integration.Cue
 
         public IEnumerable<string> Serialize()
         {
-            return Remarks.OrderBy(r => r.Key).Select(r => $@"REM {r.Key} ""{String.Join(" ",r.Value)}""")
+            return Remarks.OrderBy(r => r.Key).Select(r => $@"REM {r.Key} ""{String.Join(" ", r.Value)}""")
                    .Concat(GetAttributes())
                    .Concat(Files.SelectMany(f => f.Serialize()));
         }

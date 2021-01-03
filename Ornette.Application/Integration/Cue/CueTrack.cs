@@ -6,7 +6,7 @@ namespace Ornette.Application.Integration.Cue
 {
     public class CueTrack
     {
-        private readonly IDictionary<int,CueIndex> _Index;
+        private readonly IDictionary<int, CueIndex> _Index;
 
         public CueTrack(int number, string type, string title, string performer, string songwriter, string isrc,
             IDictionary<int, CueIndex> index, CueIndex? preGap, CueIndex? postGap)
@@ -15,9 +15,9 @@ namespace Ornette.Application.Integration.Cue
             Type = type ?? throw new ArgumentNullException(nameof(type));
             Title = title ?? throw new ArgumentNullException(nameof(title));
             Performer = performer ?? throw new ArgumentNullException(nameof(performer));
+            _Index = index ?? throw new ArgumentNullException(nameof(index));
             Songwriter = songwriter;
             Isrc = isrc;
-            _Index = index ?? throw new ArgumentNullException(nameof(index));
             PreGap = preGap;
             PostGap = postGap;
 
@@ -31,10 +31,10 @@ namespace Ornette.Application.Integration.Cue
             yield return $@"  TITLE ""{Title}""";
             yield return $@"  PERFORMER ""{Performer}""";
 
-            if (Isrc!= null)
+            if (Isrc != null)
                 yield return $@"  ISRC {Isrc}";
 
-            if (Songwriter!=null)
+            if (Songwriter != null)
                 yield return $@"  SONGWRITER ""{Songwriter}""";
 
             if (PreGap.HasValue)

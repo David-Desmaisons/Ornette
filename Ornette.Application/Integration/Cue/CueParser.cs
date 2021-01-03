@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ornette.Application.Infra;
 using Ornette.Application.Integration.Cue.Parser;
 
 namespace Ornette.Application.Integration.Cue
 {
-    public class CueParser: ICueParser
+    public class CueParser: IParser<CueSheet>
     {
         public CueSheet Parse(IEnumerable<string> content)
         {

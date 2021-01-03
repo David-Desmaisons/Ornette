@@ -1,4 +1,4 @@
-﻿namespace Ornette.Application.Infra
+﻿namespace Ornette.Application.Io
 {
     public interface IFileReader
     {

@@ -82,13 +82,12 @@
     <Compile Include="Converter\Command\ConvertCommand.cs" />
     <Compile Include="Converter\ConvertUpdate.cs" />
     <Compile Include="Converter\Cue\CueData.cs" />
-    <Compile Include="Infra\IFileReader.cs" />
+    <Compile Include="Io\IFileReader.cs" />
     <Compile Include="Integration\Cue\CueFile.cs" />
     <Compile Include="Integration\Cue\CueIndex.cs" />
     <Compile Include="Integration\Cue\CueParser.cs" />
     <Compile Include="Integration\Cue\CueSheet.cs" />
     <Compile Include="Integration\Cue\CueTrack.cs" />
-    <Compile Include="Integration\Cue\ICueParser.cs" />
     <Compile Include="Integration\Cue\Parser\CueCommand.cs" />
     <Compile Include="Integration\Cue\Parser\CueInstruction.cs" />
     <Compile Include="Integration\Cue\Parser\CueParseException.cs" />
@@ -96,6 +95,9 @@
     <Compile Include="Integration\Cue\Parser\FileBuilder.cs" />
     <Compile Include="Integration\Cue\Parser\SheetBuilder.cs" />
     <Compile Include="Integration\Cue\Parser\TrackBuilder.cs" />
+    <Compile Include="Io\FileParser.cs" />
+    <Compile Include="Infra\IParser.cs" />
+    <Compile Include="Io\IFileParser.cs" />
     <Compile Include="Message\Feedback.cs" />
     <Compile Include="Converter\Strategy\ConverterDispatcher.cs" />
     <Compile Include="Converter\Implementation\GenericConverter.cs" />

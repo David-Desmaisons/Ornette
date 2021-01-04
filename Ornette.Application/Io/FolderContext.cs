@@ -19,7 +19,20 @@ namespace Ornette.Application.Io
 
         public string Path { get; }
         public IReadOnlyDictionary<string, FolderContext> Children => _Children;
-        public IEnumerable<string> Get(FileType fileType) => _Files.GetOrDefault(fileType) ?? Enumerable.Empty<string>();
+
+        public IEnumerable<FolderContext> AllContexts
+        {
+            get
+            {
+                yield return this;
+                foreach(var context in _Children.Values.SelectMany(child => child.AllContexts))
+                {
+                    yield return context;
+                }
+            }
+        }
+
+        public string[] Get(FileType fileType) => _Files.GetOrDefault(fileType);
         public IEnumerable<string> GetAll(FileType fileType) => Get(fileType).Concat(_Children.Values.SelectMany(v => v.Get(fileType)));
     }
 }

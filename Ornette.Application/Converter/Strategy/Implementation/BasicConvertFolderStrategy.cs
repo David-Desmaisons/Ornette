@@ -6,13 +6,13 @@ using Ornette.Application.Io;
 using Ornette.Application.Io.Extension;
 using Ornette.Application.Message;
 
-namespace Ornette.Application.Converter.Strategy
+namespace Ornette.Application.Converter.Strategy.Implementation
 {
-    public class ConvertFolderStrategy: IConvertFolderStrategy
+    public class BasicConvertFolderStrategy : IConvertFolderStrategy
     {
         private readonly IFileParser<CueSheet> _CueFileParser;
 
-        public ConvertFolderStrategy(IFileParser<CueSheet> cueFileParser)
+        public BasicConvertFolderStrategy(IFileParser<CueSheet> cueFileParser)
         {
             _CueFileParser = cueFileParser;
         }

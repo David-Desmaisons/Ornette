@@ -101,7 +101,7 @@
     <Compile Include="Message\Feedback.cs" />
     <Compile Include="Converter\Strategy\ConverterDispatcher.cs" />
     <Compile Include="Converter\Implementation\GenericConverter.cs" />
-    <Compile Include="Converter\Strategy\ConvertFolderStrategy.cs" />
+    <Compile Include="Converter\Strategy\Implementation\BasicConvertFolderStrategy.cs" />
     <Compile Include="Converter\Strategy\IConverterDispatcher.cs" />
     <Compile Include="Converter\Strategy\IConvertFolderStrategy.cs" />
     <Compile Include="Converter\Implementation\Mp3FolderConverter.cs" />

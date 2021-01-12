@@ -82,6 +82,7 @@
     <Compile Include="Converter\Command\ConvertCommand.cs" />
     <Compile Include="Converter\ConvertUpdate.cs" />
     <Compile Include="Converter\Cue\CueData.cs" />
+    <Compile Include="Converter\Strategy\MusicCluster.cs" />
     <Compile Include="Io\IFileReader.cs" />
     <Compile Include="Integration\Cue\CueFile.cs" />
     <Compile Include="Integration\Cue\CueIndex.cs" />

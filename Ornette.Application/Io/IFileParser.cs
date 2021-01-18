@@ -1,6 +1,6 @@
 ﻿namespace Ornette.Application.Io
 {
-    public interface IFileParser<T> where T: class
+    public interface IFileParser<out T> where T: class
     {
         T Parse(string path);
     }

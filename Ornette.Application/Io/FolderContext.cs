@@ -1,38 +1,37 @@
-﻿using System.Collections.Generic;
+﻿using Ornette.Application.Io.Extension;
+using System.Collections.Generic;
 using System.Linq;
-using MoreCollection.Extensions;
-using Ornette.Application.Io.Extension;
 
 namespace Ornette.Application.Io
 {
     public class FolderContext
     {
-        private readonly Dictionary<string, FolderContext> _Children;
-        private readonly Dictionary<FileType, string[]> _Files;
+        public IReadOnlyDictionary<FileType, string[]> Files { get; }
+        public IReadOnlyDictionary<string, FolderContext> Children { get; }
 
-        public FolderContext(string path, Dictionary<string, FolderContext> children, Dictionary<FileType, string[]> files)
+        public FolderContext(string path, IReadOnlyDictionary<string, FolderContext> children, IReadOnlyDictionary<FileType, string[]> files)
         {
-            _Children = children;
-            _Files = files;
+            Children = children;
+            Files = files;
             Path = path;
         }
 
         public string Path { get; }
-        public IReadOnlyDictionary<string, FolderContext> Children => _Children;
 
         public IEnumerable<FolderContext> AllContexts
         {
             get
             {
                 yield return this;
-                foreach(var context in _Children.Values.SelectMany(child => child.AllContexts))
+                foreach (var context in Children.Values.SelectMany(child => child.AllContexts))
                 {
                     yield return context;
                 }
             }
         }
 
-        public string[] Get(FileType fileType) => _Files.GetOrDefault(fileType);
-        public IEnumerable<string> GetAll(FileType fileType) => Get(fileType).Concat(_Children.Values.SelectMany(v => v.Get(fileType)));
+        public string[] Get(FileType fileType) => Files.TryGetValue(fileType, out var res) ? res : null;
+        public bool Has(FileType fileType) => Files.ContainsKey(fileType);
+        public IEnumerable<string> GetAll(FileType fileType) => Get(fileType).Concat(Children.Values.SelectMany(v => v.Get(fileType)));
     }
 }

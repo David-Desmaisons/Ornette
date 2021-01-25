@@ -7,11 +7,11 @@ using Xunit.Abstractions;
 
 namespace Ornette.Application.Tests.Converter
 {
-    public class ApiTests
+    public class ApiTest
     {
         private readonly ITestOutputHelper _TestOutputHelper;
 
-        public ApiTests(ITestOutputHelper testOutputHelper)
+        public ApiTest(ITestOutputHelper testOutputHelper)
         {
             _TestOutputHelper = testOutputHelper;
         }

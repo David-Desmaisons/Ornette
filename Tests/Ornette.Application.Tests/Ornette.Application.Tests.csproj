@@ -75,7 +75,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converter\ApiTests.cs" />
+    <Compile Include="Converter\ApiTest.cs" />
+    <Compile Include="Converter\Strategy\Cluster\ClusterFactoryTest.cs" />
     <Compile Include="Integration\Cue\CueParserTest.cs" />
     <Compile Include="Integration\Cue\Parser\CueInstructionTest.cs" />
     <Compile Include="Io\Extension\FileExtensionsTests.cs" />

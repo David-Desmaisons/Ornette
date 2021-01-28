@@ -85,6 +85,7 @@
     <Compile Include="Converter\Strategy\Cluster\ClusterFactory.cs" />
     <Compile Include="Converter\Strategy\Cluster\IClusterFactory.cs" />
     <Compile Include="Converter\Strategy\Cluster\MusicCluster.cs" />
+    <Compile Include="Infra\DictionaryExtension.cs" />
     <Compile Include="Io\IFileReader.cs" />
     <Compile Include="Integration\Cue\CueFile.cs" />
     <Compile Include="Integration\Cue\CueIndex.cs" />

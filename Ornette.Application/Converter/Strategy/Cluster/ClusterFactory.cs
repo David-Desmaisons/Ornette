@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Ornette.Application.Infra;
 using Ornette.Application.Io;
 using Ornette.Application.Io.Extension;
 
@@ -12,13 +12,12 @@ namespace Ornette.Application.Converter.Strategy.Cluster
         {
             if (context.Has(FileType.LoosyMusic))
             {
-                var files = context.Files;
-                yield return new MusicCluster(context.Path, false, context.Files);
+                yield return new MusicCluster(context.Path, false, context.Files.DuplicateExcept(FileType.LosslessMusic));
             }
 
             if (context.Has(FileType.LosslessMusic))
             {
-                yield return new MusicCluster(context.Path, true, context.Files);
+                yield return new MusicCluster(context.Path, true, context.Files.DuplicateExcept(FileType.LoosyMusic));
             }
         }
 

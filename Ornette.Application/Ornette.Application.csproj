@@ -82,6 +82,7 @@
     <Compile Include="Converter\Command\ConvertCommand.cs" />
     <Compile Include="Converter\ConvertUpdate.cs" />
     <Compile Include="Converter\Cue\CueData.cs" />
+    <Compile Include="Converter\Strategy\Cluster\ClusterBuilder.cs" />
     <Compile Include="Converter\Strategy\Cluster\ClusterFactory.cs" />
     <Compile Include="Converter\Strategy\Cluster\IClusterFactory.cs" />
     <Compile Include="Converter\Strategy\Cluster\MusicCluster.cs" />

@@ -8,7 +8,7 @@ namespace Ornette.Application.Converter.Strategy.Cluster
 {
     internal class ClusterBuilder
     {
-        public Dictionary<FileType, List<string>> Files { get; }
+        public Dictionary<FileType, List<string>> Files { get; private set; }
 
         public string MainFolder { get; }
         public bool IsLossless { get; }
@@ -24,7 +24,7 @@ namespace Ornette.Application.Converter.Strategy.Cluster
 
         internal void Merge(FolderContext context)
         {
-            context.Files.ForEach(kvp => Files.GetOrAdd(kvp.Key, _ => new List<string>()).Item.AddRange(kvp.Value));
+            Files = Files.Merge(context.Files);
         }
     }
 }

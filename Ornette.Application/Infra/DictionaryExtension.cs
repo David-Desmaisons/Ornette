@@ -22,11 +22,22 @@ namespace Ornette.Application.Infra
             return result;
         }
 
-        public static IReadOnlyDictionary<TKey, TValue[]> Convert<TKey, TValue>(this Dictionary<TKey, List<TValue>> from)
+        public static Dictionary<TKey, TValue[]> Convert<TKey, TValue>(this Dictionary<TKey, List<TValue>> from)
         {
             var result = new Dictionary<TKey, TValue[]>();
             from?.ForEach(kvp => result[kvp.Key] = kvp.Value.ToArray());
             return result;
+        }
+
+        public static Dictionary<TKey, List<TValue>> Merge<TKey, TValue>(this Dictionary<TKey, TValue[]> from, IReadOnlyDictionary<TKey, TValue[]> with)
+        {
+            return from.Convert().Merge(with);
+        }
+
+        public static Dictionary<TKey, List<TValue>> Merge<TKey, TValue>(this Dictionary<TKey, List<TValue>> from, IReadOnlyDictionary<TKey, TValue[]> with)
+        {
+            with.ForEach(kvp => from.GetOrAddEntity(kvp.Key, _ => new List<TValue>()).AddRange(kvp.Value));
+            return from;
         }
     }
 }

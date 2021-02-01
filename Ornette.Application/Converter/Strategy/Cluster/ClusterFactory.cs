@@ -43,6 +43,14 @@ namespace Ornette.Application.Converter.Strategy.Cluster
                 }
                 yield return builder.Build();
             }
+
+            if ((!hasLossless && !hasLoosy))
+            {
+                foreach (var cluster in context.Children.Values.SelectMany(childContext => GetClustersFromFolderContext(childContext, null)))
+                {
+                    yield return cluster;
+                }
+            }
         }
 
         private IEnumerable<MusicCluster> PrivateGetClustersFromFolderContext(FolderContext context)

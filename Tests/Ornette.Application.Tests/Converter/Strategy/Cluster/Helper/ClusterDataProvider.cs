@@ -25,9 +25,11 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
         private readonly Dictionary<FileType, string[]> _ImageContent;
         private readonly Dictionary<FileType, string[]> _ImageSingleContent;
         private readonly Dictionary<FileType, string[]> _CueContent;
+        private readonly Dictionary<FileType, string[]> _EmptyContent;
 
         public ClusterDataProvider()
         {
+            _EmptyContent = new Dictionary<FileType, string[]>();
             _LoosyMusicContent = new Dictionary<FileType, string[]>
             {
                 {FileType.LoosyMusic, new[] {"a.mp3", "b.mp3"}}
@@ -106,6 +108,20 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
             return new TestData(contextWithImageFolder, groupedArtCluster);
         }
 
+        private TestData GetNestedLoosyContext()
+        {
+            var children = new Dictionary<string, FolderContext>
+            {
+                {"sub1", _SimpleLoosyContext}
+            }; 
+            var rooContext = new FolderContext(RootPath,
+                children,
+                _EmptyContent
+            );
+
+            return new TestData(rooContext, _SimpleLoosyCluster);
+        }
+
         private IEnumerable<TestData> GetData()
         {
             yield return GetEmptyContext();
@@ -113,6 +129,7 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
             yield return GetSimpleLosslessContext();
             yield return GetSimpleMixedContext();
             yield return GetContextWithImage();
+            yield return GetNestedLoosyContext();
         }
 
         public IEnumerator<object[]> GetEnumerator() => 

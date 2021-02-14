@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Ornette.Application.Infra;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Ornette.Application.Tests.Infra
@@ -39,7 +39,7 @@ namespace Ornette.Application.Tests.Infra
 
         [Theory]
         [MemberData(nameof(GetDuplicateExceptTestData))]
-        public void DuplicateExcept_Copy_Original_but_Provided_Key(Dictionary<string, string> source, string removeKey, IDictionary<string,string> expected)
+        public void DuplicateExcept_Copy_Original_but_Provided_Key(Dictionary<string, string> source, string removeKey, IDictionary<string, string> expected)
         {
             var result = source.DuplicateExcept(removeKey);
             result.Should().BeEquivalentTo(expected);
@@ -47,11 +47,55 @@ namespace Ornette.Application.Tests.Infra
 
         [Theory]
         [MemberData(nameof(GetDuplicateExceptTestData))]
-        public void DuplicateExcept_DO_Change_Original(Dictionary<string, string> source, string removeKey, IDictionary<string, string> _)
+        public void DuplicateExcept_Do_Not_Change_Original(Dictionary<string, string> source, string removeKey, IDictionary<string, string> _)
         {
             var original = new Dictionary<string, string>(source);
             source.DuplicateExcept(removeKey);
             source.Should().BeEquivalentTo(original);
+        }
+
+        public static IEnumerable<object[]> GetConvertTestData()
+        {
+            yield return new object[]
+            {
+                new Dictionary<string, string[]>()
+                {
+                    { "a", new []{"A", "a"}}
+                },
+                new Dictionary<string, List<string>>()
+                {
+                    { "a", new List<string>(){"A", "a"}}
+                }
+            };
+            yield return new object[]
+            {
+                new Dictionary<string, string[]>()
+                {
+                    { "a", new []{"A", "a", "1"}},
+                    { "b", new []{"B", "b", "2"}}
+                },
+                new Dictionary<string, List<string>>()
+                {
+                    { "a", new List<string>(){"A", "a", "1"}},
+                    { "b", new List<string>(){"B", "b", "2"}}
+                }
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(GetConvertTestData))]
+        public void Convert_Array_Transform_Dictionary(Dictionary<string, string[]> source, Dictionary<string, List<string>> expected)
+        {
+            var result = source.Convert();
+            result.Should().BeEquivalentTo(expected);
+        }
+
+        [Theory]
+        [MemberData(nameof(GetConvertTestData))]
+        public void Convert_List_Transform_Dictionary(Dictionary<string, string[]> expected, Dictionary<string, List<string>> source)
+        {
+            var result = source.Convert();
+            result.Should().BeEquivalentTo(expected);
         }
     }
 }

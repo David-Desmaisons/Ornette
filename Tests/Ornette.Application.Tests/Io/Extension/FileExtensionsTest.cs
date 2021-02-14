@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Ornette.Application.Tests.Io.Extension
 {
-    public class FileExtensionsTests
+    public class FileExtensionsTest
     {
         [Theory]
         [InlineData(".cue", FileType.Cue)]

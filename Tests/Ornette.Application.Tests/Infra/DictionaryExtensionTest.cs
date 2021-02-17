@@ -97,5 +97,69 @@ namespace Ornette.Application.Tests.Infra
             var result = source.Convert();
             result.Should().BeEquivalentTo(expected);
         }
+
+        public static IEnumerable<object[]> GetMergeArrayTestData()
+        {
+            yield return new object[]
+            {
+                new Dictionary<string, string[]>()
+                {
+                    {"a", new[] {"A", "a"}},
+                    {"z", new[] {"Z"}}
+                },
+                new Dictionary<string, string[]>()
+                {
+                    {"a", new[] {"A", "aa"}},
+                    {"c", new[] {"C"}}
+                },
+                new Dictionary<string, List<string>>()
+                {
+                    {"a", new List<string>() {"A", "a", "A", "aa"}},
+                    {"c", new List<string>() {"C"}},
+                    {"z", new List<string>() {"Z"}}
+                }
+            };
+        }
+
+
+        [Theory]
+        [MemberData(nameof(GetMergeArrayTestData))]
+        public void Merge_Array_Merge_Dictionaries(Dictionary<string, string[]> source, Dictionary<string, string[]> with, Dictionary<string, List<string>> expected)
+        {
+            var result = source.Merge(with);
+            result.Should().BeEquivalentTo(expected);
+        }
+
+        public static IEnumerable<object[]> GetMergeListTestData()
+        {
+            yield return new object[]
+            {
+                new Dictionary<string, List<string>>()
+                {
+                    {"a", new List<string>() {"A", "a"}},
+                    {"z", new List<string>()  {"Z"}}
+                },
+                new Dictionary<string, string[]>()
+                {
+                    {"a", new[] {"A", "aa"}},
+                    {"c", new[] {"C"}}
+                },
+                new Dictionary<string, List<string>>()
+                {
+                    {"a", new List<string>() {"A", "a", "A", "aa"}},
+                    {"c", new List<string>() {"C"}},
+                    {"z", new List<string>() {"Z"}}
+                }
+            };
+        }
+
+
+        [Theory]
+        [MemberData(nameof(GetMergeListTestData))]
+        public void Merge_List_Merge_Dictionaries(Dictionary<string, List<string>> source, Dictionary<string, string[]> with, Dictionary<string, List<string>> expected)
+        {
+            var result = source.Merge(with);
+            result.Should().BeEquivalentTo(expected);
+        }
     }
 }

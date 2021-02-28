@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Ornette.Application.Io.Extension;
 
 namespace Ornette.Application.Converter.Strategy.Cluster
@@ -16,5 +17,11 @@ namespace Ornette.Application.Converter.Strategy.Cluster
             IsLossless = isLossless;
             Files = files;
         }
+
+        public override string ToString()
+        {
+            return $@"Folder: ""{MainFolder}"" Lossless: {IsLossless} {{{string.Join(", ", Files.Select(f => $"{f.Key} : [{string.Join(",", f.Value.Select(value => $@"""{value}"""))}]"))}}}";
+        }
     }
 }
+ 

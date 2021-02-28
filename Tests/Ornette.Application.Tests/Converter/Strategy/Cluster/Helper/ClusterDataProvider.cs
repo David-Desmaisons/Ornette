@@ -1,5 +1,4 @@
-﻿using System;
-using Ornette.Application.Converter.Strategy.Cluster;
+﻿using Ornette.Application.Converter.Strategy.Cluster;
 using Ornette.Application.Infra;
 using Ornette.Application.Io;
 using Ornette.Application.Io.Extension;
@@ -14,12 +13,13 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
     {
         private const string RootPath = "C:\\root";
         private const string Scans = "scans";
-        private readonly Dictionary<string, FolderContext> _EmptyChildren = new Dictionary<string, FolderContext>();
+        private readonly Dictionary<string, FolderContext> _EmptyChildren;
         private readonly FolderContext _SimpleLoosyContext;
         private readonly FolderContext _SimpleLosslessContext;
         private readonly MusicCluster _SimpleLoosyCluster;
         private readonly MusicCluster _SimpleLosslessCluster;
         private readonly Dictionary<string, FolderContext> _ChildrenWithArt;
+        private readonly Dictionary<string, FolderContext> _ChildrenWithLoosy;
         private readonly Dictionary<FileType, string[]> _LoosyMusicContent;
         private readonly Dictionary<FileType, string[]> _LosslessMusicContent;
         private readonly Dictionary<FileType, string[]> _ImageContent;
@@ -30,26 +30,13 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
         public ClusterDataProvider()
         {
             _EmptyContent = new Dictionary<FileType, string[]>();
-            _LoosyMusicContent = new Dictionary<FileType, string[]>
-            {
-                {FileType.LoosyMusic, new[] {"a.mp3", "b.mp3"}}
-            };
-            _LosslessMusicContent = new Dictionary<FileType, string[]>
-            {
-                {FileType.LosslessMusic, new[] {"a.flac", "b.flac"}}
-            };
-            _ImageContent = new Dictionary<FileType, string[]>
-            {
-                {FileType.Image, new[] {"a.jpeg", "b.jpeg"}}
-            };
-            _ImageSingleContent = new Dictionary<FileType, string[]>
-            {
-                {FileType.Image, new[] {"c.gif"}}
-            };
-            _CueContent = new Dictionary<FileType, string[]>
-            {
-                {FileType.Cue, new[] {"a.cue"}}
-            };
+            _LoosyMusicContent = CreateDictionary(FileType.LoosyMusic, "a.mp3", "b.mp3");
+            _LosslessMusicContent = CreateDictionary(FileType.LosslessMusic, "a.flac", "b.flac");
+            _ImageContent = CreateDictionary(FileType.Image, "a.jpeg", "b.jpeg");
+            _ImageSingleContent = CreateDictionary(FileType.Image, "c.gif");
+            _CueContent = CreateDictionary(FileType.Cue, "a.cue");
+
+            _EmptyChildren = new Dictionary<string, FolderContext>();
             _SimpleLoosyContext = new FolderContext(RootPath, _EmptyChildren, _LoosyMusicContent);
             _SimpleLosslessContext = new FolderContext(RootPath, _EmptyChildren, _LosslessMusicContent);
             var imageContext = new FolderContext(Path.Combine(RootPath, Scans), _EmptyChildren, _ImageContent);
@@ -57,9 +44,17 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
             {
                 {Scans, imageContext}
             };
+            _ChildrenWithLoosy = new Dictionary<string, FolderContext>
+            {
+                {"sub1", _SimpleLoosyContext}
+            };
+
             _SimpleLoosyCluster = new MusicCluster(RootPath, false, _LoosyMusicContent);
             _SimpleLosslessCluster = new MusicCluster(RootPath, true, _LosslessMusicContent);
         }
+
+        private static Dictionary<FileType, string[]> CreateDictionary(FileType fileType, params string[] values)
+            => new Dictionary<FileType, string[]> { { fileType, values } };
 
         public struct TestData
         {
@@ -110,16 +105,23 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
 
         private TestData GetNestedLoosyContext()
         {
-            var children = new Dictionary<string, FolderContext>
-            {
-                {"sub1", _SimpleLoosyContext}
-            }; 
             var rooContext = new FolderContext(RootPath,
-                children,
+                _ChildrenWithLoosy,
                 _EmptyContent
             );
 
             return new TestData(rooContext, _SimpleLoosyCluster);
+        }
+
+        private TestData GetAdjacentMusicArtFolderContext()
+        {
+            var mixedChildren = _ChildrenWithLoosy.Merge(_ChildrenWithArt);
+            var mixedContext = new FolderContext(RootPath,
+                mixedChildren,
+                _EmptyContent
+            );
+            var groupedArtCluster = new MusicCluster(RootPath, false, _LoosyMusicContent.Merge(_ImageContent).Convert());
+            return new TestData(mixedContext, groupedArtCluster);
         }
 
         private IEnumerable<TestData> GetData()
@@ -130,10 +132,11 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
             yield return GetSimpleMixedContext();
             yield return GetContextWithImage();
             yield return GetNestedLoosyContext();
+            yield return GetAdjacentMusicArtFolderContext();
         }
 
-        public IEnumerator<object[]> GetEnumerator() => 
-            GetData().Select(testData => new object[] {testData.Input, testData.ExpectedResult})
+        public IEnumerator<object[]> GetEnumerator() =>
+            GetData().Select(testData => new object[] { testData.Input, testData.ExpectedResult })
             .GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

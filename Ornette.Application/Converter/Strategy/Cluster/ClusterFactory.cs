@@ -8,36 +8,33 @@ namespace Ornette.Application.Converter.Strategy.Cluster
 {
     public class ClusterFactory : IClusterFactory
     {
+        private static readonly bool[] _IsLosslessValues = { true, false };
+
         public IEnumerable<MusicCluster> GetClustersFromFolderContext(FolderContext context)
         {
             return GetClusterBuildersFromFolderContext(context, null).Select(builder => builder.Build());
         }
 
-        private static IEnumerable<ClusterBuilder> GetClusterBuildersFromFolderContext(FolderContext context, ClusterBuilder rootBuilder)
+        private static IEnumerable<ClusterBuilder> GetClusterBuildersFromFolderContext(FolderContext context,
+            ClusterBuilder rootBuilder)
         {
             var hasLossless = context.Has(FileType.LosslessMusic);
             var hasLoosy = context.Has(FileType.LoosyMusic);
 
-            if ((!hasLossless && !hasLoosy))
+            if ((hasLossless || hasLoosy))
             {
-                if (rootBuilder != null)
-                {
-                    rootBuilder.Merge(context);
-                    yield break;
-                }
-
-                foreach (var cluster in context.Children.Values.SelectMany(childContext => GetClusterBuildersFromFolderContext(childContext, null)))
-                {
-                    yield return cluster.Merge(context);
-                }
-                yield break;
+                return _IsLosslessValues.SelectMany(isLossless => GetClusterBuildersFromFolderContext(context, isLossless));
             }
 
-            foreach (var cluster in GetClusterBuildersFromFolderContext(context, false).Concat(
-                                    GetClusterBuildersFromFolderContext(context, true)))
+            if (rootBuilder == null)
             {
-                yield return cluster;
+                return context.Children.Values
+                    .SelectMany(childContext => GetClusterBuildersFromFolderContext(childContext, null))
+                    .Select(builder => builder.Merge(context));
             }
+
+            rootBuilder.Merge(context);
+            return Enumerable.Empty<ClusterBuilder>();
         }
 
         private static IEnumerable<ClusterBuilder> GetClusterBuildersFromFolderContext(FolderContext context, bool isLossless)

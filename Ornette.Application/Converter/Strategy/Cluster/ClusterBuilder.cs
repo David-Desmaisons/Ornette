@@ -22,9 +22,10 @@ namespace Ornette.Application.Converter.Strategy.Cluster
 
         public MusicCluster Build() => new MusicCluster(MainFolder, IsLossless, Files.Convert());
 
-        internal void Merge(FolderContext context)
+        internal ClusterBuilder Merge(FolderContext context)
         {
             Files = Files.Merge(context.Files);
+            return this;
         }
     }
 }

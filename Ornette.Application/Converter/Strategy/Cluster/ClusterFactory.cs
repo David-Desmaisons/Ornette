@@ -28,7 +28,7 @@ namespace Ornette.Application.Converter.Strategy.Cluster
 
                 foreach (var cluster in context.Children.Values.SelectMany(childContext => GetClusterBuildersFromFolderContext(childContext, null)))
                 {
-                    yield return cluster;
+                    yield return cluster.Merge(context);
                 }
                 yield break;
             }

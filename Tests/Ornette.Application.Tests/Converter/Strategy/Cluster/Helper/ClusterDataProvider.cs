@@ -124,6 +124,16 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
             return new TestData(mixedContext, groupedArtCluster);
         }
 
+        private TestData GetTopMusicArtFolderContext()
+        {
+            var rootWithArtAndChildrenWithLoosy = new FolderContext(RootPath,
+                _ChildrenWithLoosy,
+                _ImageContent
+            );
+            var groupedArtCluster = new MusicCluster(RootPath, false, _LoosyMusicContent.Merge(_ImageContent).Convert());
+            return new TestData(rootWithArtAndChildrenWithLoosy, groupedArtCluster);
+        }
+
         private IEnumerable<TestData> GetData()
         {
             yield return GetEmptyContext();
@@ -133,6 +143,7 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
             yield return GetContextWithImage();
             yield return GetNestedLoosyContext();
             yield return GetAdjacentMusicArtFolderContext();
+            yield return GetTopMusicArtFolderContext();
         }
 
         public IEnumerator<object[]> GetEnumerator() =>

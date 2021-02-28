@@ -10,23 +10,23 @@ namespace Ornette.Application.Converter.Strategy.Cluster
     {
         public IEnumerable<MusicCluster> GetClustersFromFolderContext(FolderContext context)
         {
-            return GetClustersFromFolderContext(context, null);
+            return GetClusterBuildersFromFolderContext(context, null).Select(builder => builder.Build());
         }
 
-        private IEnumerable<MusicCluster> GetClustersFromFolderContext(FolderContext context, ClusterBuilder clusterBuilder)
+        private IEnumerable<ClusterBuilder> GetClusterBuildersFromFolderContext(FolderContext context, ClusterBuilder rootBuilder)
         {
             var hasLossless = context.Has(FileType.LosslessMusic);
             var hasLoosy = context.Has(FileType.LoosyMusic);
 
             if ((!hasLossless && !hasLoosy))
             {
-                if (clusterBuilder != null)
+                if (rootBuilder != null)
                 {
-                    clusterBuilder.Merge(context);
+                    rootBuilder.Merge(context);
                     yield break;
                 }
 
-                foreach (var cluster in context.Children.Values.SelectMany(childContext => GetClustersFromFolderContext(childContext, null)))
+                foreach (var cluster in context.Children.Values.SelectMany(childContext => GetClusterBuildersFromFolderContext(childContext, null)))
                 {
                     yield return cluster;
                 }
@@ -36,27 +36,22 @@ namespace Ornette.Application.Converter.Strategy.Cluster
             if (hasLoosy)
             {
                 var builder = new ClusterBuilder(context.Path, false, context.Files.DuplicateExcept(FileType.LosslessMusic));
-                foreach (var cluster in context.Children.Values.SelectMany(childContext => GetClustersFromFolderContext(childContext, builder)))
+                foreach (var cluster in context.Children.Values.SelectMany(childContext => GetClusterBuildersFromFolderContext(childContext, builder)))
                 {
                     yield return cluster;
                 }
-                yield return builder.Build();
+                yield return builder;
             }
 
             if (hasLossless)
             {
                 var builder = new ClusterBuilder(context.Path, true, context.Files.DuplicateExcept(FileType.LoosyMusic));
-                foreach (var cluster in context.Children.Values.SelectMany(childContext => GetClustersFromFolderContext(childContext, builder)))
+                foreach (var cluster in context.Children.Values.SelectMany(childContext => GetClusterBuildersFromFolderContext(childContext, builder)))
                 {
                     yield return cluster;
                 }
-                yield return builder.Build();
+                yield return builder;
             }
-        }
-
-        private IEnumerable<MusicCluster> PrivateGetClustersFromFolderContext(FolderContext context)
-        {
-            return Enumerable.Empty<MusicCluster>();
         }
     }
 }

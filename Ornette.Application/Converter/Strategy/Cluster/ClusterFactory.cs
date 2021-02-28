@@ -18,9 +18,18 @@ namespace Ornette.Application.Converter.Strategy.Cluster
             var hasLossless = context.Has(FileType.LosslessMusic);
             var hasLoosy = context.Has(FileType.LoosyMusic);
 
-            if ((clusterBuilder != null) && (!hasLossless && !hasLoosy))
+            if ((!hasLossless && !hasLoosy))
             {
-                clusterBuilder.Merge(context);
+                if (clusterBuilder != null)
+                {
+                    clusterBuilder.Merge(context);
+                    yield break;
+                }
+
+                foreach (var cluster in context.Children.Values.SelectMany(childContext => GetClustersFromFolderContext(childContext, null)))
+                {
+                    yield return cluster;
+                }
                 yield break;
             }
 
@@ -42,14 +51,6 @@ namespace Ornette.Application.Converter.Strategy.Cluster
                     yield return cluster;
                 }
                 yield return builder.Build();
-            }
-
-            if ((!hasLossless && !hasLoosy))
-            {
-                foreach (var cluster in context.Children.Values.SelectMany(childContext => GetClustersFromFolderContext(childContext, null)))
-                {
-                    yield return cluster;
-                }
             }
         }
 

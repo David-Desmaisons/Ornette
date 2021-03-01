@@ -36,14 +36,20 @@ namespace Ornette.Application.Infra
 
         public static Dictionary<TKey, List<TValue>> Merge<TKey, TValue>(this Dictionary<TKey, List<TValue>> from, IReadOnlyDictionary<TKey, TValue[]> with)
         {
-            with.ForEach(kvp => from.GetOrAddEntity(kvp.Key, _ => new List<TValue>()).AddRange(kvp.Value));
+            with?.ForEach(kvp => from.GetOrAddEntity(kvp.Key, _ => new List<TValue>()).AddRange(kvp.Value));
+            return from;
+        }
+
+        public static Dictionary<TKey, List<TValue>> Merge<TKey, TValue>(this Dictionary<TKey, List<TValue>> from, IReadOnlyDictionary<TKey, List<TValue>> with)
+        {
+            with?.ForEach(kvp => from.GetOrAddEntity(kvp.Key, _ => new List<TValue>()).AddRange(kvp.Value));
             return from;
         }
 
         public static Dictionary<TKey, TValue> Merge<TKey, TValue>(this IDictionary<TKey, TValue> from, IReadOnlyDictionary<TKey, TValue> with)
         {
             var res = new Dictionary<TKey, TValue>(from);
-            with.ForEach(kvp => res.Add(kvp.Key, kvp.Value));
+            with?.ForEach(kvp => res.Add(kvp.Key, kvp.Value));
             return res;
         }
     }

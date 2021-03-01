@@ -27,5 +27,11 @@ namespace Ornette.Application.Converter.Strategy.Cluster
             Files = Files.Merge(context.Files);
             return this;
         }
+
+        internal ClusterBuilder Merge(IReadOnlyDictionary<FileType, List<string>> context)
+        {
+            Files = Files.Merge(context);
+            return this;
+        }
     }
 }

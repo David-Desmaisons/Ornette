@@ -151,8 +151,22 @@ namespace Ornette.Application.Tests.Infra
                     {"z", new List<string>() {"Z"}}
                 }
             };
-        }
 
+            yield return new object[]
+            {
+                new Dictionary<string, List<string>>()
+                {
+                    {"a", new List<string>() {"A", "a"}},
+                    {"z", new List<string>()  {"Z"}}
+                },
+                null,
+                new Dictionary<string, List<string>>()
+                {
+                    {"a", new List<string>() {"A", "a"}},
+                    {"z", new List<string>() {"Z"}}
+                }
+            };
+        }
 
         [Theory]
         [MemberData(nameof(GetMergeListTestData))]

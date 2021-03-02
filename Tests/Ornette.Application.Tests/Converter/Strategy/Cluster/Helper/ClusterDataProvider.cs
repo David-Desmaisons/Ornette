@@ -12,6 +12,9 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
     public class ClusterDataProvider : IEnumerable<object[]>
     {
         private const string RootPath = "C:\\root";
+        private const string RootPathLoosy = "C:\\root\\mp3";
+        private const string RootPathLossless = "C:\\root\\flac";
+
         private const string Scans = "scans";
         private readonly Dictionary<string, FolderContext> _EmptyChildren;
         private readonly FolderContext _SimpleLoosyContext;
@@ -20,6 +23,8 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
         private readonly MusicCluster _SimpleLosslessCluster;
         private readonly Dictionary<string, FolderContext> _ChildrenWithArt;
         private readonly Dictionary<string, FolderContext> _ChildrenWithLoosy;
+        private readonly Dictionary<string, FolderContext> _ChildrenWithLossless;
+
         private readonly Dictionary<FileType, string[]> _LoosyMusicContent;
         private readonly Dictionary<FileType, string[]> _LosslessMusicContent;
         private readonly Dictionary<FileType, string[]> _ImageContent;
@@ -37,24 +42,23 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
             _CueContent = CreateDictionary(FileType.Cue, "a.cue");
 
             _EmptyChildren = new Dictionary<string, FolderContext>();
-            _SimpleLoosyContext = new FolderContext(RootPath, _EmptyChildren, _LoosyMusicContent);
-            _SimpleLosslessContext = new FolderContext(RootPath, _EmptyChildren, _LosslessMusicContent);
+            _SimpleLoosyContext = new FolderContext(RootPathLoosy, _EmptyChildren, _LoosyMusicContent);
+            _SimpleLosslessContext = new FolderContext(RootPathLossless, _EmptyChildren, _LosslessMusicContent);
             var imageContext = new FolderContext(Path.Combine(RootPath, Scans), _EmptyChildren, _ImageContent);
-            _ChildrenWithArt = new Dictionary<string, FolderContext>
-            {
-                {Scans, imageContext}
-            };
-            _ChildrenWithLoosy = new Dictionary<string, FolderContext>
-            {
-                {"sub1", _SimpleLoosyContext}
-            };
 
-            _SimpleLoosyCluster = new MusicCluster(RootPath, false, _LoosyMusicContent);
-            _SimpleLosslessCluster = new MusicCluster(RootPath, true, _LosslessMusicContent);
+            _ChildrenWithArt = CreateDictionary(Scans, imageContext);
+            _ChildrenWithLoosy = CreateDictionary("sub1", _SimpleLoosyContext);
+            _ChildrenWithLossless = CreateDictionary("sub2", _SimpleLosslessContext);
+
+            _SimpleLoosyCluster = new MusicCluster(RootPathLoosy, false, _LoosyMusicContent);
+            _SimpleLosslessCluster = new MusicCluster(RootPathLossless, true, _LosslessMusicContent);
         }
 
         private static Dictionary<FileType, string[]> CreateDictionary(FileType fileType, params string[] values)
             => new Dictionary<FileType, string[]> { { fileType, values } };
+
+        private static Dictionary<string, FolderContext> CreateDictionary(string path, FolderContext child)
+            => new Dictionary<string, FolderContext> { { path, child } };
 
         public struct TestData
         {
@@ -88,7 +92,11 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
         {
             var simpleMixedContext = new FolderContext(RootPath, _EmptyChildren,
                 _LoosyMusicContent.Merge(_LosslessMusicContent).Convert());
-            return new TestData(simpleMixedContext, _SimpleLoosyCluster, _SimpleLosslessCluster);
+
+            var loosyCluster = new MusicCluster(RootPath, false, _LoosyMusicContent);
+            var losslessCluster = new MusicCluster(RootPath, true, _LosslessMusicContent);
+
+            return new TestData(simpleMixedContext, loosyCluster, losslessCluster);
         }
 
         private TestData GetContextWithImage()
@@ -113,26 +121,40 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
             return new TestData(rooContext, _SimpleLoosyCluster);
         }
 
-        private TestData GetAdjacentMusicArtFolderContext()
+        private TestData GetTopWithArtFolderContext()
+        {
+            var rootWithArtAndChildrenWithLoosy = new FolderContext(RootPath,
+                _ChildrenWithLoosy,
+                _ImageContent
+            );
+            var groupedArtCluster = new MusicCluster(RootPathLoosy, false, _LoosyMusicContent.Merge(_ImageContent).Convert());
+            return new TestData(rootWithArtAndChildrenWithLoosy, groupedArtCluster);
+        }
+
+        private TestData GetAdjacentArtFolderContext()
         {
             var mixedChildren = _ChildrenWithLoosy.Merge(_ChildrenWithArt);
             var mixedContext = new FolderContext(RootPath,
                 mixedChildren,
                 _EmptyContent
             );
-            var groupedArtCluster = new MusicCluster(RootPath, false, _LoosyMusicContent.Merge(_ImageContent).Convert());
+            var groupedArtCluster = new MusicCluster(RootPathLoosy, false, _LoosyMusicContent.Merge(_ImageContent).Convert());
             return new TestData(mixedContext, groupedArtCluster);
         }
 
-        private TestData GetTopMusicArtFolderContext()
+        private TestData GetTwoAdjacentArtFolderContext()
         {
-            var rootWithArtAndChildrenWithLoosy = new FolderContext(RootPath,
-                _ChildrenWithLoosy,
-                _ImageContent
+            var mixedChildren = _ChildrenWithLoosy.Merge(_ChildrenWithLossless).Merge(_ChildrenWithArt);
+            var mixedContext = new FolderContext(RootPath,
+                mixedChildren,
+                _EmptyContent
             );
-            var groupedArtCluster = new MusicCluster(RootPath, false, _LoosyMusicContent.Merge(_ImageContent).Convert());
-            return new TestData(rootWithArtAndChildrenWithLoosy, groupedArtCluster);
+            var groupedArtClusterLoosy = new MusicCluster(RootPathLoosy, false, _LoosyMusicContent.Merge(_ImageContent).Convert());
+            var groupedArtClusterLossless = new MusicCluster(RootPathLossless, true, _LosslessMusicContent.Merge(_ImageContent).Convert());
+
+            return new TestData(mixedContext, groupedArtClusterLoosy, groupedArtClusterLossless);
         }
+
 
         private IEnumerable<TestData> GetData()
         {
@@ -142,8 +164,9 @@ namespace Ornette.Application.Tests.Converter.Strategy.Cluster.Helper
             yield return GetSimpleMixedContext();
             yield return GetContextWithImage();
             yield return GetNestedLoosyContext();
-            yield return GetAdjacentMusicArtFolderContext();
-            yield return GetTopMusicArtFolderContext();
+            yield return GetTopWithArtFolderContext();
+            yield return GetAdjacentArtFolderContext();
+            yield return GetTwoAdjacentArtFolderContext();
         }
 
         public IEnumerator<object[]> GetEnumerator() =>
